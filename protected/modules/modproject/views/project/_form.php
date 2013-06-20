@@ -8,10 +8,10 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'project-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -47,7 +47,12 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'version_date'); ?>
-		<?php echo $form->textField($model,'version_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'version_date'),
+					'value'=>$model->version_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'version_date'); ?>
 	</div>
 
@@ -59,7 +64,12 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status_date'); ?>
-		<?php echo $form->textField($model,'status_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'status_date'),
+					'value'=>$model->status_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'status_date'); ?>
 	</div>
 
@@ -71,25 +81,45 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'plan_start_date'); ?>
-		<?php echo $form->textField($model,'plan_start_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'plan_start_date'),
+					'value'=>$model->plan_start_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'plan_start_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'plan_end_date'); ?>
-		<?php echo $form->textField($model,'plan_end_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'plan_end_date'),
+					'value'=>$model->plan_end_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'plan_end_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'act_start_date'); ?>
-		<?php echo $form->textField($model,'act_start_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'act_start_date'),
+					'value'=>$model->act_start_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'act_start_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'act_end_date'); ?>
-		<?php echo $form->textField($model,'act_end_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'act_end_date'),
+					'value'=>$model->act_end_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'act_end_date'); ?>
 	</div>
 
@@ -101,7 +131,12 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'spmk_date'); ?>
-		<?php echo $form->textField($model,'spmk_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'spmk_date'),
+					'value'=>$model->spmk_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'spmk_date'); ?>
 	</div>
 
@@ -117,7 +152,7 @@
 		<?php echo $form->error($model,'pic'); ?>
 	</div>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'created_by'); ?>
 		<?php echo $form->textField($model,'created_by',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'created_by'); ?>
@@ -127,10 +162,15 @@
 		<?php echo $form->labelEx($model,'created_date'); ?>
 		<?php echo $form->textField($model,'created_date'); ?>
 		<?php echo $form->error($model,'created_date'); ?>
-	</div>
+	</div> -->
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class = "action">
+		<div class="form-actions">
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/project/index'))); ?>
+			
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>	
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>
