@@ -24,7 +24,7 @@ $this->menu=array(
 	 $this->widget('editable.EditableDetailView', array(
 	'data' => $model,
 	//you can define any default params for child EditableFields
-	'url' => $this->createUrl('user/ajaxupdate'), //common submit url for all fields
+	'url' => $this->createUrl('task/ajaxupdate'), //common submit url for all fields
 	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
 	'emptytext' => 'no value',
 	'attributes'=>array(
