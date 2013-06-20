@@ -1,0 +1,44 @@
+id,akun,elbi,nama_elbi
+1,90600,0,BEBAN UMUM & ADMINISTRASI
+2,90600,200,Beban Material
+3,90600,221,Bahan Kimia
+4,90600,222,Bahan Bakar
+5,90600,223,Inventaris dan Peralatan Kantor
+6,90600,224,Perlengkapan Kantor
+7,90600,225,Cetakan
+8,90600,226,Peralatan/Perlengkapan K3
+9,90600,227,Alat-alat (Tools)
+10,90600,228,Suku Cadang
+11,90600,229,Material Umum
+12,90600,300,Beban Jasa
+13,90600,301,Pemakaian Listrik (PLN)
+14,90600,302,Pemakaian Air
+15,90600,303,Survey dan Study
+16,90600,304,Komunikasi
+17,90600,305,Pengangkutan
+18,90600,306,Transport Lokal
+19,90600,307,Promosi/Humas
+20,90600,308,Sewa
+21,90600,309,Jasa dan Konsultan
+22,90600,310,Administrasi Biaya Bank
+23,90600,311,Pemeliharaan Bangunan Kantor dan Bangunan Penunjang Operasi
+24,90600,316,Pemeliharaan Peralatan Kantor
+25,90600,318,Premi Pensiun
+26,90600,319,Asuransi Aset
+27,90600,321,Makan dan/atau Minum Pekerja
+28,90600,400,Beban Penyusutan/Penyisihan dan Amortisasi
+29,90600,406,Penyusutan Peralatan Kantor
+30,90600,500,Beban Umum
+31,90600,501,Perjalanan Dinas
+32,90600,502,Jamuan
+33,90600,503,Penerimaan/Pemindahan Pekerja
+34,90600,504,Pembinaan/Pendidikan
+35,90600,505,Perayaan
+36,90600,507,Perijinan
+37,90600,509,Penugasan Sementara (Detasering)
+38,90600,510,Pakaian Dinas
+39,90600,511,Pajak Bumi dan Bangunan
+40,90600,512,Keanggotaan
+41,90600,513,Pajak dan Retribusi Daerah
+42,90600,514,Majalah/Surat Kabar
+43,90600,517,Tanggung Jawab Sosial dan Lingkungan (CSR)
