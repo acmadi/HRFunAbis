@@ -8,10 +8,10 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'project-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -164,8 +164,13 @@
 		<?php echo $form->error($model,'created_date'); ?>
 	</div> -->
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class = "action">
+		<div class="form-actions">
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/project/index'))); ?>
+			
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>	
+			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>
