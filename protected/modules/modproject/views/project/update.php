@@ -16,6 +16,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Project <?php echo $model->id; ?></h1>
+<div class="well well-small">
+<h1>Update Proyek <?php echo $model->name; ?></h1>
+</div>
+
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

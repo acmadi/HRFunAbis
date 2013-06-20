@@ -16,10 +16,17 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Project #<?php echo $model->id; ?></h1>
+<div class="well well-small">
+<h1>Proyek <?php echo $model->name; ?></h1>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+<?php
+	 $this->widget('editable.EditableDetailView', array(
+	'data' => $model,
+	//you can define any default params for child EditableFields
+	'url' => $this->createUrl('user/ajaxupdate'), //common submit url for all fields
+	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
+	'emptytext' => 'no value',
 	'attributes'=>array(
 		'id',
 		'number',
@@ -41,5 +48,6 @@ $this->menu=array(
 		'pic',
 		'created_by',
 		'created_date',
-	),
-)); ?>
+		)
+	));
+?>
