@@ -74,15 +74,15 @@ class Finance extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'project_number' => 'Project Number',
+			'project_number' => 'Nomor Proyek',
 			'elbi' => 'Elbi',
-			'elbi_desc' => 'Elbi Desc',
-			'period_month' => 'Period Month',
+			'elbi_desc' => 'Deskripsi Elbi',
+			'period_month' => 'Periode Bulan',
 			'debit' => 'Debit',
-			'credit' => 'Credit',
-			'remarks' => 'Remarks',
-			'created_by' => 'Created By',
-			'created_date' => 'Created Date',
+			'credit' => 'Kredit',
+			'remarks' => 'Keterangan',
+			'created_by' => 'Dibuat oleh',
+			'created_date' => 'Tanggal Dibuat',
 		);
 	}
 

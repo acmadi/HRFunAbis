@@ -11,7 +11,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -62,11 +61,16 @@
 		<?php echo $form->textField($model,'created_by',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'created_by'); ?>
 	</div>
-
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'created_date'); ?>
-		<?php echo $form->textField($model,'created_date'); ?>
-		<?php echo $form->error($model,'created_date'); ?>
+			<?php echo CHtml::activeLabelEx($model,'created_date'); ?>
+			<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+				'name'=>CHtml::activeName($model,'created_date'),
+				'value'=>$model->created_date,
+				'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+			));
+			?>
+			<?php echo $form->error($model,'created_date'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -1,5 +1,6 @@
-
 <?php
+/* @var $this Employee */
+
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 	'Employees'=>array('index'), 
 	'Manage',

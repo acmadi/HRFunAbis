@@ -47,15 +47,29 @@ class DocumentController extends RController
 		if(isset($_POST['Document']))
 		{
 			$model->attributes=$_POST['Document'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			
+			$document=CUploadedFile::getInstance($model,'file_attached');
+			if ($document)
+			{
+				$document_name = $document->name;
+				$document->SaveAs(Yii::app()->basePath . '/../document/' . $document_name);
+				
+				$model->file_attached = 'document/'.$document_name;
+				
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->id));
+			}
+			else
+			{
+				if($model->save())
+						$this->redirect(array('view','id'=>$model->id));
+			}
 		}
-
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
-
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -144,5 +158,11 @@ class DocumentController extends RController
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('Document');
+		$es->update();
 	}
 }

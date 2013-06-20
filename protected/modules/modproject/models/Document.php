@@ -76,18 +76,18 @@ class Document extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'project_number' => 'Project Number',
-			'type' => 'Type',
+			'project_number' => 'Nomor Proyek',
+			'type' => 'Tipe',
 			'task_id' => 'Task',
-			'document_number' => 'Document Number',
-			'version' => 'Version',
-			'version_date' => 'Version Date',
-			'owner' => 'Owner',
-			'distribution' => 'Distribution',
-			'document_description' => 'Document Description',
-			'file_attached' => 'File Attached',
-			'created_date' => 'Created Date',
-			'created_by' => 'Created By',
+			'document_number' => 'Nomor Dokumen',
+			'version' => 'Versi',
+			'version_date' => 'Tanggal Versi',
+			'owner' => 'Pemilik',
+			'distribution' => 'Distribusi',
+			'document_description' => 'Deskripsi Dokumen',
+			'file_attached' => 'Berkas Terlampir',
+			'created_date' => 'Tanggal Dibuat',
+			'created_by' => 'Dibuat Oleh',
 		);
 	}
 
