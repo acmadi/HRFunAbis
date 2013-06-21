@@ -2,6 +2,16 @@
 
 class PersonelController extends Controller
 {
+	public function init()
+	{
+		//$this->_authorizer = $this->module->getAuthorizer();
+		$this->layout = $this->module->layout;
+		$this->defaultAction = 'admin';
+
+		// Register the scripts
+		$this->module->registerScripts();
+	}
+	
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -103,6 +113,12 @@ class PersonelController extends Controller
 		));
 	}
 
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('Personel');
+		$es->update();
+	}
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

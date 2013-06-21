@@ -26,7 +26,6 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-
 <?php 
     $this->widget('bootstrap.widgets.TbBox', array(
     'title' => 'Dokumen',

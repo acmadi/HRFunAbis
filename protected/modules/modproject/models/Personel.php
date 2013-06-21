@@ -74,16 +74,16 @@ class Personel extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'project_number' => 'Project Number',
-			'employee_id' => 'Employee',
-			'name' => 'Name',
-			'position' => 'Position',
+			'project_number' => 'Nomor Proyek',
+			'employee_id' => 'ID Pegawai',
+			'name' => 'Nama',
+			'position' => 'Posisi',
 			'position_task' => 'Position Task',
-			'start_join' => 'Start Join',
-			'end_join' => 'End Join',
+			'start_join' => 'Tanggal Mulai Kerja',
+			'end_join' => 'Tanggal Selesai Kerja',
 			'telepon' => 'Telepon',
 			'email' => 'Email',
-			'remarks' => 'Remarks',
+			'remarks' => 'Keterangan',
 			'created_by' => 'Created By',
 			'created_date' => 'Created Date',
 		);

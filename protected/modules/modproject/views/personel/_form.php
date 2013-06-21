@@ -11,8 +11,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
@@ -46,15 +44,25 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'start_join'); ?>
-		<?php echo $form->textField($model,'start_join'); ?>
-		<?php echo $form->error($model,'start_join'); ?>
+			<?php echo CHtml::activeLabelEx($model,'start_join'); ?>
+			<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+				'name'=>CHtml::activeName($model,'start_join'),
+				'value'=>$model->start_join,
+				'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+			));
+			?>
+			<?php echo $form->error($model,'start_join'); ?>
 	</div>
-
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'end_join'); ?>
-		<?php echo $form->textField($model,'end_join'); ?>
-		<?php echo $form->error($model,'end_join'); ?>
+			<?php echo CHtml::activeLabelEx($model,'end_join'); ?>
+			<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+				'name'=>CHtml::activeName($model,'end_join'),
+				'value'=>$model->end_join,
+				'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+			));
+			?>
+			<?php echo $form->error($model,'end_join'); ?>
 	</div>
 
 	<div class="row">
@@ -75,20 +83,13 @@
 		<?php echo $form->error($model,'remarks'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_by'); ?>
-		<?php echo $form->textField($model,'created_by',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'created_by'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_date'); ?>
-		<?php echo $form->textField($model,'created_date'); ?>
-		<?php echo $form->error($model,'created_date'); ?>
-	</div>
-
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<div class="form-actions">
+		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/personel/admin'))); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>
