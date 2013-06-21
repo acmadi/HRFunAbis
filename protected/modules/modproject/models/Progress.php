@@ -11,7 +11,7 @@
  * @property integer $period_month
  * @property integer $period_year
  * @property integer $progress
- * @property integer $description
+ * @property string $description
  * @property string $termin_pgn
  * @property string $termin_vendor
  * @property string $progress_actual
@@ -44,6 +44,39 @@ class Progress extends CActiveRecord
 		return 'prj_progress';
 	}
 
+	//Dropdown Month
+	const TYPE_1 = 1;
+	const TYPE_2 = 2;
+	const TYPE_3 = 3;
+	const TYPE_4 = 4;
+	const TYPE_5 = 5;
+	const TYPE_6 = 6;
+	const TYPE_7 = 7;
+	const TYPE_8 = 8;
+	const TYPE_9 = 9;
+	const TYPE_10 = 10;
+	const TYPE_11 = 11;
+	const TYPE_12 = 12;
+
+	public function getPeriodMonths()
+	{
+		return array (
+			self::TYPE_1 =>'Januari',
+			self::TYPE_2 =>'Februari',
+			self::TYPE_3 =>'Maret',
+			self::TYPE_4 =>'April',
+			self::TYPE_5 =>'Mei',
+			self::TYPE_6 =>'Juni',
+			self::TYPE_7 =>'Juli',
+			self::TYPE_8 =>'Agustus',
+			self::TYPE_9 =>'September',
+			self::TYPE_10 =>'Oktober',
+			self::TYPE_11 =>'November',
+			self::TYPE_12 =>'Desember',
+			);
+	}
+
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -53,7 +86,7 @@ class Progress extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_number, period_date, period_week, period_month, period_year, progress, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic', 'required'),
-			array('period_week, period_month, period_year, progress, description', 'numerical', 'integerOnly'=>true),
+			array('period_week, period_month, period_year, progress', 'numerical', 'integerOnly'=>true),
 			array('project_number, pic, created_by', 'length', 'max'=>50),
 			array('progress_actual, progress_plan', 'length', 'max'=>11),
 			array('created_date', 'safe'),
@@ -81,24 +114,24 @@ class Progress extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'project_number' => 'Project Number',
-			'period_date' => 'Period Date',
-			'period_week' => 'Period Week',
-			'period_month' => 'Period Month',
-			'period_year' => 'Period Year',
+			'project_number' => 'Nomor Proyek',
+			'period_date' => 'Tanggal Periode',
+			'period_week' => 'Minggu Periode',
+			'period_month' => 'Bulan Periode',
+			'period_year' => 'Tahun Periode',
 			'progress' => 'Progress',
-			'description' => 'Description',
-			'termin_pgn' => 'Termin Pgn',
+			'description' => 'Deskripsi',
+			'termin_pgn' => 'Termin PGN',
 			'termin_vendor' => 'Termin Vendor',
 			'progress_actual' => 'Progress Actual',
 			'progress_plan' => 'Progress Plan',
-			'progress_this_week' => 'Progress This Week',
-			'completed_work' => 'Completed Work',
-			'work_remaining' => 'Work Remaining',
-			'reason_of_delay' => 'Reason Of Delay',
-			'pic' => 'Pic',
-			'created_date' => 'Created Date',
-			'created_by' => 'Created By',
+			'progress_this_week' => 'Progress Minggu ini',
+			'completed_work' => 'Pekerjaan Selesai',
+			'work_remaining' => 'Sisa Pekerjaan',
+			'reason_of_delay' => 'Alasan Keterlambatan',
+			'pic' => 'PIC',
+			'created_date' => 'Tanggal Dibuat',
+			'created_by' => 'Dibuat Oleh',
 		);
 	}
 

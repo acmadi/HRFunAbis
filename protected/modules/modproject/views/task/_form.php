@@ -111,14 +111,12 @@
 		<?php echo $form->error($model,'created_by'); ?>
 	</div> -->
 
-	<div class = "action">
-		<div class="form-actions">
-			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/task/index'))); ?>
-			
-			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>	
-			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
-		</div>
+	
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
 	</div>
+	
 
 <?php $this->endWidget(); ?>
 

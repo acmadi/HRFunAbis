@@ -16,29 +16,39 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Progress #<?php echo $model->id; ?></h1>
+<div class="well well-small">
+<h1>Progress #<?php echo $model->id; ?></h1>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'project_number',
-		'period_date',
-		'period_week',
-		'period_month',
-		'period_year',
-		'progress',
-		'description',
-		'termin_pgn',
-		'termin_vendor',
-		'progress_actual',
-		'progress_plan',
-		'progress_this_week',
-		'completed_work',
-		'work_remaining',
-		'reason_of_delay',
-		'pic',
-		'created_date',
-		'created_by',
-	),
-)); ?>
+<?php
+	 $this->widget('editable.EditableDetailView', array(
+		'data'=>$model,
+		'attributes'=>array(
+			'id',
+			'project_number',
+			'period_date',
+			'period_week',
+			array(
+					'name'=>'period_month',
+					'editable' => array(
+						'type' => 'select',
+						'source' => Progress::model()->getPeriodMonths(),
+					)
+				),
+			'period_year',
+			'progress',
+			'description',
+			'termin_pgn',
+			'termin_vendor',
+			'progress_actual',
+			'progress_plan',
+			'progress_this_week',
+			'completed_work',
+			'work_remaining',
+			'reason_of_delay',
+			'pic',
+			'created_date',
+			'created_by',
+		),
+	));
+?>

@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 
 <?php
 	$this->beginWidget('bootstrap.widgets.TbBox', array(
-	    'title' => 'Daftar Proyek',
+	    'title' => 'Kelola Proyek',
 	    'headerIcon' => 'icon-home',
 	    'headerButtons' => array(
 			array(

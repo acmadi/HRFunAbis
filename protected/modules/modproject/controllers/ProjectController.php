@@ -28,8 +28,24 @@ class ProjectController extends RController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$model = $this->loadModel($id); 
+		
+		Yii::app()->session['project_number'] = $model->number;
+		
+		$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$tasks = Task::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$documents = Document::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$finances = Finance::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$procurement = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		
+		
+		$this->render('dashboard',array(
+			'model'=>$model,
+			'progress'=>$progress,
+			'tasks'=>$tasks,
+			'documents'=>$documents,
+			'finances'=>$finances,
+			'procurement'=>$procurement,
 		));
 	}
 
