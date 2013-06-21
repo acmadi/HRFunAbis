@@ -16,16 +16,29 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Finance #<?php echo $model->id; ?></h1>
+<div class="well well-small">
+	<h1>View Finance #<?php echo $model->id; ?></h1>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('editable.EditableDetailView', array(
 	'data'=>$model,
+	//you can define any default params for child EditableFields
+	'url' => $this->createUrl('finance/ajaxupdate'), //common submit url for all fields
+	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
+	'emptytext' => 'no value',
 	'attributes'=>array(
 		'id',
 		'project_number',
 		'elbi',
 		'elbi_desc',
-		'period_month',
+		array(
+			'name'=>'period_month',
+			'value'=>Finance::model()->getMonth($model->period_month),
+			'editable' => array(
+				'type' => 'select',
+				'source' => Finance::model()->getPeriodOptions(),
+			)
+		),
 		'debit',
 		'credit',
 		'remarks',

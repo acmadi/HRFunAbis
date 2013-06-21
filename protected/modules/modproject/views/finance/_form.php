@@ -28,16 +28,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'elbi_desc'); ?>
-		<?php echo $form->textField($model,'elbi_desc',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textArea($model,'elbi_desc',array('rows'=>5, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'elbi_desc'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'period_month'); ?>
-		<?php echo $form->textField($model,'period_month'); ?>
-		<?php echo $form->error($model,'period_month'); ?>
+			<?php echo $form->labelEx($model,'period_month'); ?>
+			<?php echo $form->dropDownList($model,'period_month',$model->getPeriodOptions(), array('empty'=>'pilih periode bulan')); ?>
+			<?php echo $form->error($model,'period_month'); ?>
 	</div>
-
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'debit'); ?>
 		<?php echo $form->textField($model,'debit',array('size'=>11,'maxlength'=>11)); ?>
@@ -52,7 +52,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'remarks'); ?>
-		<?php echo $form->textField($model,'remarks'); ?>
+		<?php echo $form->textArea($model,'remarks',array('rows'=>5, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'remarks'); ?>
 	</div>
 
@@ -74,7 +74,12 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<div class="form-actions">
+		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/finance/admin'))); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>
