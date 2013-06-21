@@ -14,7 +14,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-<h1>Create Project</h1>
+<h1>Tambah Proyek</h1>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
 </div>
 

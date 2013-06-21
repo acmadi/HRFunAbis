@@ -16,6 +16,8 @@ $this->menu=array(
 );
 ?>
 
+<div class="well well-small">
 <h1>Update Progress <?php echo $model->id; ?></h1>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

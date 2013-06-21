@@ -117,7 +117,7 @@ $this->menu=array(
 </div>	
 <div class="row-fluid">
 	<div class="span12">
-	
+
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>"Detail",
@@ -129,9 +129,11 @@ $this->menu=array(
 	$tabs = array(
 		array('id' => 'tab1', 'label' => 'Progress', 'content' => $this->renderPartial('pages/_progress', array('data' => $progress), true), 'active' => true),
 		array('id' => 'tab2', 'label' => 'Task', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks), true), 'active' => false),
-		array('id' => 'tab3', 'label' => 'Document', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks), true), 'active' => false),
-		array('id' => 'tab4', 'label' => 'Finance', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks), true), 'active' => false),
-		array('id' => 'tab5', 'label' => 'Procurement', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks), true), 'active' => false),
+		array('id' => 'tab3', 'label' => 'Document', 'content' => $this->renderPartial('pages/_documents', array('data' => $documents), true), 'active' => false),
+		array('id' => 'tab4', 'label' => 'Finance', 'content' => $this->renderPartial('pages/_finances', array('data' => $finances), true), 'active' => false),
+		array('id' => 'tab5', 'label' => 'Procurement', 'content' => $this->renderPartial('pages/_procurements', array('data' => $procurements), true), 'active' => false),
+		array('id' => 'tab6', 'label' => 'Personel', 'content' => $this->renderPartial('pages/_personels', array('data' => $personels), true), 'active' => false),
+
 	);
 
 	$this->widget('bootstrap.widgets.TbWizard', array(

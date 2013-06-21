@@ -87,7 +87,7 @@ class Project extends CActiveRecord
 			'number' => 'Nomor Proyek',
 			'name' => 'Nama Proyek',
 			'owner' => 'Pemilik',
-			'description' => 'Keterangan',
+			'description' => 'Deskripsi',
 			'version' => 'Versi',
 			'version_date' => 'Tanggal Versi',
 			'status' => 'Status',

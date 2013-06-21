@@ -12,9 +12,24 @@ $this->menu=array(
 );
 ?>
 
-<h1>Procurements</h1>
+<?php
+	$this->beginWidget('bootstrap.widgets.TbBox', array(
+	    'title' => 'Daftar Pengadaan',
+	    'headerIcon' => 'icon-home',
+	    'headerButtons' => array(
+			array(
+				'class' => 'bootstrap.widgets.TbButtonGroup',
+				'buttons'=>array(
+					array('label'=>'Tambah Pengadaan', 'url'=>array('/modproject/procurement/create')),
+				),
+			),
+	    ),
+	));		
+?>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+<?php $this->endWidget();?>
