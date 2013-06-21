@@ -37,6 +37,7 @@ class ProjectController extends RController
 		$documents = Document::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$finances = Finance::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$procurement = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$personel = Personel::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		
 		
 		$this->render('dashboard',array(
@@ -46,6 +47,7 @@ class ProjectController extends RController
 			'documents'=>$documents,
 			'finances'=>$finances,
 			'procurement'=>$procurement,
+			'personel'=>$personel,
 		));
 	}
 

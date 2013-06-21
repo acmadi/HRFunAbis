@@ -1,5 +1,5 @@
 <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-'title' => 'Info Progress',
+'title' => 'Info Dokumen',
 'headerIcon' => 'icon-th-list',
 'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
@@ -7,8 +7,9 @@
 <thead>
 	<th></th>
 	<th>No</th>
-	<th>Period</th>
-	<th>Progress</th>
+	<th>Nomor Dokumen</th>
+	<th>Deskripsi Dokumen</th>
+	<th></th>
 </thead>
 <tbody>
 	<?php
@@ -34,9 +35,9 @@
 				<?php
 					$this->widget('editable.Editable', array(
 					'type' => 'text',
-					'name' => 'period_date',
+					'name' => 'document_number',
 					'pk' => $dt->id,
-					'text' => $dt->period_date,
+					'text' => $dt->document_number,
 					'url' => $this->createUrl('dependent/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
@@ -48,14 +49,23 @@
 				<?php
 					$this->widget('editable.Editable', array(
 					'type' => 'text',
-					'name' => 'progress',
+					'name' => 'document_description',
 					'pk' => $dt->id,
-					'text' => $dt->progress,
+					'text' => $dt->document_description,
 					'url' => $this->createUrl('dependent/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
 				?>
+			</td>
+
+			<td>
+				<?php $this->widget('bootstrap.widgets.TbButton', array(
+				    'label'=>'Download',
+				    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+				    'size'=>'mini', // null, 'large', 'small' or 'mini'
+				    'url'=>array('document/download', 'id'=>$dt->id)
+				)); ?>
 			</td>
 		</tr>
 	<?php
@@ -70,7 +80,7 @@
 <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
 	'type'=>'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	'buttons'=>array(
-		array('label'=>'Create', 'url'=>array('/modproject/progress/create'))
+		array('label'=>'Create', 'url'=>array('/modproject/document/create'))
 	),
 )); ?>
 </div>
