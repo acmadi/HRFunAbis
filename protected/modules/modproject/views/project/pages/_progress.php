@@ -7,8 +7,23 @@
 <thead>
 	<th></th>
 	<th>No</th>
-	<th>Period</th>
+	<th>Tanggal Periode</th>
+	<th>Minggu Periode</th>
+	<th>Bulan Periode</th>
+	<th>Tahun Periode</th>
 	<th>Progress</th>
+	<th>Deskripsi</th>
+	<th>Termin PGN</th>
+	<th>Termin Vendor</th>
+	<th>Progress Actual</th>
+	<th>Progress Plan</th>
+	<th>Progress Minggu ini</th>
+	<th>Pekerjaan Selesai</th>
+	<th>Sisa Pekerjaan</th>
+	<th>Alasan Keterlambatan</th>
+	<th>PIC</th>
+	<th>Tanggal Dibuat</th>
+	<th>Dibuat Oleh</th>
 </thead>
 <tbody>
 	<?php
@@ -43,6 +58,48 @@
 					));
 				?>
 			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_week',
+					'pk' => $dt->id,
+					'text' => $dt->period_week,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_month',
+					'pk' => $dt->id,
+					'text' => $dt->period_month,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_year',
+					'pk' => $dt->id,
+					'text' => $dt->period_year,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
 			
 			<td>
 				<?php
@@ -51,6 +108,188 @@
 					'name' => 'progress',
 					'pk' => $dt->id,
 					'text' => $dt->progress,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'description',
+					'pk' => $dt->id,
+					'text' => $dt->description,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'termin_pgn',
+					'pk' => $dt->id,
+					'text' => $dt->termin_pgn,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'termin_vendor',
+					'pk' => $dt->id,
+					'text' => $dt->termin_vendor,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_date',
+					'pk' => $dt->id,
+					'text' => $dt->period_date,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'progress_actual',
+					'pk' => $dt->id,
+					'text' => $dt->progress_actual,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'progress_plan',
+					'pk' => $dt->id,
+					'text' => $dt->progress_plan,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'progress_this_week',
+					'pk' => $dt->id,
+					'text' => $dt->progress_this_week,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'completed_work',
+					'pk' => $dt->id,
+					'text' => $dt->completed_work,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'work_remaining',
+					'pk' => $dt->id,
+					'text' => $dt->work_remaining,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'reason_of_delay',
+					'pk' => $dt->id,
+					'text' => $dt->reason_of_delay,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'pic',
+					'pk' => $dt->id,
+					'text' => $dt->pic,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_date',
+					'pk' => $dt->id,
+					'text' => $dt->created_date,
+					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_by',
+					'pk' => $dt->id,
+					'text' => $dt->created_by,
 					'url' => $this->createUrl('dependent/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
