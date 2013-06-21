@@ -54,7 +54,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->type,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tipe',
 					'placement' => 'right'
 					));
 				?>
@@ -68,7 +68,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->task_id,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Task ID',
 					'placement' => 'right'
 					));
 				?>
@@ -82,7 +82,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->document_number,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Nomor Dokumen',
 					'placement' => 'right'
 					));
 				?>
@@ -96,7 +96,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->version,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Versi',
 					'placement' => 'right'
 					));
 				?>
@@ -110,7 +110,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->version_date,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Versi',
 					'placement' => 'right'
 					));
 				?>
@@ -124,7 +124,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->owner,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Pemilik',
 					'placement' => 'right'
 					));
 				?>
@@ -138,7 +138,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->distribution,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Distribusi',
 					'placement' => 'right'
 					));
 				?>
@@ -152,7 +152,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->document_description,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Deskripsi Dokumen',
 					'placement' => 'right'
 					));
 				?>
@@ -166,21 +166,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->file_attached,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Berkas Terlampir',
 					'placement' => 'right'
 					));
 				?>
@@ -194,12 +180,25 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
 					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Dibuat Oleh',
 					'placement' => 'right'
 					));
 				?>
 			</td>
 
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_date',
+					'pk' => $dt->id,
+					'text' => $dt->created_date,
+					'url' => $this->createUrl('document/ajaxupdate'),
+					'title' => 'Masukkan Tanggal Dibuat',
+					'placement' => 'right'
+					));
+				?>
+			</td>
 		</tr>
 	<?php
 		$count++;

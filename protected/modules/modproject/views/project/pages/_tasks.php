@@ -48,7 +48,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->code,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Kode',
 					'placement' => 'right'
 					));
 				?>
@@ -62,7 +62,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->name,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Nama',
 					'placement' => 'right'
 					));
 				?>
@@ -76,7 +76,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->description,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Deskripsi',
 					'placement' => 'right'
 					));
 				?>
@@ -90,7 +90,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->plan_start_date,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Rencana Tanggal Mulai',
 					'placement' => 'right'
 					));
 				?>
@@ -104,7 +104,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->plan_end_date,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Rencana Tanggal Berakhir',
 					'placement' => 'right'
 					));
 				?>
@@ -118,7 +118,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->plan_progress,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Rencana Progress',
 					'placement' => 'right'
 					));
 				?>
@@ -132,7 +132,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->act_start_date,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Mulai Sebenarnya',
 					'placement' => 'right'
 					));
 				?>
@@ -146,7 +146,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->act_end_date,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Berakhir Sebenarnya',
 					'placement' => 'right'
 					));
 				?>
@@ -160,7 +160,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->actual_progress,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Progress Sebenarnya',
 					'placement' => 'right'
 					));
 				?>
@@ -174,7 +174,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->remarks,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Keterangan',
 					'placement' => 'right'
 					));
 				?>
@@ -188,7 +188,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Dibuat Oleh',
 					'placement' => 'right'
 					));
 				?>
@@ -202,7 +202,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_date,
 					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>

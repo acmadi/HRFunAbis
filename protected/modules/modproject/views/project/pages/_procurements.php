@@ -48,7 +48,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->vendor,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Vendor',
 					'placement' => 'right'
 					));
 				?>
@@ -62,7 +62,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->contract,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Kontrak',
 					'placement' => 'right'
 					));
 				?>
@@ -76,7 +76,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->contract_start_date,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Mulai Kontrak',
 					'placement' => 'right'
 					));
 				?>
@@ -90,7 +90,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->contract_end_date,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Berakhir Kontrak',
 					'placement' => 'right'
 					));
 				?>
@@ -104,7 +104,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Bulan Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -118,7 +118,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->item,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Barang',
 					'placement' => 'right'
 					));
 				?>
@@ -132,7 +132,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->unit_price,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Harga Barang',
 					'placement' => 'right'
 					));
 				?>
@@ -146,7 +146,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->amount,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Jumlah',
 					'placement' => 'right'
 					));
 				?>
@@ -160,7 +160,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->total_price,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Total Harga',
 					'placement' => 'right'
 					));
 				?>
@@ -174,7 +174,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->location,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Lokasi',
 					'placement' => 'right'
 					));
 				?>
@@ -188,7 +188,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Dibuat Oleh',
 					'placement' => 'right'
 					));
 				?>
@@ -202,7 +202,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_date,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>

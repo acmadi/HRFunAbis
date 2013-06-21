@@ -53,7 +53,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_date,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -67,7 +67,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_week,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Minggu Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -81,7 +81,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Bulan Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -95,7 +95,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_year,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tahun Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -109,7 +109,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->progress,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Progress',
 					'placement' => 'right'
 					));
 				?>
@@ -123,7 +123,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->description,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Deskripsi',
 					'placement' => 'right'
 					));
 				?>
@@ -137,7 +137,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->termin_pgn,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Termin PGN',
 					'placement' => 'right'
 					));
 				?>
@@ -151,7 +151,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->termin_vendor,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Termin Vendor',
 					'placement' => 'right'
 					));
 				?>
@@ -165,7 +165,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_date,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -179,7 +179,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->progress_actual,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Progress Sebenarnya',
 					'placement' => 'right'
 					));
 				?>
@@ -193,7 +193,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->progress_plan,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Rencana Progress',
 					'placement' => 'right'
 					));
 				?>
@@ -207,7 +207,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->progress_this_week,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Progress Minggu Ini',
 					'placement' => 'right'
 					));
 				?>
@@ -221,7 +221,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->completed_work,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Pekerjaan Selesai',
 					'placement' => 'right'
 					));
 				?>
@@ -235,7 +235,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->work_remaining,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Sisa Pekerjaan',
 					'placement' => 'right'
 					));
 				?>
@@ -249,7 +249,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->reason_of_delay,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Alasan Keterlambatan',
 					'placement' => 'right'
 					));
 				?>
@@ -263,21 +263,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->pic,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan PIC',
 					'placement' => 'right'
 					));
 				?>
@@ -291,11 +277,26 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
 					'url' => $this->createUrl('progress/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Dibuat Oleh',
 					'placement' => 'right'
 					));
 				?>
 			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_date',
+					'pk' => $dt->id,
+					'text' => $dt->created_date,
+					'url' => $this->createUrl('progress/ajaxupdate'),
+					'title' => 'Masukkan Tanggal Dibuat',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
 		</tr>
 	<?php
 		$count++;

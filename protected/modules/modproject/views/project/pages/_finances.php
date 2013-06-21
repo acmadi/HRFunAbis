@@ -44,7 +44,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->elbi,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan ELBI',
 					'placement' => 'right'
 					));
 				?>
@@ -58,7 +58,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->elbi_desc,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Deskripsi ELBI',
 					'placement' => 'right'
 					));
 				?>
@@ -72,7 +72,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Bulan Periode',
 					'placement' => 'right'
 					));
 				?>
@@ -86,7 +86,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->debit,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Debit',
 					'placement' => 'right'
 					));
 				?>
@@ -100,7 +100,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->credit,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Kredit',
 					'placement' => 'right'
 					));
 				?>
@@ -114,7 +114,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->remarks,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Keterangan',
 					'placement' => 'right'
 					));
 				?>
@@ -128,7 +128,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Dibuat Oleh',
 					'placement' => 'right'
 					));
 				?>
@@ -142,7 +142,7 @@
 					'pk' => $dt->id,
 					'text' => $dt->created_date,
 					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Enter user name',
+					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>
