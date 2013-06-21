@@ -71,6 +71,9 @@
 		
     </div><!--/span-->
     <div class="span9">
+		
+	</div><!--/span-->
+	<div class="span9">
     
     <?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(

@@ -14,7 +14,11 @@ $this->renderPartial('dashboard/umum/_file_upload', array('datafiles' =>$datafil
 
 <div class="row-fluid">
   <div class="span9">
-  	<?php
+  	<?php 
+		$this->widget('application.extensions.myquotes.Myquotes');
+	?>
+		
+	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>"<i class='icon-user'></i> Live Visitors",
 		));
