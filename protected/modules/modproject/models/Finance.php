@@ -11,7 +11,7 @@
  * @property integer $period_month
  * @property string $debit
  * @property string $credit
- * @property integer $remarks
+ * @property string $remarks
  * @property string $created_by
  * @property string $created_date
  */
