@@ -11,7 +11,7 @@
  * @property integer $period_month
  * @property string $debit
  * @property string $credit
- * @property integer $remarks
+ * @property string $remarks
  * @property string $created_by
  * @property string $created_date
  */
@@ -44,7 +44,7 @@ class Finance extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_number, elbi, elbi_desc, period_month, debit, credit, remarks', 'required'),
-			array('period_month, remarks', 'numerical', 'integerOnly'=>true),
+			array('period_month', 'numerical', 'integerOnly'=>true),
 			array('project_number, created_by', 'length', 'max'=>50),
 			array('elbi', 'length', 'max'=>20),
 			array('elbi_desc', 'length', 'max'=>100),
