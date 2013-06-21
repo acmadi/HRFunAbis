@@ -1,6 +1,6 @@
 <?php
 
-class PersonelMandaysController extends Controller
+class PersonelMandaysController extends RController
 {
 	public function init()
 	{
@@ -80,6 +80,12 @@ class PersonelMandaysController extends Controller
 		));
 	}
 
+	public function actionAjaxUpdate()
+	{
+		$es = new EditableSaver('PersonelMandays');
+		$es->update();
+	}
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

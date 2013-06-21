@@ -14,7 +14,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('month')); ?>:</b>
-	<?php echo CHtml::encode($data->month); ?>
+	<?php echo CHtml::encode(Finance::model()->getMonth($data->month)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('mandays')); ?>:</b>

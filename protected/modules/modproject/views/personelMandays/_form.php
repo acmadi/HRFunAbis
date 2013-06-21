@@ -11,7 +11,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -22,11 +21,11 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'month'); ?>
-		<?php echo $form->textField($model,'month'); ?>
-		<?php echo $form->error($model,'month'); ?>
+			<?php echo $form->labelEx($model,'month'); ?>
+			<?php echo $form->dropDownList($model,'month',$model->getPeriodOptions(), array('empty'=>'pilih periode bulan')); ?>
+			<?php echo $form->error($model,'month'); ?>
 	</div>
-
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'mandays'); ?>
 		<?php echo $form->textField($model,'mandays'); ?>
@@ -34,7 +33,12 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<div class="form-actions">
+		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/personel/admin'))); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		</div>
 	</div>
 
 <?php $this->endWidget(); ?>

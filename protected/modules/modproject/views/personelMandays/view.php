@@ -3,7 +3,7 @@
 /* @var $model PersonelMandays */
 
 $this->breadcrumbs=array(
-	'Personel Mandays'=>array('index'),
+	'PersonelMandays'=>array('index'),
 	$model->id,
 );
 
@@ -16,14 +16,27 @@ $this->menu=array(
 );
 ?>
 
-<h1>View PersonelMandays #<?php echo $model->id; ?></h1>
+<div class="well well-small">
+	<h1>View PersonelMandays #<?php echo $model->id; ?></h1>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('editable.EditableDetailView', array(
 	'data'=>$model,
+	//you can define any default params for child EditableFields
+	'url' => $this->createUrl('personelmandays/ajaxupdate'), //common submit url for all fields
+	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
+	'emptytext' => 'no value',
 	'attributes'=>array(
 		'id',
 		'employee_id',
-		'month',
+		array(
+			'name'=>'month',
+			'value'=>PersonelMandays::model()->getMonth($model->month),
+			'editable' => array(
+				'type' => 'select',
+				'source' => PersonelMandays::model()->getPeriodOptions(),
+			)
+		),
 		'mandays',
 	),
 )); ?>
