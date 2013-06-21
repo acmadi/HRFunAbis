@@ -13,6 +13,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Procurement</h1>
+<div class="well well-small">
+<h1>Tambah Pengadaan</h1>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

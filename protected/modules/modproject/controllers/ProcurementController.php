@@ -42,11 +42,13 @@ class ProcurementController extends RController
 		$model=new Procurement;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Procurement']))
 		{
 			$model->attributes=$_POST['Procurement'];
+			$model->created_by = 'Dummy';
+			$model->created_date = date('Y-m-d',time());
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

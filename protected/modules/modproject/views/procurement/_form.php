@@ -8,13 +8,11 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'procurement-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
-
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'project_number'); ?>
 		<?php echo $form->textField($model,'project_number',array('size'=>50,'maxlength'=>50)); ?>
@@ -35,13 +33,23 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contract_start_date'); ?>
-		<?php echo $form->textField($model,'contract_start_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'contract_start_date'),
+					'value'=>$model->contract_start_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'contract_start_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contract_end_date'); ?>
-		<?php echo $form->textField($model,'contract_end_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'contract_end_date'),
+					'value'=>$model->contract_end_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'contract_end_date'); ?>
 	</div>
 
@@ -81,7 +89,8 @@
 		<?php echo $form->error($model,'location'); ?>
 	</div>
 
-	<div class="row">
+
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'created_by'); ?>
 		<?php echo $form->textField($model,'created_by',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'created_by'); ?>
@@ -91,11 +100,13 @@
 		<?php echo $form->labelEx($model,'created_date'); ?>
 		<?php echo $form->textField($model,'created_date'); ?>
 		<?php echo $form->error($model,'created_date'); ?>
-	</div>
+	</div> -->
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
 	</div>
+	
 
 <?php $this->endWidget(); ?>
 

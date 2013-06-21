@@ -16,6 +16,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Procurement <?php echo $model->id; ?></h1>
+<div class="well well-small">
+<h1>Update Pengadaan <?php echo $model->id; ?></h1>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
