@@ -16,6 +16,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Personel <?php echo $model->id; ?></h1>
+<div class="well well-small">
+	<h1>Update Personel <?php echo $model->id; ?></h1>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
