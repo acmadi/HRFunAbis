@@ -38,7 +38,7 @@
 					'label'=>'delete',
 					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('dependent/delete', "id" =>$dt->id),
+					'url'=>array('progress/delete', "id" =>$dt->id),
 					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
 				)); ?>
 
@@ -52,7 +52,7 @@
 					'name' => 'period_date',
 					'pk' => $dt->id,
 					'text' => $dt->period_date,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -66,7 +66,7 @@
 					'name' => 'period_week',
 					'pk' => $dt->id,
 					'text' => $dt->period_week,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -80,7 +80,7 @@
 					'name' => 'period_month',
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -94,7 +94,7 @@
 					'name' => 'period_year',
 					'pk' => $dt->id,
 					'text' => $dt->period_year,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -108,7 +108,7 @@
 					'name' => 'progress',
 					'pk' => $dt->id,
 					'text' => $dt->progress,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -122,7 +122,7 @@
 					'name' => 'description',
 					'pk' => $dt->id,
 					'text' => $dt->description,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -136,7 +136,7 @@
 					'name' => 'termin_pgn',
 					'pk' => $dt->id,
 					'text' => $dt->termin_pgn,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -150,7 +150,7 @@
 					'name' => 'termin_vendor',
 					'pk' => $dt->id,
 					'text' => $dt->termin_vendor,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -164,7 +164,7 @@
 					'name' => 'period_date',
 					'pk' => $dt->id,
 					'text' => $dt->period_date,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -178,7 +178,7 @@
 					'name' => 'progress_actual',
 					'pk' => $dt->id,
 					'text' => $dt->progress_actual,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -192,7 +192,7 @@
 					'name' => 'progress_plan',
 					'pk' => $dt->id,
 					'text' => $dt->progress_plan,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -206,7 +206,7 @@
 					'name' => 'progress_this_week',
 					'pk' => $dt->id,
 					'text' => $dt->progress_this_week,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -220,7 +220,7 @@
 					'name' => 'completed_work',
 					'pk' => $dt->id,
 					'text' => $dt->completed_work,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -234,7 +234,7 @@
 					'name' => 'work_remaining',
 					'pk' => $dt->id,
 					'text' => $dt->work_remaining,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -248,7 +248,7 @@
 					'name' => 'reason_of_delay',
 					'pk' => $dt->id,
 					'text' => $dt->reason_of_delay,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -262,7 +262,7 @@
 					'name' => 'pic',
 					'pk' => $dt->id,
 					'text' => $dt->pic,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -276,7 +276,7 @@
 					'name' => 'created_date',
 					'pk' => $dt->id,
 					'text' => $dt->created_date,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));
@@ -290,7 +290,7 @@
 					'name' => 'created_by',
 					'pk' => $dt->id,
 					'text' => $dt->created_by,
-					'url' => $this->createUrl('dependent/ajaxupdate'),
+					'url' => $this->createUrl('progress/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
 					));

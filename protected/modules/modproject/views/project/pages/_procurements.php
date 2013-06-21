@@ -8,8 +8,17 @@
 	<th></th>
 	<th>No</th>
 	<th>Vendor</th>
+	<th>Kontrak</th>
+	<th>Tanggal Mulai Kontrak</th>
+	<th>Tanggal Berakhir Kontrak</th>
+	<th>Periode Bulan</th>
 	<th>Barang</th>
+	<th>Harga Barang</th>
 	<th>Jumlah</th>
+	<th>Total Harga</th>
+	<th>Lokasi</th>
+	<th>Created By</th>
+	<th>Created Date</th>
 </thead>
 <tbody>
 	<?php
@@ -24,7 +33,7 @@
 					'label'=>'delete',
 					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('finance/delete', "id" =>$dt->id),
+					'url'=>array('procurement/delete', "id" =>$dt->id),
 					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
 				)); ?>
 
@@ -38,6 +47,62 @@
 					'name' => 'vendor',
 					'pk' => $dt->id,
 					'text' => $dt->vendor,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'contract',
+					'pk' => $dt->id,
+					'text' => $dt->contract,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'contract_start_date',
+					'pk' => $dt->id,
+					'text' => $dt->contract_start_date,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'contract_end_date',
+					'pk' => $dt->id,
+					'text' => $dt->contract_end_date,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_month',
+					'pk' => $dt->id,
+					'text' => $dt->period_month,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'
@@ -63,9 +128,79 @@
 				<?php
 					$this->widget('editable.Editable', array(
 					'type' => 'text',
+					'name' => 'unit_price',
+					'pk' => $dt->id,
+					'text' => $dt->unit_price,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
 					'name' => 'amount',
 					'pk' => $dt->id,
 					'text' => $dt->amount,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'total_price',
+					'pk' => $dt->id,
+					'text' => $dt->total_price,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'location',
+					'pk' => $dt->id,
+					'text' => $dt->location,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_by',
+					'pk' => $dt->id,
+					'text' => $dt->created_by,
+					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_date',
+					'pk' => $dt->id,
+					'text' => $dt->created_date,
 					'url' => $this->createUrl('procurement/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'

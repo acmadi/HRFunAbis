@@ -8,8 +8,13 @@
 	<th></th>
 	<th>No</th>
 	<th>Elbi</th>
+	<th>Deskripsi Elbi</th>
+	<th>Periode Bulan</th>
 	<th>Debit</th>
-	<th>Credit</th>
+	<th>Kredit</th>
+	<th>Keterangan</th>
+	<th>Dibuat oleh</th>
+	<th>Tanggal Dibuat</th>
 </thead>
 <tbody>
 	<?php
@@ -44,6 +49,34 @@
 					));
 				?>
 			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'elbi_desc',
+					'pk' => $dt->id,
+					'text' => $dt->elbi_desc,
+					'url' => $this->createUrl('finance/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'period_month',
+					'pk' => $dt->id,
+					'text' => $dt->period_month,
+					'url' => $this->createUrl('finance/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
 			
 			<td>
 				<?php
@@ -66,6 +99,48 @@
 					'name' => 'credit',
 					'pk' => $dt->id,
 					'text' => $dt->credit,
+					'url' => $this->createUrl('finance/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'remarks',
+					'pk' => $dt->id,
+					'text' => $dt->remarks,
+					'url' => $this->createUrl('finance/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_by',
+					'pk' => $dt->id,
+					'text' => $dt->created_by,
+					'url' => $this->createUrl('finance/ajaxupdate'),
+					'title' => 'Enter user name',
+					'placement' => 'right'
+					));
+				?>
+			</td>
+
+			<td>
+				<?php
+					$this->widget('editable.Editable', array(
+					'type' => 'text',
+					'name' => 'created_date',
+					'pk' => $dt->id,
+					'text' => $dt->created_date,
 					'url' => $this->createUrl('finance/ajaxupdate'),
 					'title' => 'Enter user name',
 					'placement' => 'right'

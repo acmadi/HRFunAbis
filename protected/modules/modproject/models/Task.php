@@ -82,7 +82,7 @@ class Task extends CActiveRecord
 			'description' => 'Deskripsi',
 			'plan_start_date' => 'Rencana Tanggal Mulai',
 			'plan_end_date' => 'Rencana Tanggal Selesai',
-			'plan_progress' => ' Progress yang Diharapkan',
+			'plan_progress' => 'Progress yang Diharapkan',
 			'act_start_date' => 'Tanggal Mulai',
 			'act_end_date' => 'Tanggal Selesai',
 			'actual_progress' => 'Progress',
