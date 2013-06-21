@@ -80,6 +80,12 @@ class FinanceController extends RController
 		));
 	}
 
+	public function actionAjaxUpdate()
+	{
+		$es = new EditableSaver('Finance');
+		$es->update();
+	}
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

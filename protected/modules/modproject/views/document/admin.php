@@ -30,13 +30,11 @@ $('.search-form form').submit(function(){
 <?php 
     $this->widget('bootstrap.widgets.TbBox', array(
     'title' => 'Dokumen',
-    'headerIcon' => 'icon-home',
     'headerButtons' => array(
 		array(
 			'class' => 'bootstrap.widgets.TbButtonGroup',
 			'buttons'=>array(
 				array('label'=>'Tambah Dokumen', 'url'=>array('/modproject/document/create')),
-				array('label'=>'Export', 'url'=>'#'),
 			),
 		),
     ),

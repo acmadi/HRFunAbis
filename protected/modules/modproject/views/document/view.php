@@ -41,3 +41,8 @@ $this->menu=array(
 		'created_by',
 	),
 )); ?>
+
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'type'=>'primary', 'label'=>'Download','url'=>array('document/download', 'id' => $model->id))); ?>
+	</div>
