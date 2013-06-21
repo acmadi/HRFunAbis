@@ -13,6 +13,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create PersonelMandays</h1>
+<div class="well well-small">
+	<h1>Create Personnel Mandays</h1>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

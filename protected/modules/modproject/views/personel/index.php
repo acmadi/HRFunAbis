@@ -12,7 +12,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Personels</h1>
+<div class="well well-small">
+	<h1>Personnels</h1>
+</div>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
