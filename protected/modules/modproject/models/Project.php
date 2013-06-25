@@ -143,10 +143,11 @@ class Project extends CActiveRecord
 		));
 	}
 
-	public function updateProgress($id, $progress)
+	public function updateProgress($id, $progress, $progress_plan)
 	{
 		$data = self::model()->findByPk($id);
 		$data->progress = $progress;
+		$data->progress_plan = $progress_plan;
 		$data->update();
 	}
 }
