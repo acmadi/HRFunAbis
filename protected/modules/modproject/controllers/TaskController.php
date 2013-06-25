@@ -40,7 +40,7 @@ class TaskController extends RController
 	public function actionCreate()
 	{
 		$model=new Task;
-
+		$model->project_number = Yii::app()->session['project_number'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -48,7 +48,8 @@ class TaskController extends RController
 		{
 			$model->attributes=$_POST['Task'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&task=true'));
+				// $this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(

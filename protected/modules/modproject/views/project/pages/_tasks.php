@@ -6,19 +6,15 @@
 <table class="table">
 <thead>
 	<th></th>
-	<th>No</th>
-	<th>Kode</th>
-	<th>Nama</th>
-	<th>Deskripsi</th>
-	<th>Rencana Tanggal Mulai</th>
-	<th>Rencana Tanggal Selesai</th>
-	<th>Progress yang Diharapkan</th>
-	<th>Tanggal Mulai</th>
-	<th>Tanggal Selesai</th>
-	<th>Progress</th>
+	<th>TaskID</th>
+	<th>Task</th>
+	<th>Mulai(plan)</th>
+	<th>Selesai(plan)</th>
+	<th>Progress(plan)</th>
+	<th>Mulai(real)</th>
+	<th>Selesai(real)</th>
+	<th>Progress(real)</th>
 	<th>Keterangan</th>
-	<th>Tanggal Dibuat</th>
-	<th>Dibuat Oleh</th>
 </thead>
 <tbody>
 	<?php
@@ -33,13 +29,12 @@
 					'label'=>'delete',
 					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('task/delete', "id" =>$dt->id),
+					'url'=>array('/modproject/task/delete', "id" =>$dt->id),
 					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
 				)); ?>
 
 			</td>
 			
-			<td><?php echo $count; ?></td>
 			<td>
 				<?php
 					$this->widget('editable.Editable', array(
@@ -47,7 +42,7 @@
 					'name' => 'code',
 					'pk' => $dt->id,
 					'text' => $dt->code,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Kode',
 					'placement' => 'right'
 					));
@@ -61,7 +56,7 @@
 					'name' => 'name',
 					'pk' => $dt->id,
 					'text' => $dt->name,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Nama',
 					'placement' => 'right'
 					));
@@ -75,7 +70,7 @@
 					'name' => 'description',
 					'pk' => $dt->id,
 					'text' => $dt->description,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Deskripsi',
 					'placement' => 'right'
 					));
@@ -89,7 +84,7 @@
 					'name' => 'plan_start_date',
 					'pk' => $dt->id,
 					'text' => $dt->plan_start_date,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Rencana Tanggal Mulai',
 					'placement' => 'right'
 					));
@@ -103,7 +98,7 @@
 					'name' => 'plan_end_date',
 					'pk' => $dt->id,
 					'text' => $dt->plan_end_date,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Rencana Tanggal Berakhir',
 					'placement' => 'right'
 					));
@@ -117,7 +112,7 @@
 					'name' => 'plan_progress',
 					'pk' => $dt->id,
 					'text' => $dt->plan_progress,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Rencana Progress',
 					'placement' => 'right'
 					));
@@ -131,7 +126,7 @@
 					'name' => 'act_start_date',
 					'pk' => $dt->id,
 					'text' => $dt->act_start_date,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Tanggal Mulai Sebenarnya',
 					'placement' => 'right'
 					));
@@ -145,7 +140,7 @@
 					'name' => 'act_end_date',
 					'pk' => $dt->id,
 					'text' => $dt->act_end_date,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Tanggal Berakhir Sebenarnya',
 					'placement' => 'right'
 					));
@@ -159,7 +154,7 @@
 					'name' => 'actual_progress',
 					'pk' => $dt->id,
 					'text' => $dt->actual_progress,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Progress Sebenarnya',
 					'placement' => 'right'
 					));
@@ -173,36 +168,8 @@
 					'name' => 'remarks',
 					'pk' => $dt->id,
 					'text' => $dt->remarks,
-					'url' => $this->createUrl('task/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
 					'title' => 'Masukkan Keterangan',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_by',
-					'pk' => $dt->id,
-					'text' => $dt->created_by,
-					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Masukkan Dibuat Oleh',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('task/ajaxupdate'),
-					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>

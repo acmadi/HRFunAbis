@@ -40,7 +40,7 @@ class FinanceController extends RController
 	public function actionCreate()
 	{
 		$model=new Finance;
-
+		$model->project_number = Yii::app()->session['project_number'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -48,7 +48,8 @@ class FinanceController extends RController
 		{
 			$model->attributes=$_POST['Finance'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&finance=true'));
+				//$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(

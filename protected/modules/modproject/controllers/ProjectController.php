@@ -31,6 +31,7 @@ class ProjectController extends RController
 		$model = $this->loadModel($id); 
 		
 		Yii::app()->session['project_number'] = $model->number;
+		Yii::app()->session['project_id'] = $model->id;
 		
 		$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$tasks = Task::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
@@ -48,6 +49,7 @@ class ProjectController extends RController
 			'finances'=>$finances,
 			'procurements'=>$procurements,
 			'personels'=>$personels,
+			'info'=>true,
 		));
 	}
 	

@@ -65,7 +65,7 @@ class DocumentController extends RController
 	public function actionCreate()
 	{
 		$model=new Document;
-
+		$model->project_number = Yii::app()->session['project_number'];
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -82,12 +82,14 @@ class DocumentController extends RController
 				$model->file_attached = 'document/'.$document_name;
 				
 				if($model->save())
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id']));
+					// $this->redirect(array('view','id'=>$model->id));
 			}
 			else
 			{
 				if($model->save())
-						$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&document=true'));
+						// $this->redirect(array('view','id'=>$model->id));
 			}
 		}
 		$this->render('create',array(

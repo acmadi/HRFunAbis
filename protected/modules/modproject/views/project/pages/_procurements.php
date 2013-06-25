@@ -6,7 +6,6 @@
 <table class="table">
 <thead>
 	<th></th>
-	<th>No</th>
 	<th>Vendor</th>
 	<th>Kontrak</th>
 	<th>Tanggal Mulai Kontrak</th>
@@ -17,8 +16,6 @@
 	<th>Jumlah</th>
 	<th>Total Harga</th>
 	<th>Lokasi</th>
-	<th>Created By</th>
-	<th>Created Date</th>
 </thead>
 <tbody>
 	<?php
@@ -39,7 +36,6 @@
 
 			</td>
 			
-			<td><?php echo $count; ?></td>
 			<td>
 				<?php
 					$this->widget('editable.Editable', array(
@@ -47,7 +43,7 @@
 					'name' => 'vendor',
 					'pk' => $dt->id,
 					'text' => $dt->vendor,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Vendor',
 					'placement' => 'right'
 					));
@@ -61,7 +57,7 @@
 					'name' => 'contract',
 					'pk' => $dt->id,
 					'text' => $dt->contract,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Kontrak',
 					'placement' => 'right'
 					));
@@ -75,7 +71,7 @@
 					'name' => 'contract_start_date',
 					'pk' => $dt->id,
 					'text' => $dt->contract_start_date,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Tanggal Mulai Kontrak',
 					'placement' => 'right'
 					));
@@ -89,7 +85,7 @@
 					'name' => 'contract_end_date',
 					'pk' => $dt->id,
 					'text' => $dt->contract_end_date,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Tanggal Berakhir Kontrak',
 					'placement' => 'right'
 					));
@@ -103,7 +99,7 @@
 					'name' => 'period_month',
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Bulan Periode',
 					'placement' => 'right'
 					));
@@ -117,7 +113,7 @@
 					'name' => 'item',
 					'pk' => $dt->id,
 					'text' => $dt->item,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Barang',
 					'placement' => 'right'
 					));
@@ -131,7 +127,7 @@
 					'name' => 'unit_price',
 					'pk' => $dt->id,
 					'text' => $dt->unit_price,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Harga Barang',
 					'placement' => 'right'
 					));
@@ -145,7 +141,7 @@
 					'name' => 'amount',
 					'pk' => $dt->id,
 					'text' => $dt->amount,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Jumlah',
 					'placement' => 'right'
 					));
@@ -159,7 +155,7 @@
 					'name' => 'total_price',
 					'pk' => $dt->id,
 					'text' => $dt->total_price,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Total Harga',
 					'placement' => 'right'
 					));
@@ -173,36 +169,8 @@
 					'name' => 'location',
 					'pk' => $dt->id,
 					'text' => $dt->location,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Lokasi',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_by',
-					'pk' => $dt->id,
-					'text' => $dt->created_by,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Masukkan Dibuat Oleh',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('procurement/ajaxupdate'),
-					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>

@@ -6,15 +6,12 @@
 <table class="table">
 <thead>
 	<th></th>
-	<th>No</th>
 	<th>Elbi</th>
 	<th>Deskripsi Elbi</th>
 	<th>Periode Bulan</th>
 	<th>Debit</th>
 	<th>Kredit</th>
 	<th>Keterangan</th>
-	<th>Dibuat oleh</th>
-	<th>Tanggal Dibuat</th>
 </thead>
 <tbody>
 	<?php
@@ -35,7 +32,6 @@
 
 			</td>
 			
-			<td><?php echo $count; ?></td>
 			<td>
 				<?php
 					$this->widget('editable.Editable', array(
@@ -43,7 +39,7 @@
 					'name' => 'elbi',
 					'pk' => $dt->id,
 					'text' => $dt->elbi,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan ELBI',
 					'placement' => 'right'
 					));
@@ -57,7 +53,7 @@
 					'name' => 'elbi_desc',
 					'pk' => $dt->id,
 					'text' => $dt->elbi_desc,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Deskripsi ELBI',
 					'placement' => 'right'
 					));
@@ -71,7 +67,7 @@
 					'name' => 'period_month',
 					'pk' => $dt->id,
 					'text' => $dt->period_month,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Bulan Periode',
 					'placement' => 'right'
 					));
@@ -85,7 +81,7 @@
 					'name' => 'debit',
 					'pk' => $dt->id,
 					'text' => $dt->debit,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Debit',
 					'placement' => 'right'
 					));
@@ -99,7 +95,7 @@
 					'name' => 'credit',
 					'pk' => $dt->id,
 					'text' => $dt->credit,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Kredit',
 					'placement' => 'right'
 					));
@@ -113,40 +109,14 @@
 					'name' => 'remarks',
 					'pk' => $dt->id,
 					'text' => $dt->remarks,
-					'url' => $this->createUrl('finance/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Keterangan',
 					'placement' => 'right'
 					));
 				?>
 			</td>
 
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_by',
-					'pk' => $dt->id,
-					'text' => $dt->created_by,
-					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Masukkan Dibuat Oleh',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('finance/ajaxupdate'),
-					'title' => 'Masukkan Tanggal Dibuat',
-					'placement' => 'right'
-					));
-				?>
-			</td>
+			
 		</tr>
 	<?php
 		$count++;

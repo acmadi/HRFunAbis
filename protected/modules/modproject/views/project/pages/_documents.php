@@ -6,7 +6,6 @@
 <table class="table">
 <thead>
 	<th></th>
-	<th>No</th>
 	<th>Tipe</th>
 	<th>Task</th>
 	<th>Nomor Dokumen</th>
@@ -15,9 +14,7 @@
 	<th>Pemilik</th>
 	<th>Distribusi</th>
 	<th>Deskripsi Dokumen</th>
-	<th>Berkas Terlampir</th>
-	<th>Tanggal Dibuat</th>
-	<th>Dibuat Oleh</th>
+	<th>Nama File</th>
 </thead>
 <tbody>
 	<?php
@@ -32,7 +29,7 @@
 					'label'=>'delete',
 					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('document/delete', "id" =>$dt->id),
+					'url'=>array('/modproject/document/delete', "id" =>$dt->id),
 					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
 				)); ?>
 			
@@ -40,12 +37,10 @@
 				    'label'=>'Download',
 				    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 				    'size'=>'mini', // null, 'large', 'small' or 'mini'
-				    'url'=>array('document/download', 'id'=>$dt->id)
+				    'url'=>array('/modproject/document/download', 'id'=>$dt->id)
 				)); ?>
 			</td>
 			
-			<td><?php echo $count; ?></td>
-
 			<td>
 				<?php
 					$this->widget('editable.Editable', array(
@@ -53,7 +48,7 @@
 					'name' => 'type',
 					'pk' => $dt->id,
 					'text' => $dt->type,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Tipe',
 					'placement' => 'right'
 					));
@@ -67,7 +62,7 @@
 					'name' => 'task_id',
 					'pk' => $dt->id,
 					'text' => $dt->task_id,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Task ID',
 					'placement' => 'right'
 					));
@@ -81,7 +76,7 @@
 					'name' => 'document_number',
 					'pk' => $dt->id,
 					'text' => $dt->document_number,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Nomor Dokumen',
 					'placement' => 'right'
 					));
@@ -95,7 +90,7 @@
 					'name' => 'version',
 					'pk' => $dt->id,
 					'text' => $dt->version,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Versi',
 					'placement' => 'right'
 					));
@@ -109,7 +104,7 @@
 					'name' => 'version_date',
 					'pk' => $dt->id,
 					'text' => $dt->version_date,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Tanggal Versi',
 					'placement' => 'right'
 					));
@@ -123,7 +118,7 @@
 					'name' => 'owner',
 					'pk' => $dt->id,
 					'text' => $dt->owner,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Pemilik',
 					'placement' => 'right'
 					));
@@ -137,7 +132,7 @@
 					'name' => 'distribution',
 					'pk' => $dt->id,
 					'text' => $dt->distribution,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Distribusi',
 					'placement' => 'right'
 					));
@@ -151,7 +146,7 @@
 					'name' => 'document_description',
 					'pk' => $dt->id,
 					'text' => $dt->document_description,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Deskripsi Dokumen',
 					'placement' => 'right'
 					));
@@ -165,36 +160,8 @@
 					'name' => 'file_attached',
 					'pk' => $dt->id,
 					'text' => $dt->file_attached,
-					'url' => $this->createUrl('document/ajaxupdate'),
+					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
 					'title' => 'Masukkan Berkas Terlampir',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_by',
-					'pk' => $dt->id,
-					'text' => $dt->created_by,
-					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Masukkan Dibuat Oleh',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'created_date',
-					'pk' => $dt->id,
-					'text' => $dt->created_date,
-					'url' => $this->createUrl('document/ajaxupdate'),
-					'title' => 'Masukkan Tanggal Dibuat',
 					'placement' => 'right'
 					));
 				?>
