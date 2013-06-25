@@ -10,7 +10,6 @@
  * @property integer $period_week
  * @property integer $period_month
  * @property integer $period_year
- * @property integer $progress
  * @property string $description
  * @property string $termin_pgn
  * @property string $termin_vendor
@@ -85,14 +84,14 @@ class Progress extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_number, period_date, period_week, period_month, period_year, progress, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic', 'required'),
-			array('period_week, period_month, period_year, progress', 'numerical', 'integerOnly'=>true),
+			array('project_number, period_date, period_week, period_month, period_year, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic', 'required'),
+			array('period_week, period_month, period_year', 'numerical', 'integerOnly'=>true),
 			array('project_number, pic, created_by', 'length', 'max'=>50),
 			array('progress_actual, progress_plan', 'length', 'max'=>11),
 			array('created_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, project_number, period_date, period_week, period_month, period_year, progress, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic, created_date, created_by', 'safe', 'on'=>'search'),
+			array('id, project_number, period_date, period_week, period_month, period_year, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic, created_date, created_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -119,7 +118,6 @@ class Progress extends CActiveRecord
 			'period_week' => 'Minggu Periode',
 			'period_month' => 'Bulan Periode',
 			'period_year' => 'Tahun Periode',
-			'progress' => 'Progress',
 			'description' => 'Deskripsi',
 			'termin_pgn' => 'Termin PGN',
 			'termin_vendor' => 'Termin Vendor',
@@ -152,7 +150,6 @@ class Progress extends CActiveRecord
 		$criteria->compare('period_week',$this->period_week);
 		$criteria->compare('period_month',$this->period_month);
 		$criteria->compare('period_year',$this->period_year);
-		$criteria->compare('progress',$this->progress);
 		$criteria->compare('description',$this->description);
 		$criteria->compare('termin_pgn',$this->termin_pgn,true);
 		$criteria->compare('termin_vendor',$this->termin_vendor,true);

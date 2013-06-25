@@ -142,4 +142,11 @@ class Project extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function updateProgress($id, $progress)
+	{
+		$data = self::model()->findByPk($id);
+		$data->progress = $progress;
+		$data->update();
+	}
 }

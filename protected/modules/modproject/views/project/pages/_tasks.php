@@ -67,20 +67,6 @@
 				<?php
 					$this->widget('editable.Editable', array(
 					'type' => 'text',
-					'name' => 'description',
-					'pk' => $dt->id,
-					'text' => $dt->description,
-					'url' => $this->createUrl('/modproject/task/ajaxupdate'),
-					'title' => 'Masukkan Deskripsi',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
 					'name' => 'plan_start_date',
 					'pk' => $dt->id,
 					'text' => $dt->plan_start_date,

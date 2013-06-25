@@ -51,12 +51,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'progress'); ?>
-		<?php echo $form->textField($model,'progress'); ?>
-		<?php echo $form->error($model,'progress'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textField($model,'description'); ?>
 		<?php echo $form->error($model,'description'); ?>
