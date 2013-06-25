@@ -21,7 +21,7 @@
 					array(
 						'type'=>'line',
 						'name'=>'Progress',             //title of data
-						'dataResource'=>'progress',     //data resource according to datebase column
+						'dataResource'=>'progress_actual',     //data resource according to datebase column
 					)
 				)
 			)
