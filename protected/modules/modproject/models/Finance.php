@@ -43,7 +43,7 @@ class Finance extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_number, elbi, elbi_desc, period_month, debit, credit, remarks', 'required'),
+			array('project_number, elbi, period_month, debit, credit, remarks', 'required'),
 			array('period_month', 'numerical', 'integerOnly'=>true),
 			array('project_number, created_by', 'length', 'max'=>50),
 			array('elbi', 'length', 'max'=>20),

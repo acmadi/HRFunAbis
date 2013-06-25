@@ -130,7 +130,7 @@
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
-	</div><!-- form -->
-	</div><!-- form -->
+   </div>
+</div>
 
 		

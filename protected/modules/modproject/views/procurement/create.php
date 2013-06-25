@@ -13,9 +13,14 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-<h1>Tambah Pengadaan</h1>
-<p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>"Tambah Informasi Pengadaan: ".$model->project_number,
+	));
+?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php 
+	$this->endWidget();
+?>

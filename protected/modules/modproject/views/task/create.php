@@ -13,10 +13,15 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-<h1>Create Task</h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>"Tambah Informasi Task: ".$model->project_number,
+	));
+?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
-
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php 
+	$this->endWidget();
+?>

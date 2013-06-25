@@ -17,7 +17,6 @@ $this->menu=array(
 	$this->beginWidget('zii.widgets.CPortlet', array(
 		'title'=>"Tambah Informasi Progress : ".$model->project_number,
 	));
-	
 ?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
 
