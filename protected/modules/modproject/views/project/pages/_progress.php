@@ -28,7 +28,7 @@
 					'label'=>'delete',
 					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('modproject/progress/delete', "id" =>$dt->id),
+					'url'=>array('/modproject/progress/delete', "id" =>$dt->id),
 					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
 				)); ?>
 

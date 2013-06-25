@@ -49,7 +49,7 @@ class ProgressController extends RController
 		{
 			$model->attributes=$_POST['Progress'];
 			if($model->save()) {
-				// Project::model()->updateProgress(Yii::app()->session['project_id'],$model->progress_actual);
+				Project::model()->updateProgress(Yii::app()->session['project_id'],$model->progress_actual, $model->progress_plan);
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&progress=true'));
 				//$this->redirect(array('view','id'=>$model->id));
 
@@ -102,7 +102,7 @@ class ProgressController extends RController
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&progress=true'));
 	}
 
 	/**
