@@ -73,12 +73,6 @@
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'total_price'); ?>
-			<?php echo $form->textField($model,'total_price',array('size'=>11,'maxlength'=>11)); ?>
-			<?php echo $form->error($model,'total_price'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($model,'location'); ?>
 			<?php echo $form->textField($model,'location',array('size'=>60,'maxlength'=>100)); ?>
 			<?php echo $form->error($model,'location'); ?>

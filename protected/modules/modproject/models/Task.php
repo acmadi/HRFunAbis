@@ -122,4 +122,9 @@ class Task extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function getName($id)
+	{
+		return self::model()->findByPk($id)->name;
+	}
 }

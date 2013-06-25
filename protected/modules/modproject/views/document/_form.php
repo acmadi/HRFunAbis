@@ -19,7 +19,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'type'); ?>
-			<?php echo $form->textField($model,'type',array('size'=>20,'maxlength'=>20)); ?>
+			<?php echo $form->dropDownList($model,'type',$model->getDocType(), array('empty'=>'select document type')); ?>
 			<?php echo $form->error($model,'type'); ?>
 		</div>
 

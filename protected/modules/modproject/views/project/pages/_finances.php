@@ -17,6 +17,8 @@
 	<?php
 		$count = 1;
 		$total;
+		$debit = 0;
+		$credit = 0;
 		foreach($data as $dt):
 	?>
 
@@ -80,7 +82,7 @@
 					'type' => 'text',
 					'name' => 'debit',
 					'pk' => $dt->id,
-					'text' => $dt->debit,
+					'text' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->debit,'')),
 					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Debit',
 					'placement' => 'right'
@@ -94,7 +96,7 @@
 					'type' => 'text',
 					'name' => 'credit',
 					'pk' => $dt->id,
-					'text' => $dt->credit,
+					'text' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->credit,'')),
 					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
 					'title' => 'Masukkan Kredit',
 					'placement' => 'right'
@@ -120,8 +122,17 @@
 		</tr>
 	<?php
 		$count++;
+		$debit += $dt->debit;
+		$credit += $dt->credit;
 		endforeach;
+
 	?>	
+	<thead>
+		<th></th>
+		<th colspan="3">Total</th>
+		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($debit,''))?></th>
+		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($credit,''))?></th>
+	</thead>
 </tbody>
 </table>
 <?php $this->endWidget();?>

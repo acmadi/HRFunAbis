@@ -66,6 +66,7 @@ class DocumentController extends RController
 	{
 		$model=new Document;
 		$model->project_number = Yii::app()->session['project_number'];
+		$model->task_id = (isset($_GET['id'])?$_GET['id']:'');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -82,7 +83,7 @@ class DocumentController extends RController
 				$model->file_attached = 'document/'.$document_name;
 				
 				if($model->save())
-					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id']));
+					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&document=true'));
 					// $this->redirect(array('view','id'=>$model->id));
 			}
 			else

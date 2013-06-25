@@ -46,9 +46,10 @@ class Document extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_number, type, task_id, document_number, version, version_date, owner, distribution, document_description, file_attached', 'required'),
+			array('project_number, type, document_number, version, version_date, owner, distribution, document_description, file_attached', 'required'),
 			array('type', 'length', 'max'=>20),
-			array('task_id, document_number, owner, created_by', 'length', 'max'=>50),
+			array('document_number, owner, created_by', 'length', 'max'=>50),
+			array('task_id','numerical', 'integerOnly'=>true),
 			array('version', 'length', 'max'=>10),
 			array('distribution, file_attached', 'length', 'max'=>200),
 			array('created_date', 'safe'),
@@ -119,5 +120,19 @@ class Document extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+
+	public function getDocType()
+	{
+		return array(
+			'MoM' => 'MoM',
+			'Technical Design'=>'Technical Design',
+			'Functional Design'=>'Functional Design',
+			'Surat Masuk'=>'Surat Masuk',
+			'Surat Keluar'=>'Surat Keluar',
+			'Disposisi'=>'Disposisi',
+			'Lain-Lain'=>'Lain-Lain'
+		);
 	}
 }

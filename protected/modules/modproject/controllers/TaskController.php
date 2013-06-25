@@ -41,6 +41,7 @@ class TaskController extends RController
 	{
 		$model=new Task;
 		$model->project_number = Yii::app()->session['project_number'];
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

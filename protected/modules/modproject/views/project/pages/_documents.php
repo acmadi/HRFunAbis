@@ -25,19 +25,13 @@
 
 		<tr class = "<?php echo $count%2?'even':'odd';?>">
 			<td>
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-					'label'=>'delete',
-					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+				<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+			    	'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('/modproject/document/delete', "id" =>$dt->id),
-					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
-				)); ?>
-			
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-				    'label'=>'Download',
-				    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-				    'size'=>'mini', // null, 'large', 'small' or 'mini'
-				    'url'=>array('/modproject/document/download', 'id'=>$dt->id)
+				    'buttons'=>array(
+				        array('label'=>'Del', 'url'=>array('/modproject/document/delete', "id" =>$dt->id), 'htmlOptions'=>array('confirm'=>'Are you sure to delete?')),
+		                array('label'=>'Download', 'url'=>array('/modproject/document/download', "id" =>$dt->id))
+				    ),
 				)); ?>
 			</td>
 			
@@ -56,17 +50,7 @@
 			</td>
 
 			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'task_id',
-					'pk' => $dt->id,
-					'text' => $dt->task_id,
-					'url' => $this->createUrl('/modproject/document/ajaxupdate'),
-					'title' => 'Masukkan Task ID',
-					'placement' => 'right'
-					));
-				?>
+				<?php echo ($dt->task_id > 0)?Task::model()->getName($dt->task_id):'';?>
 			</td>
 
 			<td>

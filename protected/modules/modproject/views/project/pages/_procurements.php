@@ -126,7 +126,7 @@
 					'type' => 'text',
 					'name' => 'unit_price',
 					'pk' => $dt->id,
-					'text' => $dt->unit_price,
+					'text' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->unit_price,'')),
 					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
 					'title' => 'Masukkan Harga Barang',
 					'placement' => 'right'
@@ -149,17 +149,7 @@
 			</td>
 
 			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'total_price',
-					'pk' => $dt->id,
-					'text' => $dt->total_price,
-					'url' => $this->createUrl('/modproject/procurement/ajaxupdate'),
-					'title' => 'Masukkan Total Harga',
-					'placement' => 'right'
-					));
-				?>
+				<?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->total_price,''))?>
 			</td>
 
 			<td>

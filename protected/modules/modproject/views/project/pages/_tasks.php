@@ -6,7 +6,7 @@
 <table class="table">
 <thead>
 	<th></th>
-	<th>TaskID</th>
+	<th>Penomoran</th>
 	<th>Task</th>
 	<th>Mulai(plan)</th>
 	<th>Selesai(plan)</th>
@@ -25,12 +25,13 @@
 
 		<tr class = "<?php echo $count%2?'even':'odd';?>">
 			<td>		
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-					'label'=>'delete',
-					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+			    	'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('/modproject/task/delete', "id" =>$dt->id),
-					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
+				    'buttons'=>array(
+				        array('label'=>'Del', 'url'=>array('/modproject/task/delete', "id" =>$dt->id), 'htmlOptions'=>array('confirm'=>'Are you sure to delete?')),
+		                array('label'=>'Add Doc', 'url'=>array('/modproject/document/create', "id" =>$dt->id))
+				    ),
 				)); ?>
 
 			</td>
