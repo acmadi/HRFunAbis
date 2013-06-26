@@ -16,6 +16,19 @@ $this->menu=array(
 );
 ?>
 
+
+<table class="table table-striped table-bordered">
+  <tbody>
+	<tr>
+		<td width="20%">Nomor Proyek</td>
+	  	<td><?php echo $model->number?></td>
+	</tr>		
+	<tr>
+		<td width="20%">Nama Proyek</td>
+		<td><?php echo $model->name?></td>
+	</tr>
+  </tbody>
+</table>
 <div class="row-fluid">
 
   <div class="span9">

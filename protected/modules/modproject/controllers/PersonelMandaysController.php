@@ -37,9 +37,10 @@ class PersonelMandaysController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($employee_id)
 	{
 		$model=new PersonelMandays;
+		$model->employee_id = $employee_id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -123,6 +124,23 @@ class PersonelMandaysController extends RController
 
 		$this->render('admin',array(
 			'model'=>$model,
+		));
+	}
+
+	public function actionDetail($employee_id)
+	{
+		$project_number = Yii::app()->session['project_number'];
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'employee_id = '.$employee_id;
+		$personelMandays = PersonelMandays::model()->findAll($criteria);
+		$data = new CArrayDataProvider($personelMandays,array(
+					'id' => 'id',
+					'pagination' => array(
+						'pageSize' => 30,
+						),
+					));
+		$this->render('detail',array(
+			'dataProvider'=>$data,
 		));
 	}
 

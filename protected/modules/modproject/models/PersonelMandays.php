@@ -165,4 +165,10 @@ class PersonelMandays extends CActiveRecord
 		}
 		return $total_mandays;
 	}
+
+	public function getAllMandays($id)
+	{
+		$personel = self::model()->findAllByAttributes(array('employee_id'=>$id));
+		return $personel;
+	}
 }

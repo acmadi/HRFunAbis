@@ -119,6 +119,15 @@
 			<td>
 				<?php echo PersonelMandays::model()->getTotalMandays($dt->employee_id); ?>
 			</td>
+			<td>
+				<?php $this->widget('bootstrap.widgets.TbButton', array(
+					'label'=>'detail',
+					'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+					'size'=>'mini', // null, 'large', 'small' or 'mini'
+					'url'=>array('/modproject/personelmandays/detail', "employee_id" =>$dt->employee_id),
+					'htmlOptions' => array('target'=>'_blank')
+				)); ?>
+			</td>
 		</tr>
 	<?php
 		$count++;
