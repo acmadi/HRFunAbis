@@ -175,6 +175,7 @@
 			<th></th>
 			<th colspan="8">Total</th>
 			<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($total,''))?></th>
+			<th></th>
 		</thead>	
 </tbody>
 </table>

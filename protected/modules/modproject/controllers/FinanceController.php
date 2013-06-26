@@ -47,6 +47,7 @@ class FinanceController extends RController
 		if(isset($_POST['Finance']))
 		{
 			$model->attributes=$_POST['Finance'];
+			$model->elbi_desc = Elbicode::model()->getElbiName($model->elbi);
 			if($model->save())
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&finance=true'));
 				//$this->redirect(array('view','id'=>$model->id));

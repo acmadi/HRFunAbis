@@ -1,28 +1,9 @@
 <?php
 
 $this->breadcrumbs=array(
-	'PersonelMandays'=>array('index'),
+	'Project'=>array('/modproject/project'),
 	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List Procurement', 'url'=>array('index')),
-	array('label'=>'Create Procurement', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('procurement-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
-?>
+);?>
 
 <?php
 	$this->beginWidget('bootstrap.widgets.TbBox', array(

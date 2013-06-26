@@ -62,3 +62,12 @@
 	<?php $this->endWidget();?>
 	</div>	
 </div>	
+
+<div class="form-actions">
+<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+	'type'=>'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	'buttons'=>array(
+		array('label'=>'View Report', 'url'=>array('/modproject/project/report'))
+	),
+)); ?>
+</div>

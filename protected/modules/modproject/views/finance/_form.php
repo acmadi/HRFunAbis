@@ -17,7 +17,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'elbi'); ?>
-			<?php echo $form->textField($model,'elbi',array('size'=>20,'maxlength'=>20)); ?>
+			<?php echo $form->dropDownList($model,'elbi',CHtml::listData(Elbicode::model()->findAll(), 'elbi', 'elbi_desc'), array('empty'=>'pilih elbi')); ?>
 			<?php echo $form->error($model,'elbi'); ?>
 		</div>
 

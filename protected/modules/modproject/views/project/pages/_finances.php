@@ -132,6 +132,7 @@
 		<th colspan="3">Total</th>
 		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($debit,''))?></th>
 		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($credit,''))?></th>
+		<th></th>
 	</thead>
 </tbody>
 </table>

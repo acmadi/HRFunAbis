@@ -12,7 +12,7 @@
 	<th>Mulai Kerja</th>
 	<th>Selesai Kerja</th>
 	<th>Telepon</th>
-	<th>Total ManDays</th>
+	<th>Total Hari Kerja</th>
 </thead>
 <tbody>
 	<?php

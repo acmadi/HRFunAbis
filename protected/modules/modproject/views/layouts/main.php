@@ -28,7 +28,7 @@
     <?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
             'links'=>$this->breadcrumbs,
-			'homeLink'=>CHtml::link('Dashboard'),
+			'homeLink'=>CHtml::link('Home','index.php'),
 			'htmlOptions'=>array('class'=>'breadcrumb')
         )); ?><!-- breadcrumbs -->
     <?php endif ?>

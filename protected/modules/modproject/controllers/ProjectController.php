@@ -169,6 +169,21 @@ class ProjectController extends RController
 		));
 	}
 
+	public function actionReport()
+	{
+		$project_number = Yii::app()->session['project_number'];
+		$project = Project::model()->findByAttributes(array('number'=>$project_number));
+		$finances = Finance::model()->findAllByAttributes(array('project_number' => $project_number));
+		$personels = Personel::model()->findAllByAttributes(array('project_number' => $project_number));
+		$procurements = Procurement::model()->findAllByAttributes(array('project_number' => $project_number));
+		$this->render('report', array(
+			'project' => $project,
+			'finances' => $finances,
+			'personels' => $personels,
+			'procurements' => $procurements
+		));
+	}
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
