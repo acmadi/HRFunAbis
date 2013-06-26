@@ -20,7 +20,7 @@
 <tbody>
 	<?php
 		$count = 1;
-		$total;
+		$total = 0;
 		foreach($data as $dt):
 	?>
 
@@ -168,8 +168,14 @@
 		</tr>
 	<?php
 		$count++;
+		$total += $dt->total_price;
 		endforeach;
-	?>	
+	?>
+		<thead>
+			<th></th>
+			<th colspan="8">Total</th>
+			<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($total,''))?></th>
+		</thead>	
 </tbody>
 </table>
 <?php $this->endWidget();?>

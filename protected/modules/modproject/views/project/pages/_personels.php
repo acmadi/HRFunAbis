@@ -8,11 +8,11 @@
 	<th></th>
 	<th>ID Pegawai</th>
 	<th>Nama</th>
-	<th>Jabatan</th>
 	<th>Posisi</th>
 	<th>Mulai Kerja</th>
 	<th>Selesai Kerja</th>
 	<th>Telepon</th>
+	<th>Total ManDays</th>
 </thead>
 <tbody>
 	<?php
@@ -114,6 +114,10 @@
 					'placement' => 'right'
 					));
 				?>
+			</td>
+
+			<td>
+				<?php echo PersonelMandays::model()->getTotalMandays($dt->employee_id); ?>
 			</td>
 		</tr>
 	<?php

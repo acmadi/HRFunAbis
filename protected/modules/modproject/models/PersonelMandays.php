@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'prj_personel_mandays':
  * @property integer $id
  * @property string $employee_id
+ * @property string $project_number
  * @property integer $month
  * @property integer $mandays
  */
@@ -37,12 +38,12 @@ class PersonelMandays extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('employee_id, month, mandays', 'required'),
+			array('employee_id, project_number, month, mandays', 'required'),
 			array('month, mandays', 'numerical', 'integerOnly'=>true),
-			array('employee_id', 'length', 'max'=>50),
+			array('employee_id, project_number', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, employee_id, month, mandays', 'safe', 'on'=>'search'),
+			array('id, employee_id, project_number, month, mandays', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +66,7 @@ class PersonelMandays extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'employee_id' => 'Employee',
+			'project_number' => 'Nomor Proyek',
 			'month' => 'Month',
 			'mandays' => 'Mandays',
 		);
@@ -83,6 +85,7 @@ class PersonelMandays extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('employee_id',$this->employee_id,true);
+		$criteria->compare('project_number',$this->project_number,true);
 		$criteria->compare('month',$this->month);
 		$criteria->compare('mandays',$this->mandays);
 
@@ -150,7 +153,16 @@ class PersonelMandays extends CActiveRecord
 		if ($month == "11")
 			return 'November';
 		if ($month == "12")
-			return 'Desember';
-			
+			return 'Desember';		
+	}
+
+	public function getTotalMandays($id)
+	{
+		$personel = self::model()->findAllByAttributes(array('employee_id'=>$id));
+		$total_mandays = 0;
+		foreach ($personel as $person) {
+			$total_mandays += $person->mandays;
+		}
+		return $total_mandays;
 	}
 }
