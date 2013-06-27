@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 <?php
 	$this->beginWidget('bootstrap.widgets.TbBox', array(
-	    'title' => 'Kelola Hari Kerja Personil',
+	    'title' => 'Detail Hari Kerja Personil',
 	    'headerIcon' => 'icon-home',
 	    'headerButtons' => array(
 			array(
@@ -20,14 +20,28 @@ $this->breadcrumbs=array(
 	));		
 ?>
 
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th width="20%">No Proyek</th>
+			<td><?php echo Yii::app()->session['project_number']?></td>
+		</tr>
+		<tr>
+			<th width="20%">ID Personil</th>
+			<td><?php echo $personel->employee_id?></td>
+		</tr>
+		<tr>
+			<th width="20%">Nama Personil</th>
+			<td><?php echo $personel->name?></td>
+		</tr>
+	</thead>
+</table>
+
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'procurement-grid',
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		'id',
- 		'employee_id',
- 		'project_number',
  		'month',
  		'mandays',
 		array(

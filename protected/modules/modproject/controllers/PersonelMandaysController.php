@@ -130,9 +130,8 @@ class PersonelMandaysController extends RController
 	public function actionDetail($employee_id)
 	{
 		$project_number = Yii::app()->session['project_number'];
-		$criteria = new CDbCriteria();
-		$criteria->condition = 'employee_id = '.$employee_id;
-		$personelMandays = PersonelMandays::model()->findAll($criteria);
+		$personel = Personel::model()->findByAttributes(array('employee_id' => $employee_id));
+		$personelMandays = PersonelMandays::model()->findAllByAttributes(array('employee_id' => $employee_id));
 		$data = new CArrayDataProvider($personelMandays,array(
 					'id' => 'id',
 					'pagination' => array(
@@ -141,6 +140,7 @@ class PersonelMandaysController extends RController
 					));
 		$this->render('detail',array(
 			'dataProvider'=>$data,
+			'personel' => $personel
 		));
 	}
 
