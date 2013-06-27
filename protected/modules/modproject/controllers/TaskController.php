@@ -37,7 +37,7 @@ class TaskController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id=0)
 	{
 		$model=new Task;
 		$model->project_number = Yii::app()->session['project_number'];
@@ -48,6 +48,7 @@ class TaskController extends RController
 		if(isset($_POST['Task']))
 		{
 			$model->attributes=$_POST['Task'];
+			$model->parent_id = $id;
 			if($model->save())
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&task=true'));
 				// $this->redirect(array('view','id'=>$model->id));

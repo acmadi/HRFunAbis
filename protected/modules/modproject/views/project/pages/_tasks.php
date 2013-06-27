@@ -168,6 +168,44 @@
 	?>	
 </tbody>
 </table>
+
+
+<?php 
+// $this->widget('ext.QTreeGridView.CQTreeGridView', array(
+//     'id'=>'task-grid',
+//     // 'cssFile'=>false,
+//     'ajaxUpdate' => false,
+//     'dataProvider'=>$taskData,
+//     'columns'=>array(
+// 	        'id',
+// 			// 'project_number',
+// 			// 'code',
+// 			'name',
+// 			// 'description',
+// 			// 'plan_start_date',
+// 			// 'plan_end_date',
+// 			// 'plan_progress',
+// 			// 'act_start_date',
+// 			// 'act_end_date',
+// 			// 'actual_progress',
+// 			// 'remarks',
+// 			// 'created_date',
+// 			// 'created_by',
+//         array(
+//             'class'=>'CButtonColumn',
+//             'template'=>'{view}{update}{add}{delete}',
+//             'buttons'=> array(
+//             	'add'=>array(
+//             		'label'=>'Add Task',
+//             		'imageUrl'=>Yii::app()->request->baseUrl.'/images/add.png',
+// 		            'url'=>'Yii::app()->createUrl("modproject/task/create", array("id"=>$data->id))',
+//             		),
+// 	        	)
+// 	        ),
+// 	    ),
+// ));
+?>
+
 <?php $this->endWidget();?>
 
 <div class="form-actions">
