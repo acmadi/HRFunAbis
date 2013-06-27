@@ -132,6 +132,9 @@ class PersonelMandaysController extends RController
 		$project_number = Yii::app()->session['project_number'];
 		$personel = Personel::model()->findByAttributes(array('employee_id' => $employee_id));
 		$personelMandays = PersonelMandays::model()->findAllByAttributes(array('employee_id' => $employee_id));
+		foreach ($personelMandays as $pm) {
+			$pm->month = PersonelMandays::model()->getMonth($pm->month);
+		}
 		$data = new CArrayDataProvider($personelMandays,array(
 					'id' => 'id',
 					'pagination' => array(

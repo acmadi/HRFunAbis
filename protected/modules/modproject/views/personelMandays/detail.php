@@ -1,9 +1,10 @@
 <?php
 
-$this->breadcrumbs=array(
-	'Project'=>array('/modproject/project'),
-	'Manage',
-);?>
+// $this->breadcrumbs=array(
+// 	'Project'=>array('/modproject/project/'),
+// 	'Manage',
+// );
+?>
 
 <?php
 	$this->beginWidget('bootstrap.widgets.TbBox', array(
@@ -43,6 +44,7 @@ $this->breadcrumbs=array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
  		'month',
+ 		'year',
  		'mandays',
 		array(
 			'class'=>'CButtonColumn',
