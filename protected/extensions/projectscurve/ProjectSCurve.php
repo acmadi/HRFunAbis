@@ -15,36 +15,40 @@ class ProjectSCurve extends CWidget{
 		);
 
 	
-		$dataProvider=new CActiveDataProvider('Progress',
-            array(
-                'criteria'=>$criteria,
-            )
-        );
+		// $dataProvider=new CActiveDataProvider('Progress',
+            // array(
+                // 'criteria'=>$criteria,
+            // )
+        // );
  
-        //json formatted ajax response to request
-        if(isset($_GET['json']) && $_GET['json'] == 1)
-		{
-            $count = ChartData::model()->count();
-            for($i=1; $i<=$count; $i++)
-			{
-                $data = ChartData::model()->findByPk($i);
-                $data->data += rand(-10,10);
-                $data->save();
-            }
-            echo CJSON::encode($dataProvider->getData());
-        }
-		else
-		{
-			$this->render('index', array('dataProvider'=>$dataProvider));
-			
-            // $this->render('ChartView',array(
-                    // 'dataProvider'=>$dataProvider,
-            // ));
-        }
+		$data = Progress::model()->findAll($criteria);
 		
-		//$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>Yii::app()->session['project_number'])));
+		$line1 = array();
+		$line2 = array();
 		
-		//tampilkan
-		//$this->render('index', array('progress'=>$progress));
+		foreach ($data as $dt) 
+		{
+		  $line1[]=array($dt->period_week, $dt->progress_actual);
+		  $line2[]=array($dt->period_week, $dt->progress_plan);
+		}
+		
+		$this->render('index', array('line1'=>$line1, 'line2'=>$line2));
+		
+        // //json formatted ajax response to request
+        // if(isset($_GET['json']) && $_GET['json'] == 1)
+		// {
+            // $count = ChartData::model()->count();
+            // for($i=1; $i<=$count; $i++)
+			// {
+                // $data = ChartData::model()->findByPk($i);
+                // $data->data += rand(-10,10);
+                // $data->save();
+            // }
+            // echo CJSON::encode($dataProvider->getData());
+        // }
+		// else
+		// {
+			// $this->render('index', array('dataProvider'=>$dataProvider));
+        // }
 	}
 }
