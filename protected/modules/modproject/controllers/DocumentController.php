@@ -36,7 +36,7 @@ class DocumentController extends RController
 	public function actionDownload($id)
 	{
 		$model = $this->loadModel($id);
-		$src = $model->file_attached; 
+		$src = 'document/'.$model->file_attached; 
 		if(@file_exists($src)) {
 				$path_parts = @pathinfo($src);
 				//$mime = $this->__get_mime($path_parts['extension']);
@@ -80,7 +80,7 @@ class DocumentController extends RController
 				$document_name = $document->name;
 				$document->SaveAs(Yii::app()->basePath . '/../document/' . $document_name);
 				
-				$model->file_attached = 'document/'.$document_name;
+				$model->file_attached = $document_name;
 				
 				if($model->save())
 					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&document=true'));
@@ -129,7 +129,10 @@ class DocumentController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+		unlink('document/'.$model->file_attached);
+		$model->delete();
+
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
