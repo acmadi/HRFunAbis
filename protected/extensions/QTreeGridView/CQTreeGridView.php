@@ -112,51 +112,51 @@ class CQTreeGridView extends CGridView
             });
             ');
 
-        $cs->registerScript('draganddrop', '
-            $(document).ready(function()  {
-               $("#'.$this->getId().' .items tr.initialized").draggable({
-                  helper: "clone",
-                  opacity: .75,
-                  refreshPositions: true, // Performance?
-                  revert: "invalid",
-                  revertDuration: 300,
-                  scroll: true
-                });
+        // $cs->registerScript('draganddrop', '
+        //     $(document).ready(function()  {
+        //        $("#'.$this->getId().' .items tr.initialized").draggable({
+        //           helper: "clone",
+        //           opacity: .75,
+        //           refreshPositions: true, // Performance?
+        //           revert: "invalid",
+        //           revertDuration: 300,
+        //           scroll: true
+        //         });
 
-                $("#'.$this->getId().' .items tr.initialized, #'.$this->getId().' .items tr.before, #'.$this->getId().' .items tr.after").droppable({
-                    accept: ".initialized",
-                    drop: function(e, ui) {
-                      // Call jQuery treeTable plugin to move the branch
-                      //$(ui.draggable).appendBranchTo(this);
-                      if($(this).hasClass("initialized")) {
-                        window.location.href = "moveNode/action/child/to/"+$(this).attr("id")+"/id/"+$(ui.draggable).attr("id");
-                      }
-                      if($(this).hasClass("before")) {
-                        window.location.href = "moveNode/action/before/to/"+$(this).attr("id").replace("before-", "")+"/id/"+$(ui.draggable).attr("id");
-                      }
-                      if($(this).hasClass("after")) {
-                        window.location.href = "moveNode/action/before/to/"+$(this).attr("id").replace("after-", "")+"/id/"+$(ui.draggable).attr("id");
-                      }
-                    },
-                    hoverClass: "accept",
-                    over: function(e, ui) {
-                      // Make the droppable branch expand when a draggable node is moved over it.
-                      if(this.id != $(ui.draggable.parents("tr")[0]).id && !$(this).is(".expanded")) {
-                        $(this).expand();
-                      }
-                    },
-                    activate: function(e, ui) {
-                      $(".after").css("display", "table-row");
-                      $(".before").css("display", "table-row");
-                    },
-                    deactivate: function(e, ui) {
-                      $(".after").css("display", "none");
-                      $(".before").css("display", "none");
-                    },
-                  });
-            });
+        //         $("#'.$this->getId().' .items tr.initialized, #'.$this->getId().' .items tr.before, #'.$this->getId().' .items tr.after").droppable({
+        //             accept: ".initialized",
+        //             drop: function(e, ui) {
+        //               // Call jQuery treeTable plugin to move the branch
+        //               //$(ui.draggable).appendBranchTo(this);
+        //               if($(this).hasClass("initialized")) {
+        //                 window.location.href = "moveNode/action/child/to/"+$(this).attr("id")+"/id/"+$(ui.draggable).attr("id");
+        //               }
+        //               if($(this).hasClass("before")) {
+        //                 window.location.href = "moveNode/action/before/to/"+$(this).attr("id").replace("before-", "")+"/id/"+$(ui.draggable).attr("id");
+        //               }
+        //               if($(this).hasClass("after")) {
+        //                 window.location.href = "moveNode/action/before/to/"+$(this).attr("id").replace("after-", "")+"/id/"+$(ui.draggable).attr("id");
+        //               }
+        //             },
+        //             hoverClass: "accept",
+        //             over: function(e, ui) {
+        //               // Make the droppable branch expand when a draggable node is moved over it.
+        //               if(this.id != $(ui.draggable.parents("tr")[0]).id && !$(this).is(".expanded")) {
+        //                 $(this).expand();
+        //               }
+        //             },
+        //             activate: function(e, ui) {
+        //               $(".after").css("display", "table-row");
+        //               $(".before").css("display", "table-row");
+        //             },
+        //             deactivate: function(e, ui) {
+        //               $(".after").css("display", "none");
+        //               $(".before").css("display", "none");
+        //             },
+        //           });
+        //     });
 
-            ');
+        //     ');
     }
 
     /**

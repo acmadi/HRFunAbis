@@ -34,17 +34,15 @@ class ProjectController extends RController
 		Yii::app()->session['project_id'] = $model->id;
 		
 		$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
-		$tasks = Task::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$tasks = new CArrayDataProvider($this->createTasksTree(),array(
+					'id' => 'id',
+					'pagination'=>false
+					));
 		$documents = Document::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$finances = Finance::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$procurements = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$personels = Personel::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
-		$taskData = new CArrayDataProvider($tasks,array(
-					'id' => 'id',
-					'pagination' => array(
-						'pageSize' => 30,
-						),
-					));
+		
 		
 		$this->render('dashboard',array(
 			'model'=>$model,
@@ -54,7 +52,6 @@ class ProjectController extends RController
 			'finances'=>$finances,
 			'procurements'=>$procurements,
 			'personels'=>$personels,
-			'taskData'=>$taskData,
 			'info'=>true,
 		));
 	}
@@ -190,6 +187,34 @@ class ProjectController extends RController
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+
+	public function actionTest()
+	{
+		$this->createTasksTree();
+	}
+
+	public function createTasksTree()
+	{
+		$roots = Task::model()->findAllByAttributes(array('parent_id'=>0));
+		$taskData = array();
+		foreach ($roots as $root) {
+			$this->getChildren($taskData,$root->id);
+		}
+		return $taskData;
+	}
+
+	public function getChildren(&$array, $parentId)
+	{
+		array_push($array, Task::model()->findByPk($parentId));
+		$children = Task::model()->findAllByAttributes(array('parent_id'=>$parentId));
+		if ($children) {
+			foreach ($children as $child) {
+				$this->getChildren($array,$child->id);
+			}
+		} else {
+			return;
 		}
 	}
 }

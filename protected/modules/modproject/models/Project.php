@@ -99,7 +99,7 @@ class Project extends CActiveRecord
 			'act_end_date' => 'Actual End Date',
 			'duration' => 'Durasi',
 			'spmk_date' => 'Tanggal SPMK',
-			'amount' => 'Jumlah',
+			'amount' => 'Nilai Kontrak',
 			'pic' => 'PIC',
 			'created_by' => 'Created By',
 			'created_date' => 'Created Date',

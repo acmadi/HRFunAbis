@@ -105,6 +105,7 @@ class Task extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('parent_id',$this->parent_id,true);
 		$criteria->compare('code',$this->code,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
@@ -127,4 +128,18 @@ class Task extends CActiveRecord
 	{
 		return self::model()->findByPk($id)->name;
 	}
+
+	// public function behaviors()
+	// {
+	// 	return array(
+	// 		'nestedSetBehavior'=>array(
+	// 		    'class'=>'application.extensions.NestedSetBehavior.NestedSetBehavior',
+	// 		    'leftAttribute'=>'lft',
+	// 		    'rightAttribute'=>'rgt',
+	// 		    'levelAttribute'=>'level',
+	// 		    'hasManyRoots'=>true,
+	// 		    'rootAttribute'=>'root',
+	// 		   	),
+	// 		);
+	//  }
 }

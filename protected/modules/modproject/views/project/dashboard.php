@@ -71,7 +71,7 @@ $this->menu=array(
 	$tabs = array(
 		array('id' => 'tab0', 'label' => 'Info', 'content' => $this->renderPartial('pages/_info', array('model' => $model), true), 'active' => $tab0),
 		array('id' => 'tab1', 'label' => 'Progress', 'content' => $this->renderPartial('pages/_progress', array('data' => $progress), true), 'active' => $tab1),
-		array('id' => 'tab2', 'label' => 'Task', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks,'taskData'=>$taskData), true), 'active' => $tab2),
+		array('id' => 'tab2', 'label' => 'Task', 'content' => $this->renderPartial('pages/_tasks', array('data' => $tasks), true), 'active' => $tab2),
 		array('id' => 'tab3', 'label' => 'Document', 'content' => $this->renderPartial('pages/_documents', array('data' => $documents), true), 'active' => $tab3),
 		array('id' => 'tab4', 'label' => 'Finance', 'content' => $this->renderPartial('pages/_finances', array('data' => $finances), true), 'active' => $tab4),
 		array('id' => 'tab5', 'label' => 'Procurement', 'content' => $this->renderPartial('pages/_procurements', array('data' => $procurements), true), 'active' => $tab5),

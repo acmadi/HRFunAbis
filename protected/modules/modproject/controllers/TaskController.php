@@ -96,8 +96,7 @@ class TaskController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
+		$this->deleteChildren($id);
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
@@ -153,5 +152,16 @@ class TaskController extends RController
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function deleteChildren($parentId)
+	{
+		$children = Task::model()->findAllByAttributes(array('parent_id'=>$parentId));
+		if ($children) {
+			foreach ($children as $child) {
+				$this->deleteChildren($child->id);
+			}
+		}
+		$this->loadModel($parentId)->delete();
 	}
 }
