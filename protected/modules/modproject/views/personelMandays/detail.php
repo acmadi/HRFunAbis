@@ -4,7 +4,7 @@ $project = Project::model()->findByAttributes(array('number'=>Yii::app()->sessio
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 	'Projects' => array('project/admin'),
 	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
-	'Personel',
+	'Personnel',
 	$personel->name=>array('personel/view','id'=>$personel->id),
 	'Mandays',
 )));

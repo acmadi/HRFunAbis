@@ -19,7 +19,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Procurement #<?php echo $model->id; ?></h1>
+<div class="well well-small">
+	<h1>Procurement #<?php echo $model->id; ?></h1>
+</div>
 
 <?php
 	 $this->widget('editable.EditableDetailView', array(

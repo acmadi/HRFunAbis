@@ -6,7 +6,7 @@ $project = Project::model()->findByAttributes(array('number'=>$model->project_nu
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 	'Projects' => array('project/admin'),
 	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
-	'Personel',
+	'Personnel',
 	$model->name,
 )));
 
@@ -20,7 +20,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-	<h1>View Personnel <?php echo $model->name; ?></h1>
+	<h1>Personnel <?php echo $model->name; ?></h1>
 </div>
 
 <?php $this->widget('editable.EditableDetailView', array(

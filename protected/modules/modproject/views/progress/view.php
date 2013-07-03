@@ -20,7 +20,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-<h1>Progress <?php echo $model->period_date; ?></h1>
+	<h1>Progress <?php echo $model->period_date; ?></h1>
 </div>
 
 <?php

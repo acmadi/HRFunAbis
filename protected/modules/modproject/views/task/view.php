@@ -19,7 +19,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-<h1>Task <?php echo $model->name; ?></h1>
+	<h1>Task <?php echo $model->name; ?></h1>
 </div>
 
 <?php

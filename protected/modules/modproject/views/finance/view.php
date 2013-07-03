@@ -20,7 +20,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-	<h1>View Finance #<?php echo $model->id; ?></h1>
+	<h1>Finance #<?php echo $model->id; ?></h1>
 </div>
 
 <?php $this->widget('editable.EditableDetailView', array(

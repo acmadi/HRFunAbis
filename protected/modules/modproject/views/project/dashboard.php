@@ -75,7 +75,7 @@ $this->menu=array(
 		array('id' => 'tab3', 'label' => 'Document', 'content' => $this->renderPartial('pages/_documents', array('data' => $documents), true), 'active' => $tab3),
 		array('id' => 'tab4', 'label' => 'Finance', 'content' => $this->renderPartial('pages/_finances', array('data' => $finances), true), 'active' => $tab4),
 		array('id' => 'tab5', 'label' => 'Procurement', 'content' => $this->renderPartial('pages/_procurements', array('data' => $procurements), true), 'active' => $tab5),
-		array('id' => 'tab6', 'label' => 'Personel', 'content' => $this->renderPartial('pages/_personels', array('data' => $personels), true), 'active' => $tab6),
+		array('id' => 'tab6', 'label' => 'Personnel', 'content' => $this->renderPartial('pages/_personels', array('data' => $personels), true), 'active' => $tab6),
 
 	);
 

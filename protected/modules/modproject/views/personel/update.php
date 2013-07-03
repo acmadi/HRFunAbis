@@ -6,7 +6,7 @@ $project = Project::model()->findByAttributes(array('number'=>$model->project_nu
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 	'Projects' => array('project/admin'),
 	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
-	'Personel',
+	'Personnel',
 	'Update Personel',
 )));
 
