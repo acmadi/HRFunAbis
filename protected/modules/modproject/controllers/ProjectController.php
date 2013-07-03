@@ -52,14 +52,16 @@ class ProjectController extends RController
 		if (isset($_GET['Finance'])) {
 			$finances->attributes=$_GET['Finance'];
 		}
-		$procurements = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$procurements = new Procurement('search');
 		$procurements->unsetAttributes();
 		if (isset($_GET['Procurement'])) {
 			$procurements->attributes=$_GET['Procurement'];
 		}
-		$personels = Personel::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
-		
+		$personels = new Personel('search');
+		$personels->unsetAttributes();
+		if (isset($_GET['Personel'])) {
+			$personels->attributes=$_GET['Personel'];
+		}
 		
 		$this->render('dashboard',array(
 			'model'=>$model,

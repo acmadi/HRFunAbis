@@ -101,7 +101,7 @@ class Personel extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('employee_id',$this->employee_id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('position',$this->position,true);

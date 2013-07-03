@@ -2,10 +2,13 @@
 /* @var $this PersonelController */
 /* @var $model Personel */
 
-$this->breadcrumbs=array(
-	'Personels'=>array('index'),
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Personel',
 	$model->name,
-);
+)));
 
 $this->menu=array(
 	array('label'=>'List Personel', 'url'=>array('index')),
@@ -17,7 +20,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-	<h1>View Personnel #<?php echo $model->id; ?></h1>
+	<h1>View Personnel <?php echo $model->name; ?></h1>
 </div>
 
 <?php $this->widget('editable.EditableDetailView', array(

@@ -1,9 +1,13 @@
 <?php
 
-// $this->breadcrumbs=array(
-// 	'Project'=>array('/modproject/project/'),
-// 	'Manage',
-// );
+$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Personel',
+	$personel->name=>array('personel/view','id'=>$personel->id),
+	'Mandays',
+)));
 ?>
 
 <?php
