@@ -106,15 +106,31 @@ class DocumentController extends RController
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		$oldDoc = $model->file_attached;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Document']))
 		{
 			$model->attributes=$_POST['Document'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+
+			$document=CUploadedFile::getInstance($model,'file_attached');
+			if ($document)
+			{
+				unlink('document/'.$oldDoc);
+				$document_name = $document->name;
+				$document->SaveAs(Yii::app()->basePath . '/../document/' . $document_name);
+				
+				$model->file_attached = $document_name;
+				
+				if($model->save())
+					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&document=true'));
+					// $this->redirect(array('view','id'=>$model->id));
+			} else {
+				$model->file_attached = $oldDoc;
+				if($model->save())
+					$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&document=true'));
+			}
 		}
 
 		$this->render('update',array(
