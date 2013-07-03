@@ -25,7 +25,7 @@
 		<?php
 			$year = array();
 			for ($i=-1; $i < 4; $i++) { 
-				$year[$i+1] = date('Y',time()) + $i;
+				$year[date('Y',time())+$i] = date('Y',time()) + $i;
 			}
 			echo $form->dropDownList($model,'year',$year, array('empty'=>'pilih tahun')); 
 		?>
