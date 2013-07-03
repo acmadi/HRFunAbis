@@ -25,6 +25,18 @@
 			<?php echo $form->dropDownList($model,'month',$model->getPeriodOptions(), array('empty'=>'pilih periode bulan')); ?>
 			<?php echo $form->error($model,'month'); ?>
 	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'year'); ?>
+		<?php
+			$year = array();
+			for ($i=-1; $i < 4; $i++) { 
+				$year[$i+1] = date('Y',time()) + $i;
+			}
+			echo $form->dropDownList($model,'year',$year, array('empty'=>'pilih tahun')); 
+		?>
+		<?php echo $form->error($model,'year'); ?>
+	</div>
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'mandays'); ?>
