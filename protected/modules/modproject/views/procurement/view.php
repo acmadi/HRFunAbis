@@ -2,10 +2,13 @@
 /* @var $this ProcurementController */
 /* @var $model Procurement */
 
-$this->breadcrumbs=array(
-	'Procurements'=>array('index'),
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Procurement',
 	$model->id,
-);
+)));
 
 $this->menu=array(
 	array('label'=>'List Procurement', 'url'=>array('index')),

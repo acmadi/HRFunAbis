@@ -80,8 +80,8 @@ class Procurement extends CActiveRecord
 			'project_number' => 'Nomor Proyek',
 			'vendor' => 'Vendor',
 			'contract' => 'Kontrak',
-			'contract_start_date' => 'Tanggal Mulai Kontrak',
-			'contract_end_date' => 'Tanggal Berakhir Kontrak',
+			'contract_start_date' => 'Mulai Kontrak',
+			'contract_end_date' => 'Berakhir Kontrak',
 			'period_month' => 'Periode Bulan',
 			'item' => 'Barang',
 			'unit_price' => 'Harga Barang',
@@ -105,7 +105,7 @@ class Procurement extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('vendor',$this->vendor,true);
 		$criteria->compare('contract',$this->contract,true);
 		$criteria->compare('contract_start_date',$this->contract_start_date,true);

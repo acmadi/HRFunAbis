@@ -33,7 +33,6 @@ class ProjectController extends RController
 		Yii::app()->session['project_number'] = $model->number;
 		Yii::app()->session['project_id'] = $model->id;
 		
-		$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$progress = new Progress('search');
 		$progress->unsetAttributes();
 		if (isset($_GET['Progress'])) {
@@ -54,6 +53,11 @@ class ProjectController extends RController
 			$finances->attributes=$_GET['Finance'];
 		}
 		$procurements = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$procurements = new Procurement('search');
+		$procurements->unsetAttributes();
+		if (isset($_GET['Procurement'])) {
+			$procurements->attributes=$_GET['Procurement'];
+		}
 		$personels = Personel::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		
 		
