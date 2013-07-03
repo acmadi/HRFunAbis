@@ -145,7 +145,7 @@ class Progress extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('period_date',$this->period_date,true);
 		$criteria->compare('period_week',$this->period_week);
 		$criteria->compare('period_month',$this->period_month);

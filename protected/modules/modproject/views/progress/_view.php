@@ -29,9 +29,6 @@
 	<?php echo CHtml::encode($data->period_year); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('progress')); ?>:</b>
-	<?php echo CHtml::encode($data->progress); ?>
-	<br />
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>

@@ -34,6 +34,11 @@ class ProjectController extends RController
 		Yii::app()->session['project_id'] = $model->id;
 		
 		$progress = Progress::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$progress = new Progress('search');
+		$progress->unsetAttributes();
+		if (isset($_GET['Progress'])) {
+			$progress->attributes=$_GET['Progress'];
+		}
 		$tasks = new CArrayDataProvider($this->createTasksTree(),array(
 					'id' => 'id',
 					'pagination'=>false
@@ -43,7 +48,6 @@ class ProjectController extends RController
 		if (isset($_GET['Document'])) {
 			$documents->attributes=$_GET['Document'];
 		}
-		$finances = Finance::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$finances = new Finance('search');
 		$finances->unsetAttributes();
 		if (isset($_GET['Finance'])) {

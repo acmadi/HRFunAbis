@@ -74,7 +74,8 @@ class FinanceController extends RController
 		{
 			$model->attributes=$_POST['Finance'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				// $this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&finance=true'));
 		}
 
 		$this->render('update',array(
