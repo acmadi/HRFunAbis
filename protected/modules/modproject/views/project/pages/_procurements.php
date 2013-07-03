@@ -171,12 +171,12 @@
 		$total += $dt->total_price;
 		endforeach;
 	?>
-		<thead>
+		<td>
 			<th></th>
 			<th colspan="8">Total</th>
 			<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($total,''))?></th>
 			<th></th>
-		</thead>	
+		</td>	
 </tbody>
 </table>
 <?php $this->endWidget();?>
