@@ -31,14 +31,15 @@
 			'template'=>'{view}{update}{delete}',
 			'buttons'=> array(
             	'view'=>array(
-            		'url'=>'Yii::app()->createUrl("modproject/task/view", array("id"=>$data->id))',
+            		'url'=>'Yii::app()->createUrl("modproject/finance/view", array("id"=>$data->id))',
             		),
             	'update'=>array(
-            		'url'=>'Yii::app()->createUrl("modproject/task/update", array("id"=>$data->id))',
+            		'url'=>'Yii::app()->createUrl("modproject/finance/update", array("id"=>$data->id))',
             		),
             	'delete'=>array(
-            		'url'=>'Yii::app()->createUrl("modproject/task/delete", array("id"=>$data->id))',
+            		'url'=>'Yii::app()->createUrl("modproject/finance/delete", array("id"=>$data->id))',
             		),
+            	),
 			),
 	),
 )); ?>
