@@ -41,6 +41,7 @@ class PersonelMandaysController extends RController
 	{
 		$model=new PersonelMandays;
 		$model->employee_id = $employee_id;
+		$model->project_number = Yii::app()->session['project_number'];
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

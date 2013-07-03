@@ -14,7 +14,8 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-	<h1>Create Personnel Mandays</h1>
+	<h1>Tambah Hari Kerja</h1>
+	<h5>ID Pegawai: <?php echo $model->employee_id?></h5>
 </div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

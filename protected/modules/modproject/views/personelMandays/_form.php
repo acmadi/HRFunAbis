@@ -15,12 +15,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'employee_id'); ?>
-		<?php echo $form->textField($model,'employee_id',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'employee_id'); ?>
-	</div>
-
-	<div class="row">
 			<?php echo $form->labelEx($model,'month'); ?>
 			<?php echo $form->dropDownList($model,'month',$model->getPeriodOptions(), array('empty'=>'pilih periode bulan')); ?>
 			<?php echo $form->error($model,'month'); ?>
@@ -47,7 +41,6 @@
 	<div class="row buttons">
 		<div class="form-actions">
 		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
-		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'label'=>'Back', 'url'=>array('/modproject/personel/admin'))); ?>
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
 		</div>

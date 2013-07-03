@@ -66,10 +66,11 @@ class PersonelMandays extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'employee_id' => 'Employee',
+			'employee_id' => 'ID Pegawai',
 			'project_number' => 'Nomor Proyek',
-			'month' => 'Month',
-			'mandays' => 'Mandays',
+			'month' => 'Bulan',
+			'year' => 'Tahun',
+			'mandays' => 'Hari Kerja',
 		);
 	}
 
