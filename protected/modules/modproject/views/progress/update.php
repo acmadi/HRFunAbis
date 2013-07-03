@@ -20,6 +20,7 @@ $this->menu=array(
 
 <div class="well well-small">
 <h1>Update Progress <?php echo $model->period_date; ?></h1>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 </div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

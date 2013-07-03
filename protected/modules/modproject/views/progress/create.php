@@ -16,15 +16,9 @@ $this->menu=array(
 );
 ?>
 
-<?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>"Tambah Informasi Progress : ".$model->project_number,
-	));
-?>
+<div class="well well-small">
+<h1>Tambah Informasi Progress <?php echo Project::model()->getNameByNumber($model->project_number)?></h1>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
-<?php 
-	$this->endWidget();
-?>

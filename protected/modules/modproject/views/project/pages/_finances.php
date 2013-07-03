@@ -16,10 +16,12 @@
 		'period_month',
 		array(
 			'name'=>'debit',
+			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->debit,\'\'))',
 			'footer' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency(Finance::model()->getTotalDebit(),'')),
 			),
 		array(
 			'name'=>'credit',
+			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->credit,\'\'))',
 			'footer' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency(Finance::model()->getTotalCredit(),'')),
 			),
 		'remarks',

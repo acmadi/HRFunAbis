@@ -150,4 +150,9 @@ class Project extends CActiveRecord
 		$data->progress_plan = $progress_plan;
 		$data->update();
 	}
+
+	public function getNameByNumber($number)
+	{
+		return self::model()->findByAttributes(array('number'=>$number))->name;
+	}
 }

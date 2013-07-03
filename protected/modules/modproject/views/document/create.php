@@ -16,14 +16,12 @@ $this->menu=array(
 );
 ?>
 
-<?php
-	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>'Tambah Informasi Dokumen : '.$model->project_number.(($model->task_id)?'<br/>Task: '.Task::model()->findByPk($model->task_id)->name:''),
-	));
-?>
+<div class="well well-small">
+	<h1>Tambah Informasi Dokumen <?php echo Project::model()->getNameByNumber($model->project_number) ?></h1>
+	<?php if ($model->task_id) { ?>
+	<h4>Task: <?php echo Task::model()->findByPk($model->task_id)->name; ?></h4>
+	<?php } ?>
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
-<?php 
-	$this->endWidget();
-?>

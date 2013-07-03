@@ -19,6 +19,7 @@ $this->menu=array(
 
 <div class="well well-small">
 <h1>Update Task <?php echo $model->name; ?></h1>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 </div>
 
 

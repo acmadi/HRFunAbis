@@ -129,6 +129,11 @@ class Task extends CActiveRecord
 		return self::model()->findByPk($id)->name;
 	}
 
+	public function getCode($id)
+	{
+		return self::model()->findByPk($id)->code;
+	}
+
 	// public function behaviors()
 	// {
 	// 	return array(

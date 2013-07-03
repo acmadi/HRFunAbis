@@ -1,0 +1,51 @@
+1	101	 Upah Pokok
+2	102	 Upah
+3	103	 Lembur
+4	104	 PPh Pasal 21  Beban Perusahaan
+5	105	 Jamsostek
+6	106	 Bonus/Insentif
+7	108	 Tunjangan Umum
+8	109	 Tunjangan Cuti
+9	110	 Tunjangan Keagamaan
+10	112	 Iuran DPLK
+11	113	 Tunjangan Insentif/Prestasi
+12	114	 Perawatan Kesehatan
+13	115	 Tunjangan Kesetiaan Kerja
+14	116	 Tunjangan Akhir Masa Bhakti
+15	118	 Gaji Direksi dan Komisaris
+16	120	 Pesangon
+17	222	 Bahan Bakar (BBM)
+18	224	 Alat Tulis Kantor
+19	225	 Cetakan dan Publikasi
+20	226	 Obat-obatan
+21	227	 Alat-alat (Tools)
+22	228	 Suku Cadang
+23	229	 Material Umum
+24	301	 Pemakaian Listrik (PLN)
+25	302	 Pemakaian Air (PAM)
+26	303	 Survey dan Studi
+27	304	 Komunikasi
+28	306	 Transport Lokal
+29	307	 Promosi dan Humas
+30	308	 Biaya sewa-sewa
+31	309	 Konsultan dan Jasa Teknik
+32	310	 Biaya Bank
+33	311	 Pemeliharaan Bangunan Kantor dan Penunjang Operasi
+34	314	 Pemeliharaan Mesin dan Peralatan
+35	315	 Pemeliharaan Kendaraan Bermotor
+36	316	 Pemeliharaan Peralatan Kantor
+37	317	 Pemeliharaan Inventaris Lain-lain
+38	318	 Premi Asuransi
+39	319	 Asuransi Aset
+40	404	 Penyusutan Mesin dan Peralatan
+41	501	 Perjalanan Dinas
+42	502	 Jamuan
+43	503	 Penerimaan dan Pemindahan Pekerja
+44	504	 Pembinaan dan Pendidikan
+45	505	 Perayaan-perayaan
+46	507	 Perizinan
+47	510	 Pakaian Dinas
+48	511	 Pajak Bumi dan Bangunan (PBB)
+49	512	 Keanggotaan
+50	513	 Pajak Retribusi Daerah
+51	514	 Majalah/Surat Kabar/Buku
