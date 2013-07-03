@@ -2,10 +2,13 @@
 /* @var $this DocumentController */
 /* @var $model Document */
 
-$this->breadcrumbs=array(
-	'Documents'=>array('index'),
-	'Create',
-);
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'document'=>'true'),
+	'Document',
+	'Create Document',
+)));
 
 $this->menu=array(
 	array('label'=>'List Document', 'url'=>array('index')),
@@ -15,7 +18,7 @@ $this->menu=array(
 
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(
-		'title'=>"Tambah Informasi Dokumen : ".$model->project_number,
+		'title'=>'Tambah Informasi Dokumen : '.$model->project_number.(($model->task_id)?'<br/>Task: '.Task::model()->findByPk($model->task_id)->name:''),
 	));
 ?>
 

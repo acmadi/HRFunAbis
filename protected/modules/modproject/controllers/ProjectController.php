@@ -38,8 +38,17 @@ class ProjectController extends RController
 					'id' => 'id',
 					'pagination'=>false
 					));
-		$documents = Document::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$documents = new Document('search');
+		$documents->unsetAttributes();
+		if (isset($_GET['Document'])) {
+			$documents->attributes=$_GET['Document'];
+		}
 		$finances = Finance::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
+		$finances = new Finance('search');
+		$finances->unsetAttributes();
+		if (isset($_GET['Finance'])) {
+			$finances->attributes=$_GET['Finance'];
+		}
 		$procurements = Procurement::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		$personels = Personel::model()->findAll(array('condition'=>'project_number=:x', 'params'=>array(':x'=>$model->number)));
 		
@@ -197,7 +206,7 @@ class ProjectController extends RController
 
 	public function createTasksTree()
 	{
-		$roots = Task::model()->findAllByAttributes(array('parent_id'=>0));
+		$roots = Task::model()->findAllByAttributes(array('parent_id'=>0,'project_number'=>Yii::app()->session['project_number']));
 		$taskData = array();
 		foreach ($roots as $root) {
 			$this->getChildren($taskData,$root->id);

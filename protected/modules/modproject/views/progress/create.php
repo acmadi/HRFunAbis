@@ -2,9 +2,12 @@
 /* @var $this ProgressController */
 /* @var $model Progress */
 
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
 $this->breadcrumbs=array(
-	'Progresses'=>array('index'),
-	'Create',
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'progress'=>'true'),
+	'Progress',
+	'Create Progress',
 );
 
 $this->menu=array(

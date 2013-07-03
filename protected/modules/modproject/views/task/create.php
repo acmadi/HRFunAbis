@@ -2,9 +2,12 @@
 /* @var $this TaskController */
 /* @var $model Task */
 
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
-	'Tasks'=>array('index'),
-	'Create',
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Task',
+	'Create Task',
 )));
 
 $this->menu=array(

@@ -2,12 +2,13 @@
 /* @var $this TaskController */
 /* @var $model Task */
 
-$this->breadcrumbs=array(
-	'Tasks'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
-
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Task',
+	'Update Task',
+)));
 $this->menu=array(
 	array('label'=>'List Task', 'url'=>array('index')),
 	array('label'=>'Create Task', 'url'=>array('create')),

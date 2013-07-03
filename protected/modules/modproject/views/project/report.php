@@ -16,8 +16,10 @@
 </style>
 
 <?php
+
 $this->breadcrumbs=array(
-	'Projects'=>array('view','id'=>$project->id),
+	'Projects' => array('admin'),
+	$project->name => array('view','id'=>$project->id),
 	'Report',
 );?>
 

@@ -1,9 +1,11 @@
 <?php
 /* @var $this TaskController */
 /* @var $model Task */
-
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
 $this->breadcrumbs=array(
-	'Tasks'=>array('index'),
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Task',
 	$model->name,
 );
 

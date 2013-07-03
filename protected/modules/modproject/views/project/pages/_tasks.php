@@ -73,7 +73,7 @@ $this->widget('ext.QTreeGridView.CQTreeGridView', array(
             	'attach'=>array(
             		'label'=>'Attach Document',
             		'imageUrl'=>Yii::app()->request->baseUrl.'/images/attach.png',
-		            'url'=>'Yii::app()->createUrl("modproject/document/create", array("id"=>$data->id))',
+		            'url'=>'Yii::app()->createUrl("modproject/document/create", array("task_id"=>$data->id))',
             		),
 	        	),
             'htmlOptions'=>array(

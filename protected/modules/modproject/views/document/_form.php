@@ -24,12 +24,6 @@
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'task_id'); ?>
-			<?php echo $form->textField($model,'task_id',array('size'=>50,'maxlength'=>50)); ?>
-			<?php echo $form->error($model,'task_id'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($model,'document_number'); ?>
 			<?php echo $form->textField($model,'document_number',array('size'=>50,'maxlength'=>50)); ?>
 			<?php echo $form->error($model,'document_number'); ?>

@@ -175,4 +175,24 @@ class Finance extends CActiveRecord
 			return 'Desember';
 			
 	}
+
+	public function getTotalDebit()
+	{
+		$finances = $this->findAllByAttributes(array('project_number'=>Yii::app()->session['project_number']));
+		$total = 0;
+		foreach ($finances as $finance) {
+			$total += $finance->debit;
+		}
+		return $total;
+	}
+
+	public function getTotalCredit()
+	{
+		$finances = $this->findAllByAttributes(array('project_number'=>Yii::app()->session['project_number']));
+		$total = 0;
+		foreach ($finances as $finance) {
+			$total += $finance->credit;
+		}
+		return $total;
+	}
 }

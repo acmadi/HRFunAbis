@@ -62,11 +62,11 @@ class DocumentController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($task_id='')
 	{
 		$model=new Document;
 		$model->project_number = Yii::app()->session['project_number'];
-		$model->task_id = (isset($_GET['id'])?$_GET['id']:'');
+		$model->task_id = $task_id;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

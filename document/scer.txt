@@ -1,0 +1,26 @@
+1. Untuk dapat menggunakan zenoss, pertama-tama kita perlu menginstall CentOS linux 64 bit terlebih dahulu
+2. setelah centos terinstal, bukalah terminal dan masuk sebagai root
+3. jalankan perintah2 berikut ini.
+4. zenpack yang akan diinstall dapat diubah dengan mengubah file zenpack actions
+5. apabila telah selesai, mulailah instalasi dengan mengetikkan perintah berikut
+6. installer zenoss otomatis akan mendownload file-file yang diperlukan dan melakukan instalasi
+7. Dengan menggunakan cara ini, seluruh file-file yang dibutuhkan oleh zenoss akan didownload dan diinstall secara otomatis. Kita cukup menunggu hingga proses instalasi ini selesai
+8. Di tengah2 proses instalasi, kita akan diminta konfirmasi untuk membuat password mysql. ketik Y untuk mengatur password dan masukkan password yang diinginkan
+9. Setelah selesai membuat password mysql, proses instalasi zenoss memasuki tahap akhir dari instalasi.
+10. berikut tampilan apabila zenoss telah berhasil diinstall
+
+11. berikutnya kita akan mencoba menginstal dan konfigurasi snmp pada windows 7
+12. buka my computer, klik uninstall or change program, pilih turn windows feature on or off, cari pilihan simple network management protocol, beri ceklis, lalu tekan ok untuk melakukan instalasi
+
+13. untuk melakukan konfigurasi snmp, klik kanan pada computer dan klik manage
+14. pilih service and applications lalu pilih services. cari snmp service lalu klik kanan dan pilih properties
+15. pada tab agent, isi contact dan location jika diperlukan, pada area service beri tanda ceklis seperti berikut
+16. pada tab security, tekan tombol add pada accepted community name dan masukkan nama community yang diinginkan.
+17. pilih accept snmp packets from any host lalu tekan ok untuk menyelesaikan konfigurasi
+
+18. bukalah localhost dengan port 8080 untuk membuka zenoss
+19. halaman yang akan terbuka jika anda pertama kali menginstal zenoss adalah seperti berikut. pilih mulai dari step1
+20. pada halaman ini, kita diminta untuk menentukan password admin dan akun untuk mengakses zenoss. Isilah kolom2 sesuai yang diinginkan
+21. pada halaman berikut ini, kita bisa menambahkan device yang mau dimonitor dengan memasukkan ip, tipe device, dan nama communitynya. nama community yang dimasukkan harus sama dengan nama community yang dimasukkan ketika melakukan konfigurasi snmp di device yang ingin dimonito.  penambahan device juga dapat dilakukan setelah masuk ke dashboard dari zenoss dan tidak harus di halaman ini.
+
+22. berikut adalah hasil monitoring yang dilakukan selama 1 x 24 jam

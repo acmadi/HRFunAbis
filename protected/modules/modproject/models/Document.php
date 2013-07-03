@@ -102,9 +102,8 @@ class Document extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('task_id',$this->task_id,true);
 		$criteria->compare('document_number',$this->document_number,true);

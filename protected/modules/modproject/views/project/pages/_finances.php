@@ -3,139 +3,47 @@
 'headerIcon' => 'icon-th-list',
 'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<table class="table">
-<thead>
-	<th></th>
-	<th>Elbi</th>
-	<th>Deskripsi Elbi</th>
-	<th>Periode Bulan</th>
-	<th>Debit</th>
-	<th>Kredit</th>
-	<th>Keterangan</th>
-</thead>
-<tbody>
-	<?php
-		$count = 1;
-		$total;
-		$debit = 0;
-		$credit = 0;
-		foreach($data as $dt):
-	?>
 
-		<tr class = "<?php echo $count%2?'even':'odd';?>">
-			<td>		
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-					'label'=>'delete',
-					'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-					'size'=>'mini', // null, 'large', 'small' or 'mini'
-					'url'=>array('finance/delete', "id" =>$dt->id),
-					'htmlOptions'=>array('confirm'=>'Are you sure to delete?'),
-				)); ?>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'finance-grid',
+	'dataProvider'=>$data->search(),
+	'filter'=>$data,
+	'columns'=>array(
+		// 'id',
+		// 'project_number',
+		'elbi',
+		'elbi_desc',
+		'period_month',
+		array(
+			'name'=>'debit',
+			'footer' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency(Finance::model()->getTotalDebit(),'')),
+			),
+		array(
+			'name'=>'credit',
+			'footer' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency(Finance::model()->getTotalCredit(),'')),
+			),
+		'remarks',
+		// 'created_by',
+		// 'created_date',
+		
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}{update}{delete}',
+			'buttons'=> array(
+            	'view'=>array(
+            		'url'=>'Yii::app()->createUrl("modproject/task/view", array("id"=>$data->id))',
+            		),
+            	'update'=>array(
+            		'url'=>'Yii::app()->createUrl("modproject/task/update", array("id"=>$data->id))',
+            		),
+            	'delete'=>array(
+            		'url'=>'Yii::app()->createUrl("modproject/task/delete", array("id"=>$data->id))',
+            		),
+			),
+	),
+)); ?>
 
-			</td>
-			
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'elbi',
-					'pk' => $dt->id,
-					'text' => $dt->elbi,
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan ELBI',
-					'placement' => 'right'
-					));
-				?>
-			</td>
 
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'elbi_desc',
-					'pk' => $dt->id,
-					'text' => $dt->elbi_desc,
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan Deskripsi ELBI',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'period_month',
-					'pk' => $dt->id,
-					'text' => $dt->period_month,
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan Bulan Periode',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-			
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'debit',
-					'pk' => $dt->id,
-					'text' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->debit,'')),
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan Debit',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'credit',
-					'pk' => $dt->id,
-					'text' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency($dt->credit,'')),
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan Kredit',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			<td>
-				<?php
-					$this->widget('editable.Editable', array(
-					'type' => 'text',
-					'name' => 'remarks',
-					'pk' => $dt->id,
-					'text' => $dt->remarks,
-					'url' => $this->createUrl('/modproject/finance/ajaxupdate'),
-					'title' => 'Masukkan Keterangan',
-					'placement' => 'right'
-					));
-				?>
-			</td>
-
-			
-		</tr>
-	<?php
-		$count++;
-		$debit += $dt->debit;
-		$credit += $dt->credit;
-		endforeach;
-
-	?>	
-	<tr>
-		<th></th>
-		<th colspan="3">Total</th>
-		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($debit,''))?></th>
-		<th><?php echo CHtml::encode(Yii::app()->numberFormatter->formatCurrency($credit,''))?></th>
-		<th></th>
-	</tr>
-</tbody>
-</table>
 <?php $this->endWidget();?>
 
 <div class="form-actions">

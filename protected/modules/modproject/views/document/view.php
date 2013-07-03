@@ -2,10 +2,13 @@
 /* @var $this DocumentController */
 /* @var $model Document */
 
-$this->breadcrumbs=array(
-	'Documents'=>array('index'),
-	$model->id,
-);
+$project = Project::model()->findByAttributes(array('number'=>$model->project_number));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('/modproject/project/view','id'=>$project->id,'task'=>'true'),
+	'Document',
+	$model->document_number,
+)));
 
 $this->menu=array(
 	array('label'=>'List Document', 'url'=>array('index')),
@@ -17,7 +20,7 @@ $this->menu=array(
 ?>
 
 <div class="well well-small">
-	<h1>View Document #<?php echo $model->id; ?></h1>
+	<h1>View Document <?php echo $model->document_number; ?></h1>
 </div>
 
 <?php $this->widget('editable.EditableDetailView', array(
