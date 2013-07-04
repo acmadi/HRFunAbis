@@ -2,11 +2,16 @@
 /* @var $this PersonelMandaysController */
 /* @var $model PersonelMandays */
 
-$this->breadcrumbs=array(
-	'Personel Mandays'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
+$personel = Personel::model()->findByAttributes(array('employee_id'=>$model->employee_id));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('project/view','id'=>$project->id,'task'=>'true'),
+	'Personnel',
+	$personel->name=>array('personel/view','id'=>$personel->id),
+	'Mandays'=>array('personelmandays/detail','employee_id'=>$personel->employee_id),
+	'Update Hari Kerja'
+)));
 
 $this->menu=array(
 	array('label'=>'List PersonelMandays', 'url'=>array('index')),
@@ -16,9 +21,14 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Update PersonelMandays <?php echo $model->id; ?></h1>
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
-
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Hari Kerja '.$personel->name,
+	));		
+?>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

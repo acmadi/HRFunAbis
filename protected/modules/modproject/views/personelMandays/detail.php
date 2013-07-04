@@ -29,7 +29,11 @@ $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 	<thead>
 		<tr>
 			<th width="20%">No Proyek</th>
-			<td><?php echo Yii::app()->session['project_number']?></td>
+			<td><?php echo $project->number?></td>
+		</tr>
+		<tr>
+			<th width="20%">Nama Proyek</th>
+			<td><?php echo $project->name?></td>
 		</tr>
 		<tr>
 			<th width="20%">ID Personil</th>

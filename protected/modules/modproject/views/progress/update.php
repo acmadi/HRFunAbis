@@ -18,9 +18,15 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-<h1>Update Progress <?php echo $model->period_date; ?></h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Progress Minggu'.$model->period_week,
+	));		
+?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

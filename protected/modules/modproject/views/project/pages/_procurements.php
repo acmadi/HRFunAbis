@@ -17,9 +17,17 @@
 		'contract_end_date',
 		'period_month',
 		'item',
-		'unit_price',
+		array(
+			'name'=>'unit_price',
+			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->unit_price,\'\'))',
+			),
 		'amount',
 		'total_price',
+		array(
+			'name'=>'total_price',
+			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->total_price,\'\'))',
+			'footer' => CHtml::encode(Yii::app()->numberFormatter->formatCurrency(Procurement::model()->getSumTotalPrice(),'')),
+			),
 		'location',
 		// 'created_by',
 		// 'created_date',

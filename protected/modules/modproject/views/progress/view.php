@@ -19,9 +19,11 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Progress <?php echo $model->period_date; ?></h1>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Progress Minggu '.$model->period_week,
+	));		
+?>
 
 <?php
 	 $this->widget('editable.EditableDetailView', array(
@@ -30,15 +32,8 @@ $this->menu=array(
 			'id',
 			'project_number',
 			'period_date',
+			'period_date_to',
 			'period_week',
-			array(
-					'name'=>'period_month',
-					'editable' => array(
-						'type' => 'select',
-						'source' => Progress::model()->getPeriodMonths(),
-					)
-				),
-			'period_year',
 			'description',
 			'termin_pgn',
 			'termin_vendor',
@@ -53,4 +48,6 @@ $this->menu=array(
 			'created_by',
 		),
 	));
+
+	 $this->endWidget();
 ?>

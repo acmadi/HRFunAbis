@@ -19,9 +19,11 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Personnel <?php echo $model->name; ?></h1>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Personil '.$model->name,
+	));		
+?>
 
 <?php $this->widget('editable.EditableDetailView', array(
 	'data'=>$model,
@@ -44,3 +46,7 @@ $this->menu=array(
 		'created_date',
 	),
 )); ?>
+
+<?php
+	$this->endWidget();
+?>

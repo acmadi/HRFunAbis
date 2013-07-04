@@ -123,4 +123,14 @@ class Procurement extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function getSumTotalPrice()
+	{
+		$procurements = $this->findAllByAttributes(array('project_number'=>Yii::app()->session['project_number']));
+		$total = 0;
+		foreach ($procurements as $procurement) {
+			$total += $procurement->total_price;
+		}
+		return $total;
+	}
 }

@@ -101,6 +101,8 @@ class ProgressController extends RController
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
+		$progress = Progress::model()->getMaxProgress(Yii::app()->session['project_number']);
+		Project::model()->updateProgress(Yii::app()->session['project_id'],$progress->progress_actual, $progress->progress_plan);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

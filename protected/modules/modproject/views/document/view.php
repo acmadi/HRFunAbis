@@ -19,9 +19,12 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Document <?php echo $model->document_number; ?></h1>
-</div>
+
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Document '.$model->document_number,
+	));		
+?>
 
 <?php $this->widget('editable.EditableDetailView', array(
 	'data'=>$model,
@@ -49,3 +52,7 @@ $this->menu=array(
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'info', 'type'=>'primary', 'label'=>'Download','url'=>array('document/download', 'id' => $model->id))); ?>
 	</div>
+
+<?php
+	$this->endWidget();
+?>

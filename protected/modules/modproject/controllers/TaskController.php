@@ -41,6 +41,7 @@ class TaskController extends RController
 	{
 		$model=new Task;
 		$model->project_number = Yii::app()->session['project_number'];
+		$model->parent_id = $id;
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -48,7 +49,6 @@ class TaskController extends RController
 		if(isset($_POST['Task']))
 		{
 			$model->attributes=$_POST['Task'];
-			$model->parent_id = $id;
 			if($model->save())
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&task=true'));
 				// $this->redirect(array('view','id'=>$model->id));

@@ -16,9 +16,14 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-<h1>Update Proyek <?php echo $model->name; ?></h1>
-</div>
-
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Proyek '.$model->name,
+	));		
+?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

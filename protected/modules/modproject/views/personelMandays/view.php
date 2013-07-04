@@ -2,10 +2,16 @@
 /* @var $this PersonelMandaysController */
 /* @var $model PersonelMandays */
 
-$this->breadcrumbs=array(
-	'PersonelMandays'=>array('index'),
-	$model->id,
-);
+$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
+$personel = Personel::model()->findByAttributes(array('employee_id'=>$model->employee_id));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('project/view','id'=>$project->id,'task'=>'true'),
+	'Personnel',
+	$personel->name=>array('personel/view','id'=>$personel->id),
+	'Mandays'=>array('personelmandays/detail','employee_id'=>$personel->employee_id),
+	'Detail Hari Kerja'
+)));
 
 $this->menu=array(
 	array('label'=>'List PersonelMandays', 'url'=>array('index')),
@@ -16,9 +22,11 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>View PersonelMandays #<?php echo $model->id; ?></h1>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Hari Kerja '.$personel->name,
+	));		
+?>
 
 <?php $this->widget('editable.EditableDetailView', array(
 	'data'=>$model,
@@ -40,3 +48,7 @@ $this->menu=array(
 		'mandays',
 	),
 )); ?>
+
+<?php
+	$this->endWidget();
+?>

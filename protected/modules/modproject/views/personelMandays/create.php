@@ -2,10 +2,16 @@
 /* @var $this PersonelMandaysController */
 /* @var $model PersonelMandays */
 
-$this->breadcrumbs=array(
-	'Personel Mandays'=>array('index'),
-	'Create',
-);
+$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
+$personel = Personel::model()->findByAttributes(array('employee_id'=>$model->employee_id));
+$this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
+	'Projects' => array('project/admin'),
+	$project->name=>array('project/view','id'=>$project->id,'task'=>'true'),
+	'Personnel',
+	$personel->name=>array('personel/view','id'=>$personel->id),
+	'Mandays'=>array('personelmandays/detail','employee_id'=>$personel->employee_id),
+	'Tambah Hari Kerja'
+)));
 
 $this->menu=array(
 	array('label'=>'List PersonelMandays', 'url'=>array('index')),
@@ -13,9 +19,16 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Tambah Hari Kerja</h1>
-	<h5>ID Pegawai: <?php echo $model->employee_id?></h5>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Tambah Hari Kerja<br/>
+					ID Pegawai: '.$model->employee_id.
+					'<br/>Nama Pegawai: '.Personel::model()->getNameByEmployeeId($model->employee_id),
+	));		
+?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

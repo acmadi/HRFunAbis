@@ -17,10 +17,17 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-<h1>Update Task <?php echo $model->name; ?></h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Task '.$model->name,
+	));		
+?>
+
 <p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
 
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

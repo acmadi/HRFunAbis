@@ -18,9 +18,15 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Update Document <?php echo $model->document_number; ?></h1>
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Document '.$model->document_number,
+	));		
+?>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php
+	$this->endWidget();
+?>

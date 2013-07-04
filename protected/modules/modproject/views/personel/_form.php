@@ -15,12 +15,6 @@
 		<?php echo $form->errorSummary($model); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'project_number'); ?>
-			<?php echo $form->textField($model,'project_number',array('size'=>50,'maxlength'=>50)); ?>
-			<?php echo $form->error($model,'project_number'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($model,'employee_id'); ?>
 			<?php echo $form->textField($model,'employee_id',array('size'=>50,'maxlength'=>50)); ?>
 			<?php echo $form->error($model,'employee_id'); ?>

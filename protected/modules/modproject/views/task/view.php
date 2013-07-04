@@ -18,9 +18,11 @@ $this->menu=array(
 );
 ?>
 
-<div class="well well-small">
-	<h1>Task <?php echo $model->name; ?></h1>
-</div>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Task '.$model->name,
+	));		
+?>
 
 <?php
 	 $this->widget('editable.EditableDetailView', array(
@@ -46,4 +48,6 @@ $this->menu=array(
 		'created_by',
 		)
 	));
+
+	 $this->endWidget();
 ?>

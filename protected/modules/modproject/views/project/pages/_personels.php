@@ -34,6 +34,7 @@
             		'label'=>'Mandays Detail',
             		'imageUrl'=>Yii::app()->request->baseUrl.'/images/person.png',
 		            'url'=>'Yii::app()->createUrl("modproject/personelmandays/detail", array("employee_id"=>$data->employee_id))',
+		            'htmlOptions'=>array('target'=>'blank'),
             		),
             	'update'=>array(
             		'url'=>'Yii::app()->createUrl("modproject/personel/update", array("id"=>$data->id))',

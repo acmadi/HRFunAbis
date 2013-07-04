@@ -78,7 +78,7 @@ class Personel extends CActiveRecord
 			'employee_id' => 'ID Pegawai',
 			'name' => 'Nama',
 			'position' => 'Posisi',
-			'position_task' => 'Task Jabatan',
+			'position_task' => 'Tugas',
 			'start_join' => 'Mulai Kerja',
 			'end_join' => 'Selesai Kerja',
 			'telepon' => 'Telepon',
@@ -117,5 +117,10 @@ class Personel extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function getNameByEmployeeId($employee_id)
+	{
+		return self::model()->findByAttributes(array('employee_id'=>$employee_id))->name;
 	}
 }
