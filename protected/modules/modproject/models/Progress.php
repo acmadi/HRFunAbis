@@ -7,14 +7,13 @@
  * @property integer $id
  * @property string $project_number
  * @property string $period_date
+ * @property string $period_date_to
  * @property integer $period_week
- * @property integer $period_month
- * @property integer $period_year
  * @property string $description
  * @property string $termin_pgn
  * @property string $termin_vendor
- * @property string $progress_actual
- * @property string $progress_plan
+ * @property float $progress_actual
+ * @property float $progress_plan
  * @property string $progress_this_week
  * @property string $completed_work
  * @property string $work_remaining
@@ -145,7 +144,7 @@ class Progress extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('period_date',$this->period_date,true);
 		$criteria->compare('period_date_to',$this->period_date_to,true);
 		$criteria->compare('period_week',$this->period_week);
@@ -179,5 +178,17 @@ class Progress extends CActiveRecord
 		
 		return $row['maxperiod'] + 1;
 		// return $row->period_week;
+	}
+
+	public function getMaxProgress($project_number)
+	{
+		$progress = Progress::model()->findAllByAttributes(array('project_number'=>$project_number));
+		$max = $progress[0];
+		for ($i=1; $i < sizeof($progress); $i++) { 
+			if ($progress[$i]->progress_plan > $max->progress_plan) {
+				$max = $progress[$i];
+			}
+		}
+		return $max;
 	}
 }

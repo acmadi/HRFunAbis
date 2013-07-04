@@ -124,12 +124,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'duration'); ?>
-		<?php echo $form->textField($model,'duration'); ?>
-		<?php echo $form->error($model,'duration'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'spmk_date'); ?>
 		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
 					'name'=>CHtml::activeName($model,'spmk_date'),

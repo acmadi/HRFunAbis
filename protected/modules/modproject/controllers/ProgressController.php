@@ -77,7 +77,8 @@ class ProgressController extends RController
 		{
 			$model->attributes=$_POST['Progress'];
 			if($model->save())
-				// $this->redirect(array('view','id'=>$model->id));
+				$progress = Progress::model()->getMaxProgress(Yii::app()->session['project_number']);
+				Project::model()->updateProgress(Yii::app()->session['project_id'],$progress->progress_actual, $progress->progress_plan);
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&progress=true'));
 		}
 

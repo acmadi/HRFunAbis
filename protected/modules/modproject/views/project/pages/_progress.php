@@ -11,10 +11,9 @@
 	'columns'=>array(
 		// 'id',
 		// 'project_number',
-		// 'period_date',
+		'period_date',
+		'period_date_to',
 		'period_week',
-		'period_month',
-		// 'period_year',
 		// 'description',
 		// 'termin_pgn',
 		// 'termin_vendor',

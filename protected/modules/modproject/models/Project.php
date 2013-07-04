@@ -155,4 +155,14 @@ class Project extends CActiveRecord
 	{
 		return self::model()->findByAttributes(array('number'=>$number))->name;
 	}
+
+	public function getNumberOfWeeks()
+	{
+		return ceil(abs((strtotime($this->plan_end_date)-strtotime($this->plan_start_date)))/(86400*7));
+	}
+
+	public function getNumberOfDays()
+	{
+		return (strtotime($this->plan_end_date)-strtotime($this->plan_start_date))/86400;
+	}
 }
