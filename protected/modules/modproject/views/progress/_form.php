@@ -38,12 +38,6 @@
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'period_week'); ?>
-			<?php echo $form->textField($model,'period_week', array('class'=>'span10')); ?>
-			<?php echo $form->error($model,'period_week'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($model,'description'); ?>
 			<?php echo $form->textField($model,'description', array('class'=>'span10')); ?>
 			<?php echo $form->error($model,'description'); ?>

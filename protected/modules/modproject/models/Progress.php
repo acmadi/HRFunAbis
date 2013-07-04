@@ -166,6 +166,7 @@ class Progress extends CActiveRecord
 		));
 	}
 	
+	var $maxperiod;
 	public function getPeriodWeek($project_number)
 	{
 		$criteria=new CDbCriteria;

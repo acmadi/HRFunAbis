@@ -41,6 +41,7 @@ class ProgressController extends RController
 	{
 		$model=new Progress;
 		$model->project_number = Yii::app()->session['project_number'];
+		$model->period_week = Progress::model()->getPeriodWeek($model->project_number);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
