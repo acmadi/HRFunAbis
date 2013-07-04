@@ -9,6 +9,10 @@
 	'dataProvider'=>$data->search(),
 	'filter'=>$data,
 	'columns'=>array(
+		array(
+            'header'=>'No',
+            'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',       //  row is zero based
+        ),
 		// 'id',
 		// 'project_number',
 		'period_date',
