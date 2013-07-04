@@ -84,14 +84,15 @@ class Progress extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_number, period_date, period_week, period_month, period_year, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic', 'required'),
-			array('period_week, period_month, period_year', 'numerical', 'integerOnly'=>true),
+			array('project_number, period_date, period_date_to, period_week, description, progress_actual, progress_plan, pic, progress_this_week, completed_work, work_remaining, reason_of_delay', 'required'),
+			array('period_week', 'numerical', 'integerOnly'=>true),
 			array('project_number, pic, created_by', 'length', 'max'=>50),
 			array('progress_actual, progress_plan', 'length', 'max'=>11),
+			//array('progress_this_week, completed_work, work_remaining, reason_of_delay', 'length', 'max'=>500),
 			array('created_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, project_number, period_date, period_week, period_month, period_year, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic, created_date, created_by', 'safe', 'on'=>'search'),
+			array('id, project_number, period_date, period_date_to,period_week, description, termin_pgn, termin_vendor, progress_actual, progress_plan, progress_this_week, completed_work, work_remaining, reason_of_delay, pic, created_date, created_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -114,10 +115,9 @@ class Progress extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'project_number' => 'Nomor Proyek',
-			'period_date' => 'Tanggal Periode',
-			'period_week' => 'Minggu Periode',
-			'period_month' => 'Bulan Periode',
-			'period_year' => 'Tahun Periode',
+			'period_date' => 'Tanggal Dari',
+			'period_date_to' => 'Tanggal Sampai',
+			'period_week' => 'Minggu Ke',
 			'description' => 'Deskripsi',
 			'termin_pgn' => 'Termin PGN',
 			'termin_vendor' => 'Termin Vendor',
@@ -145,11 +145,10 @@ class Progress extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
+		$criteria->compare('project_number',$this->project_number,true);
 		$criteria->compare('period_date',$this->period_date,true);
+		$criteria->compare('period_date_to',$this->period_date_to,true);
 		$criteria->compare('period_week',$this->period_week);
-		$criteria->compare('period_month',$this->period_month);
-		$criteria->compare('period_year',$this->period_year);
 		$criteria->compare('description',$this->description);
 		$criteria->compare('termin_pgn',$this->termin_pgn,true);
 		$criteria->compare('termin_vendor',$this->termin_vendor,true);
@@ -166,5 +165,19 @@ class Progress extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getPeriodWeek($project_number)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->select='MAX(period_week) as maxperiod';
+
+		$criteria->condition='project_number = :project_number';
+		$criteria->params = array(':project_number'=>$project_number);
+		
+		$row = Progress::model()->find($criteria);
+		
+		return $row['maxperiod'] + 1;
+		// return $row->period_week;
 	}
 }

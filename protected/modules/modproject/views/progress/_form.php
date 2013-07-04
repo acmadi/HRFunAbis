@@ -16,12 +16,6 @@
 		<?php echo $form->errorSummary($model); ?>
 
 		<div class="row">
-			<?php //echo $form->labelEx($model,'project_number'); ?>
-			<?php //echo $form->textField($model,'project_number',array('size'=>50,'maxlength'=>50)); ?>
-			<?php //echo $form->error($model,'project_number'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($model,'period_date'); ?>
 			<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
 						'name'=>CHtml::activeName($model,'period_date'),
@@ -31,23 +25,16 @@
 					?>
 			<?php echo $form->error($model,'period_date'); ?>
 		</div>
-
+		
 		<div class="row">
-			<?php echo $form->labelEx($model,'period_week'); ?>
-			<?php echo $form->textField($model,'period_week'); ?>
-			<?php echo $form->error($model,'period_week'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($model,'period_month'); ?>
-			<?php echo $form->dropDownList($model,'period_month',Progress::model()->getPeriodMonths()); ?>
-			<?php echo $form->error($model,'period_month'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($model,'period_year'); ?>
-			<?php echo $form->textField($model,'period_year'); ?>
-			<?php echo $form->error($model,'period_year'); ?>
+			<?php echo $form->labelEx($model,'period_date_to'); ?>
+			<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+						'name'=>CHtml::activeName($model,'period_date_to'),
+						'value'=>$model->period_date_to,
+						'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+					));
+					?>
+			<?php echo $form->error($model,'period_date_to'); ?>
 		</div>
 
 		<div class="row">
@@ -55,7 +42,7 @@
 			<?php echo $form->textField($model,'description', array('class'=>'span10')); ?>
 			<?php echo $form->error($model,'description'); ?>
 		</div>
-
+		
 		<div class="row">
 			<?php echo $form->labelEx($model,'termin_pgn'); ?>
 			<?php echo $form->textArea($model,'termin_pgn',array('rows'=>6, 'cols'=>50, 'class'=>'span10')); ?>
@@ -70,13 +57,13 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'progress_actual'); ?>
-			<?php echo $form->textField($model,'progress_actual',array('size'=>11,'maxlength'=>11)); ?>
+			<?php echo $form->textField($model,'progress_actual',array('size'=>11,'maxlength'=>11)); ?>%
 			<?php echo $form->error($model,'progress_actual'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'progress_plan'); ?>
-			<?php echo $form->textField($model,'progress_plan',array('size'=>11,'maxlength'=>11)); ?>
+			<?php echo $form->textField($model,'progress_plan',array('size'=>11,'maxlength'=>11)); ?>%
 			<?php echo $form->error($model,'progress_plan'); ?>
 		</div>
 
