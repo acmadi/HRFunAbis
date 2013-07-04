@@ -3,13 +3,13 @@ $this->widget('application.extensions.EFlot.EFlotGraphWidget',
     array(
         'data'=>array(
             array(
-                'label'=> 'line 1', 
+                'label'=> '% Realisasi', 
                 'data'=>$line1,
                 'lines'=>array('show'=>true, 'fill'=>true),
                 'points'=>array('show'=>true),
             ),
 			array(
-                'label'=> 'line 2', 
+                'label'=> '% Rencana', 
                 'data'=>$line2,
                 'lines'=>array('show'=>true, 'fill'=>true),
                 'points'=>array('show'=>true),
