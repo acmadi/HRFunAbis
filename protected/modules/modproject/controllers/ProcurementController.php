@@ -75,6 +75,7 @@ class ProcurementController extends RController
 		if(isset($_POST['Procurement']))
 		{
 			$model->attributes=$_POST['Procurement'];
+			$model->total_price = $model->amount * $model->unit_price;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

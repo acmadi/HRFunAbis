@@ -26,7 +26,6 @@
 			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->unit_price,\'\'))',
 			),
 		'amount',
-		'total_price',
 		array(
 			'name'=>'total_price',
 			'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->total_price,\'\'))',
