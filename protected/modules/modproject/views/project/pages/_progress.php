@@ -15,14 +15,38 @@
         ),
 		// 'id',
 		// 'project_number',
-		'period_date',
-		'period_date_to',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'period_date',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'period_date_to',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
 		'period_week',
 		// 'description',
 		// 'termin_pgn',
 		// 'termin_vendor',
-		'progress_actual',
 		'progress_plan',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'progress_actual',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
 		'progress_this_week',
 		// 'completed_work',
 		'work_remaining',

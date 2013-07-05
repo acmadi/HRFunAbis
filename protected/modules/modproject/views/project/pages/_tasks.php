@@ -42,17 +42,35 @@ $this->widget('ext.QTreeGridView.CQTreeGridView', array(
 				'header'=>'Progress(Plan)',
 				),
 			array(
-				'name'=>'act_start_date',
-				'header'=>'Mulai(Real)',
-				),
+			'class' => 'editable.EditableColumn',
+			'name' => 'act_start_date',
+			'header' => 'Mulai(Real)',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('task/ajaxupdate'),
+				'placement' => 'right',
+				)
+			),
 			array(
-				'name'=>'act_end_date',
-				'header'=>'Selesai(Real)',
-				),
+			'class' => 'editable.EditableColumn',
+			'name' => 'act_end_date',
+			'header' => 'Selesai(Real)',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('task/ajaxupdate'),
+				'placement' => 'right',
+				)
+			),
 			array(
-				'name'=>'actual_progress',
-				'header'=>'Progress(Real)',
-				),
+			'class' => 'editable.EditableColumn',
+			'name' => 'actual_progress',
+			'header' => 'Progress(Real)',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('task/ajaxupdate'),
+				'placement' => 'right',
+				)
+			),
 			// 'remarks',
 			// 'created_date',
 			// 'created_by',
