@@ -9,7 +9,7 @@
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'procurement-form',
-		'enableAjaxValidation'=>true,
+		'enableAjaxValidation'=>false,
 	)); ?>
 
 		<?php echo $form->errorSummary($model); ?>

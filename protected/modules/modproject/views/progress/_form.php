@@ -10,7 +10,7 @@
 
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'progress-form',
-		'enableAjaxValidation'=>true,
+		'enableAjaxValidation'=>false,
 	)); ?>
 
 		<?php echo $form->errorSummary($model); ?>

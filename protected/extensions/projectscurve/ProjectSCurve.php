@@ -9,7 +9,7 @@ class ProjectSCurve extends CWidget{
 		
 		
 		$criteria=new CDbCriteria;
-        $criteria->condition = "project_number >= :x";
+        $criteria->condition = "project_number = :x";
 		$criteria->params = array (
 			':x' => Yii::app()->session['project_number'],
 		);

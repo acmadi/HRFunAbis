@@ -90,26 +90,26 @@ class ProjectController extends RController
 		{
 			$model->attributes=$_POST['Project'];
 			$model->duration = $model->getNumberOfDays();
-			$numOfWeek = $model->getNumberOfWeeks();
-			for ($i=0; $i < $numOfWeek; $i++) { 
-				$progress = new Progress;
-				$progress->project_number = $model->number;
-				$progress->period_date = $model->plan_start_date;
-				$progress->period_date_to = $model->plan_end_date;
-				$progress->description = '-';
-				$progress->termin_pgn = '-';
-				$progress->termin_vendor = '-';
-				$progress->progress_actual = 0;
-				$progress->progress_plan = 0;
-				$progress->progress_this_week = '-';
-				$progress->completed_work = '-';
-				$progress->work_remaining = '-';
-				$progress->reason_of_delay = '-';
-				$progress->pic = '-';
-				$progress->period_week = $i+1;
-				$progress->save();
-			}
 			if($model->save())
+				$numOfWeek = $model->getNumberOfWeeks();
+				for ($i=0; $i < $numOfWeek; $i++) { 
+					$progress = new Progress;
+					$progress->project_number = $model->number;
+					$progress->period_date = $model->plan_start_date;
+					$progress->period_date_to = $model->plan_end_date;
+					$progress->description = '-';
+					$progress->termin_pgn = '-';
+					$progress->termin_vendor = '-';
+					$progress->progress_actual = 0;
+					$progress->progress_plan = 0;
+					$progress->progress_this_week = '-';
+					$progress->completed_work = '-';
+					$progress->work_remaining = '-';
+					$progress->reason_of_delay = '-';
+					$progress->pic = '-';
+					$progress->period_week = $i+1;
+					$progress->save();
+				}
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
