@@ -26,7 +26,10 @@
 		// 'remarks',
 		// 'created_by',
 		// 'created_date',
-		
+		array(
+            'header'=>'Total Hari Kerja',
+            'value'=>'PersonelMandays::model()->getTotalMandays($data->employee_id)',
+        ),
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}{mandays}{update}{delete}',
