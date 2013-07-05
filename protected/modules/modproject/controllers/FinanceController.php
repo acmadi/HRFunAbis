@@ -41,6 +41,8 @@ class FinanceController extends RController
 	{
 		$model=new Finance;
 		$model->project_number = Yii::app()->session['project_number'];
+		$model->debit = 0;
+		$model->credit = 0;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
