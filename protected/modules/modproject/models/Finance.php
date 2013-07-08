@@ -44,7 +44,6 @@ class Finance extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_number, elbi, period_month, debit, credit, remarks', 'required'),
-			array('period_month', 'numerical', 'integerOnly'=>true),
 			array('project_number, created_by', 'length', 'max'=>50),
 			array('elbi', 'length', 'max'=>20),
 			array('elbi_desc', 'length', 'max'=>100),
@@ -115,18 +114,18 @@ class Finance extends CActiveRecord
 	
 	//dropdown list
 	//period-month
-	const TYPE_1 = 1;
-	const TYPE_2 = 2;
-	const TYPE_3 = 3;
-	const TYPE_4 = 4;
-	const TYPE_5 = 5;
-	const TYPE_6 = 6;
-	const TYPE_7 = 7;
-	const TYPE_8 = 8;
-	const TYPE_9 = 9;
-	const TYPE_10 = 10;
-	const TYPE_11 = 11;
-	const TYPE_12 = 12;
+	const TYPE_1 = 'Januari';
+	const TYPE_2 = 'Februari';
+	const TYPE_3 = 'Maret';
+	const TYPE_4 = 'April';
+	const TYPE_5 = 'Mei';
+	const TYPE_6 = 'Juni';
+	const TYPE_7 = 'Juli';
+	const TYPE_8 = 'Agustus';
+	const TYPE_9 = 'September';
+	const TYPE_10 = 'Oktober';
+	const TYPE_11 = 'November';
+	const TYPE_12 = 'Desember';
 	
 	public function getPeriodOptions()
 	{
@@ -145,35 +144,6 @@ class Finance extends CActiveRecord
 			self::TYPE_11=>'November',
 			self::TYPE_12=>'Desember',
 		);
-	}
-	
-	public function getMonth($month)
-	{
-		if ($month == "1")
-			return 'Januari';
-		if ($month == "2")
-			return 'Februari';
-		if ($month == "3")
-			return 'Maret';
-		if ($month == "4")
-			return 'April';
-		if ($month == "5")
-			return 'Mei';
-		if ($month == "6")
-			return 'Juni';
-		if ($month == "7")
-			return 'Juli';
-		if ($month == "8")
-			return 'Agustus';
-		if ($month == "9")
-			return 'September';
-		if ($month == "10")
-			return 'Oktober';
-		if ($month == "11")
-			return 'November';
-		if ($month == "12")
-			return 'Desember';
-			
 	}
 
 	public function getTotalDebit()

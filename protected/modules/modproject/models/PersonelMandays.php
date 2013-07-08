@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $employee_id
  * @property string $project_number
- * @property integer $month
+ * @property string $month
  * @property integer $year
  * @property integer $mandays
  */
@@ -40,7 +40,7 @@ class PersonelMandays extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('employee_id, project_number, month, mandays', 'required'),
-			array('month, year, mandays', 'numerical', 'integerOnly'=>true),
+			array('year, mandays', 'numerical', 'integerOnly'=>true),
 			array('employee_id, project_number', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -99,18 +99,18 @@ class PersonelMandays extends CActiveRecord
 	
 	//dropdown list
 	//period-month
-	const TYPE_1 = 1;
-	const TYPE_2 = 2;
-	const TYPE_3 = 3;
-	const TYPE_4 = 4;
-	const TYPE_5 = 5;
-	const TYPE_6 = 6;
-	const TYPE_7 = 7;
-	const TYPE_8 = 8;
-	const TYPE_9 = 9;
-	const TYPE_10 = 10;
-	const TYPE_11 = 11;
-	const TYPE_12 = 12;
+	const TYPE_1 = 'Januari';
+	const TYPE_2 = 'Februari';
+	const TYPE_3 = 'Maret';
+	const TYPE_4 = 'April';
+	const TYPE_5 = 'Mei';
+	const TYPE_6 = 'Juni';
+	const TYPE_7 = 'Juli';
+	const TYPE_8 = 'Agustus';
+	const TYPE_9 = 'September';
+	const TYPE_10 = 'Oktober';
+	const TYPE_11 = 'November';
+	const TYPE_12 = 'Desember';
 	
 	public function getPeriodOptions()
 	{

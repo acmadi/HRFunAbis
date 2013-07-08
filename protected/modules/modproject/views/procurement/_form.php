@@ -50,7 +50,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'period_month'); ?>
-			<?php echo $form->textField($model,'period_month'); ?>
+			<?php echo $form->dropDownList($model,'period_month',$model->getPeriodOptions(), array('empty'=>'pilih periode bulan')); ?>
 			<?php echo $form->error($model,'period_month'); ?>
 		</div>
 

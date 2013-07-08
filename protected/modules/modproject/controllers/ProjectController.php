@@ -82,6 +82,8 @@ class ProjectController extends RController
 	public function actionCreate()
 	{
 		$model=new Project;
+		$model->version = '1.0';
+		$model->version_date = date('Y-m-d',time());
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

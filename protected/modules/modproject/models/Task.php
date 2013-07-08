@@ -47,7 +47,7 @@ class Task extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_number, code, name, description, plan_start_date, plan_end_date, plan_progress, act_start_date, act_end_date, actual_progress, remarks', 'required'),
+			array('project_number, code, name, description, plan_start_date, plan_end_date, plan_progress, remarks', 'required'),
 			array('project_number, code, created_by', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>200),
 			array('plan_progress, actual_progress', 'length', 'max'=>11),

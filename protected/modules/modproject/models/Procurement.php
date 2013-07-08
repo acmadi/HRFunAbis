@@ -10,7 +10,7 @@
  * @property string $contract
  * @property string $contract_start_date
  * @property string $contract_end_date
- * @property integer $period_month
+ * @property string $period_month
  * @property string $item
  * @property string $unit_price
  * @property string $amount
@@ -48,7 +48,6 @@ class Procurement extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_number, vendor, contract, contract_start_date, contract_end_date, period_month, item, unit_price, amount, total_price, location, created_by, created_date', 'required'),
-			array('period_month', 'numerical', 'integerOnly'=>true),
 			array('project_number, vendor, contract, created_by', 'length', 'max'=>50),
 			array('item', 'length', 'max'=>200),
 			array('unit_price, amount, total_price', 'length', 'max'=>11),
@@ -132,5 +131,39 @@ class Procurement extends CActiveRecord
 			$total += $procurement->total_price;
 		}
 		return $total;
+	}
+
+	//dropdown list
+	//period-month
+	const TYPE_1 = 'Januari';
+	const TYPE_2 = 'Februari';
+	const TYPE_3 = 'Maret';
+	const TYPE_4 = 'April';
+	const TYPE_5 = 'Mei';
+	const TYPE_6 = 'Juni';
+	const TYPE_7 = 'Juli';
+	const TYPE_8 = 'Agustus';
+	const TYPE_9 = 'September';
+	const TYPE_10 = 'Oktober';
+	const TYPE_11 = 'November';
+	const TYPE_12 = 'Desember';
+	
+	public function getPeriodOptions()
+	{
+		return array
+		(
+			self::TYPE_1=>'Januari',
+			self::TYPE_2=>'Februari',
+			self::TYPE_3=>'Maret',
+			self::TYPE_4=>'April',
+			self::TYPE_5=>'Mei',
+			self::TYPE_6=>'Juni',
+			self::TYPE_7=>'Juli',
+			self::TYPE_8=>'Agustus',
+			self::TYPE_9=>'September',
+			self::TYPE_10=>'Oktober',
+			self::TYPE_11=>'November',
+			self::TYPE_12=>'Desember',
+		);
 	}
 }

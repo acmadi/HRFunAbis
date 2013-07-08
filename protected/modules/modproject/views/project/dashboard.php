@@ -37,7 +37,7 @@ $this->menu=array(
 		));
 		
 	?>	
-	<?php $this->widget('application.extensions.projectSCurve.ProjectSCurve');?>
+	<?php $this->widget('application.extensions.projectscurve.ProjectSCurve');?>
 	<?php $this->endWidget();?>
  </div>
   <div class="span3">

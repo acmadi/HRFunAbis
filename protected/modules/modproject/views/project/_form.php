@@ -58,7 +58,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->dropDownList($model,'status',array('Aktif'=>'Aktif','Non-Aktif'=>'Non-Aktif'), array('empty'=>'pilih status')); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 

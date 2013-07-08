@@ -53,7 +53,7 @@ class Project extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, name, owner, description, version, version_date, status, status_date, location, plan_start_date, plan_end_date, act_start_date, act_end_date, duration, spmk_date, amount, pic', 'required'),
+			array('number, name, owner, description, version, version_date, plan_start_date, plan_end_date, amount, pic', 'required'),
 			array('duration, amount', 'numerical', 'integerOnly'=>true),
 			array('number, owner, pic, created_by', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>300),
