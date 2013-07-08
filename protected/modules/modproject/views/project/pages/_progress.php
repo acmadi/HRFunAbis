@@ -37,7 +37,15 @@
 		// 'description',
 		// 'termin_pgn',
 		// 'termin_vendor',
-		'progress_plan',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'progress_plan',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
 		array(
 			'class' => 'editable.EditableColumn',
 			'name' => 'progress_actual',
@@ -47,10 +55,34 @@
 				'placement' => 'right',
 			)
 		),
-		'progress_this_week',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'progress_this_week',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
 		// 'completed_work',
-		'work_remaining',
-		'reason_of_delay',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'work_remaining',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'reason_of_delay',
+			'headerHtmlOptions' => array('style' => 'width: 110px'),
+			'editable' => array( //editable section
+				'url' => $this->createUrl('progress/ajaxupdate'),
+				'placement' => 'right',
+			)
+		),
 		'pic',
 		// 'created_date',
 		// 'created_by',
