@@ -5,23 +5,18 @@ class ProjectStatus extends CWidget{
 
 	public function init(){
 
-		
-		
-		$this->quotes = array(
-			'Jagalah tokomu dan tokomu akan menjagamu.',
-			'Apa yang dimulai dengan amarah diakhiri dengan malu.',
-			'Waktu adalah uang.'
-		);
 	}
 
 	public function run(){
-		$project = Project::model()->findAll();
-		
-		//ambil acak salah satu quote
-		$i= rand(0, sizeof($this->quotes)-1);  
-		$quote = $this->quotes[$i];
+		$criteria = new CDbCriteria;
+		if (Yii::app()->user->isRole('Super->Super->Project')) {
+			$criteria->compare('pic',$this->pic,true);
+		} else {
+			$criteria->compare('pic',Yii::app()->user->getEmployeeID(),true);
+		}
+		$project = Project::model()->findAll($criteria);
 
 		//tampilkan
-		$this->render('index', array('quote'=>$quote, 'project'=>$project));
+		$this->render('index', array('project'=>$project));
 	}
 }

@@ -267,7 +267,7 @@
 					'htmlOptions'=>array('class'=>'pull-right'),
 					'items' => array(
 						
-						array('label'=>Yii::t("app","Project"), 'url'=>array('/modproject/project/admin'), 'visible'=>(!Yii::app()->user->isGuest) && Yii::app()->user->isRole('Super->Super->Project')),
+						array('label'=>Yii::t("app","Project"), 'url'=>array('/modproject/project/admin'), 'visible'=>(!Yii::app()->user->isGuest) && (Yii::app()->user->isRole('Super->Super->Project') || Yii::app()->user->isRole('Super->Project->PIC') || Yii::app()->user->isRole('Super->Project->Finance') || Yii::app()->user->isRole('Super->Project->Procurement'))),
 					)
 				),
 				

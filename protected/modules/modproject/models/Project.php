@@ -134,7 +134,15 @@ class Project extends CActiveRecord
 		$criteria->compare('duration',$this->duration);
 		$criteria->compare('spmk_date',$this->spmk_date,true);
 		$criteria->compare('amount',$this->amount);
-		$criteria->compare('pic',$this->pic,true);
+
+		if (Yii::app()->user->isRole('Super->Super->Project')) {
+			$criteria->compare('pic',$this->pic,true);
+		} else {
+			$criteria->compare('pic',Yii::app()->user->getEmployeeID(),true);
+		}
+		
+
+
 		$criteria->compare('created_by',$this->created_by,true);
 		$criteria->compare('created_date',$this->created_date,true);
 

@@ -35,7 +35,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span9')); ?>
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
@@ -142,7 +142,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'pic'); ?>
-		<?php echo $form->textField($model,'pic',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->dropDownList($model,'pic',CHtml::listData(User::model()->findAll(),'employee_id','username'), array('empty'=>'pilih user')); ?>
 		<?php echo $form->error($model,'pic'); ?>
 	</div>
 
