@@ -265,6 +265,19 @@ class ProjectController extends RController
 		$latestProgress = Progress::model()->getLatestProgress($project->number);
         XPHPExcel::init();
         $objPHPExcel = PHPExcel_IOFactory::load(Yii::app()->basePath . '/../document/' . 'template.xlsx');
+
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle($project->name);
+
+        // Styling
+        $styleArray = array(
+        	'borders' => array(
+        		'allborders' => array(
+        			'style' => PHPExcel_Style_Border::BORDER_THIN,
+        			'color' => array('argb' => 'FF000000'),
+        			),
+        		),
+        	);
         
         // Add project data
         $objPHPExcel->setActiveSheetIndex(0)
@@ -275,14 +288,67 @@ class ProjectController extends RController
             ->setCellValue('C9', $project->amount)
             ->setCellValue('C10', $project->number)
             ->setCellValue('D5', $latestProgress->work_remaining);
-            $objPHPExcel->getActiveSheet()->getStyle('D5')->getAlignment()->setWrapText(true);
-        
-        // Rename worksheet
-        $objPHPExcel->getActiveSheet()->setTitle($project->name);
+        $objPHPExcel->getActiveSheet()->getStyle('D5')->getAlignment()->setWrapText(true);
+
+        // set offset
+        $offset = 0;
+
+        // Add Finance Data
+        // To-Do
+
+        // Add Personnel Data
+        $no = 1;
+        $personnels = Personel::model()->findAllByAttributes(array('project_number'=>$project->number));
+        $numOfPersonnel = sizeof($personnels);
+        if ($numOfPersonnel >= 1) {
+        	if ($numOfPersonnel > 1) {
+        		$insertRow = $numOfPersonnel-1;
+        		$objPHPExcel->getActiveSheet()->insertNewRowBefore((30+$offset), $insertRow);
+        		for ($i=0; $i < $numOfPersonnel-1; $i++) { 
+        			$objPHPExcel->getActiveSheet()->mergeCells('C'.(30+$offset+$i).':D'.(30+$offset+$i));
+        		}
+			}
+			$i = 0;
+			foreach ($personnels as $person) {
+				$objPHPExcel->setActiveSheetIndex(0)
+					->setCellValue('B'.(29+$offset+$i),$no)
+					->setCellValue('C'.(29+$offset+$i),$person->position)
+					->setCellValue('E'.(29+$offset+$i),$person->name)
+					->setCellValue('F'.(29+$offset+$i),$person->telepon);
+
+				// Get mandays
+				$mandays = PersonelMandays::model()->getAllMandays($person->id);
+				$monthIndex = array (
+					'Januari' => 'G',
+					'Februari' => 'H',
+					'Maret' => 'I',
+					'April' => 'J',
+					'Mei' => 'K',
+					'Juni' => 'L',
+					'Juli' => 'M',
+					'Agustus' => 'N',
+					'September' => 'O',
+					'Oktober' => 'P',
+					'November' => 'Q',
+					'Desember' => 'R',
+					);
+				foreach ($mandays as $manday) {
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($monthIndex[$manday->month].''.(29+$offset+$i),$manday->mandays);
+				}
+				$i++;
+				$no++;
+			}
+			$objPHPExcel->setActiveSheetIndex(0)
+	        	->getStyle('B'.(29+$offset).':F'.(29+$numOfPersonnel+$offset-1))
+	        	->applyFromArray($styleArray);
+        }
+
+        // Add Procurement Data
+        // To-Do
         
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $objPHPExcel->setActiveSheetIndex(0);
-
+        // Freeze pane
         $objPHPExcel->getActiveSheet()->freezePane('G11');
         
         // Save a xls file
@@ -294,5 +360,5 @@ class ProjectController extends RController
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 
         $objWriter->save('php://output');
-    }//fin del método actionExcel
+    }
 }

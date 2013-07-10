@@ -130,34 +130,6 @@ class PersonelMandays extends CActiveRecord
 			self::TYPE_12=>'Desember',
 		);
 	}
-	
-	public function getMonth($month)
-	{
-		if ($month == "1")
-			return 'Januari';
-		if ($month == "2")
-			return 'Februari';
-		if ($month == "3")
-			return 'Maret';
-		if ($month == "4")
-			return 'April';
-		if ($month == "5")
-			return 'Mei';
-		if ($month == "6")
-			return 'Juni';
-		if ($month == "7")
-			return 'Juli';
-		if ($month == "8")
-			return 'Agustus';
-		if ($month == "9")
-			return 'September';
-		if ($month == "10")
-			return 'Oktober';
-		if ($month == "11")
-			return 'November';
-		if ($month == "12")
-			return 'Desember';		
-	}
 
 	public function getTotalMandays($employee_id)
 	{
@@ -171,7 +143,7 @@ class PersonelMandays extends CActiveRecord
 
 	public function getAllMandays($id)
 	{
-		$personel = self::model()->findAllByAttributes(array('employee_id'=>$id));
-		return $personel;
+		$personMandays = self::model()->findAllByAttributes(array('employee_id'=>$id));
+		return $personMandays;
 	}
 }
