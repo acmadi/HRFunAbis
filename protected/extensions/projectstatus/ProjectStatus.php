@@ -1,7 +1,6 @@
 <?php
 class ProjectStatus extends CWidget{
 	public $number;
-	private $quotes;
 
 	public function init(){
 
@@ -9,9 +8,7 @@ class ProjectStatus extends CWidget{
 
 	public function run(){
 		$criteria = new CDbCriteria;
-		if (Yii::app()->user->isRole('Super->Super->Project')) {
-			$criteria->compare('pic',$this->pic,true);
-		} else {
+		if (!Yii::app()->user->isRole('Super->Super->Project')) {
 			$criteria->compare('pic',Yii::app()->user->getEmployeeID(),true);
 		}
 		$project = Project::model()->findAll($criteria);

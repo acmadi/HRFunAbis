@@ -67,7 +67,8 @@
 <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
 	'type'=>'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	'buttons'=>array(
-		array('label'=>'View Report', 'url'=>array('/modproject/project/report'))
+		array('label'=>'View Report', 'url'=>array('/modproject/project/report')),
+		array('label'=>'Generate Excel', 'url'=>array('/modproject/project/excel'))
 	),
 )); ?>
 </div>

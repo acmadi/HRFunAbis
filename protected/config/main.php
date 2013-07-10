@@ -55,6 +55,8 @@ return array(
 		
 		'editable.*',
 		'application.extensions.yii-mail.*',//email
+
+		'application.extensions.phpexcel.*' //PHPExcel
 	),
 
 	'modules'=>array(

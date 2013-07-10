@@ -181,15 +181,15 @@ class Progress extends CActiveRecord
 		// return $row->period_week;
 	}
 
-	public function getMaxProgress($project_number)
+	public function getLatestProgress($project_number)
 	{
 		$progress = Progress::model()->findAllByAttributes(array('project_number'=>$project_number));
-		$max = $progress[0];
+		$latest = $progress[0];
 		for ($i=1; $i < sizeof($progress); $i++) { 
-			if ($progress[$i]->progress_plan > $max->progress_plan) {
-				$max = $progress[$i];
+			if ($progress[$i]->progress_actual > $latest->progress_actual) {
+				$latest = $progress[$i];
 			}
 		}
-		return $max;
+		return $latest;
 	}
 }

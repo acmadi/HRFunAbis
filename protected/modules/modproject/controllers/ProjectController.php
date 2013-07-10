@@ -92,7 +92,7 @@ class ProjectController extends RController
 		{
 			$model->attributes=$_POST['Project'];
 			$model->duration = $model->getNumberOfDays();
-			if($model->save())
+			if($model->save()) {
 				$numOfWeek = $model->getNumberOfWeeks();
 				for ($i=0; $i < $numOfWeek; $i++) { 
 					$progress = new Progress;
@@ -113,6 +113,7 @@ class ProjectController extends RController
 					$progress->save();
 				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -258,4 +259,40 @@ class ProjectController extends RController
 			return;
 		}
 	}
+
+	public function actionExcel(){
+		$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
+		$latestProgress = Progress::model()->getLatestProgress($project->number);
+        XPHPExcel::init();
+        $objPHPExcel = PHPExcel_IOFactory::load(Yii::app()->basePath . '/../document/' . 'template.xlsx');
+        
+        // Add project data
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('B5', $project->name)
+            ->setCellValue('C6', $project->plan_start_date)
+            ->setCellValue('C7', $project->plan_end_date)
+            ->setCellValue('C8', $project->getNumberOfDays())
+            ->setCellValue('C9', $project->amount)
+            ->setCellValue('C10', $project->number)
+            ->setCellValue('D5', $latestProgress->work_remaining);
+            $objPHPExcel->getActiveSheet()->getStyle('D5')->getAlignment()->setWrapText(true);
+        
+        // Rename worksheet
+        $objPHPExcel->getActiveSheet()->setTitle($project->name);
+        
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->freezePane('G11');
+        
+        // Save a xls file
+        $filename = 'Report_'.$project->number.'['.date('d-m-Y',time()).']';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+        header('Cache-Control: max-age=0');
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+        $objWriter->save('php://output');
+    }//fin del método actionExcel
 }

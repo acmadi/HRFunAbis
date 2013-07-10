@@ -16,10 +16,6 @@ $this->widget('ext.QTreeGridView.CQTreeGridView', array(
     'columns'=>array(
 	        // 'id',
 			// 'project_number',
-    		array(
-                'header'=>'No',
-                'value'=>'$row+1',
-		        ),
 			array(
 				'name'=>'code',
 				'header'=>'Kode'

@@ -78,7 +78,7 @@ class ProgressController extends RController
 		{
 			$model->attributes=$_POST['Progress'];
 			if($model->save())
-				$progress = Progress::model()->getMaxProgress(Yii::app()->session['project_number']);
+				$progress = Progress::model()->getLatestProgress(Yii::app()->session['project_number']);
 				Project::model()->updateProgress(Yii::app()->session['project_id'],$progress->progress_actual, $progress->progress_plan);
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&progress=true'));
 		}
@@ -102,7 +102,7 @@ class ProgressController extends RController
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-		$progress = Progress::model()->getMaxProgress(Yii::app()->session['project_number']);
+		$progress = Progress::model()->getLatestProgress(Yii::app()->session['project_number']);
 		Project::model()->updateProgress(Yii::app()->session['project_id'],$progress->progress_actual, $progress->progress_plan);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
