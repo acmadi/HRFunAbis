@@ -403,7 +403,7 @@ class ProjectController extends RController
 					->setCellValue('C'.(33+$offset+$i),$procurement->vendor)
 					->setCellValue('D'.(33+$offset+$i),$procurement->contract)
 					->setCellValue('E'.(33+$offset+$i),date('d/m/Y',strtotime($procurement->contract_start_date)).' - '.date('d/m/Y',strtotime($procurement->contract_start_date)))
-					->setCellValue('F'.(33+$offset+$i),$procurement->unit_price);
+					->setCellValue('F'.(33+$offset+$i),$procurement->unit_price * 1.1);
 
 				// Get price each month
 				$objPHPExcel->setActiveSheetIndex(0)->setCellValue($monthIndex[$procurement->period_month].''.(33+$offset+$i),($procurement->total_price * 1.1));
