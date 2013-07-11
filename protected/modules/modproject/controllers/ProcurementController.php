@@ -77,7 +77,7 @@ class ProcurementController extends RController
 			$model->attributes=$_POST['Procurement'];
 			$model->total_price = $model->amount * $model->unit_price;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&procurement=true'));
 		}
 
 		$this->render('update',array(

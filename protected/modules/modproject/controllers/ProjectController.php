@@ -270,7 +270,7 @@ class ProjectController extends RController
         $objPHPExcel->getActiveSheet()->setTitle($project->name);
 
         // Styling
-        $styleArray = array(
+        $borderStyle = array(
         	'borders' => array(
         		'allborders' => array(
         			'style' => PHPExcel_Style_Border::BORDER_THIN,
@@ -282,28 +282,79 @@ class ProjectController extends RController
         // Add project data
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('B5', $project->name)
-            ->setCellValue('C6', $project->plan_start_date)
-            ->setCellValue('C7', $project->plan_end_date)
+            ->setCellValue('C6', date('d/m/Y',strtotime($project->plan_start_date)))
+            ->setCellValue('C7', date('d/m/Y',strtotime($project->plan_end_date)))
             ->setCellValue('C8', $project->getNumberOfDays())
             ->setCellValue('C9', $project->amount)
             ->setCellValue('C10', $project->number)
             ->setCellValue('D5', $latestProgress->work_remaining);
         $objPHPExcel->getActiveSheet()->getStyle('D5')->getAlignment()->setWrapText(true);
 
+        $monthIndex = array (
+			'Januari' => 'G',
+			'Februari' => 'H',
+			'Maret' => 'I',
+			'April' => 'J',
+			'Mei' => 'K',
+			'Juni' => 'L',
+			'Juli' => 'M',
+			'Agustus' => 'N',
+			'September' => 'O',
+			'Oktober' => 'P',
+			'November' => 'Q',
+			'Desember' => 'R',
+			);
+
         // set offset
         $offset = 0;
 
         // Add Finance Data
-        // To-Do
+        $no = 1;
+        $finances = Finance::model()->findAllByAttributes(array('project_number'=>$project->number));
+        $elbicodes = CHtml::listData(Elbicode::model()->findAll(), 'elbi', 'elbi_desc');
+        $numofelbi = sizeof($elbicodes);
+        if ($numofelbi >= 1) {
+        	$insertRow = 0;
+        	if ($numofelbi > 1) {
+        		$insertRow = $numofelbi - 1;
+        		$objPHPExcel->getActiveSheet()->insertNewRowBefore((13+$offset), $insertRow);
+        	}
+        	$i = 0;
+        	foreach ($elbicodes as $elbi => $elbi_desc) {
+        		$objPHPExcel->setActiveSheetIndex(0)
+					->setCellValue('D'.(12+$offset+$i),$no)
+					->setCellValue('E'.(12+$offset+$i),$elbi)
+					->setCellValue('F'.(12+$offset+$i),$elbi_desc);
+
+				// Get amount each month
+				foreach ($finances as $finance) {
+					$value = ($finance->credit == 0) ? $finance->debit : -$finance->credit;
+					if ($finance->elbi == $elbi) {
+						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($monthIndex[$finance->period_month].''.(12+$offset+$i),$value);
+					}
+				}
+
+				$no++;
+				$i++;
+        	}
+        	// numbering format
+        	$objPHPExcel->getActiveSheet()
+        		->getStyle('G'.(12+$offset).':R'.(12+$numofelbi+$offset-1))
+        		->getNumberFormat()
+        		->setFormatCode('[>=0]#,##0;[<0](#,##0)');
+        	$offset =+ $insertRow;
+        }
 
         // Add Personnel Data
         $no = 1;
         $personnels = Personel::model()->findAllByAttributes(array('project_number'=>$project->number));
         $numOfPersonnel = sizeof($personnels);
         if ($numOfPersonnel >= 1) {
+        	$insertRow = 0;
         	if ($numOfPersonnel > 1) {
-        		$insertRow = $numOfPersonnel-1;
+        		$insertRow = $numOfPersonnel - 1;
         		$objPHPExcel->getActiveSheet()->insertNewRowBefore((30+$offset), $insertRow);
+        		// merge cells
         		for ($i=0; $i < $numOfPersonnel-1; $i++) { 
         			$objPHPExcel->getActiveSheet()->mergeCells('C'.(30+$offset+$i).':D'.(30+$offset+$i));
         		}
@@ -317,21 +368,7 @@ class ProjectController extends RController
 					->setCellValue('F'.(29+$offset+$i),$person->telepon);
 
 				// Get mandays
-				$mandays = PersonelMandays::model()->getAllMandays($person->id);
-				$monthIndex = array (
-					'Januari' => 'G',
-					'Februari' => 'H',
-					'Maret' => 'I',
-					'April' => 'J',
-					'Mei' => 'K',
-					'Juni' => 'L',
-					'Juli' => 'M',
-					'Agustus' => 'N',
-					'September' => 'O',
-					'Oktober' => 'P',
-					'November' => 'Q',
-					'Desember' => 'R',
-					);
+				$mandays = PersonelMandays::model()->getAllMandays($person->employee_id);
 				foreach ($mandays as $manday) {
 					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($monthIndex[$manday->month].''.(29+$offset+$i),$manday->mandays);
 				}
@@ -340,11 +377,63 @@ class ProjectController extends RController
 			}
 			$objPHPExcel->setActiveSheetIndex(0)
 	        	->getStyle('B'.(29+$offset).':F'.(29+$numOfPersonnel+$offset-1))
-	        	->applyFromArray($styleArray);
+	        	->applyFromArray($borderStyle);
+	        $offset += $insertRow;
         }
 
         // Add Procurement Data
-        // To-Do
+        $no = 1;
+        $procurements = Procurement::model()->findAllByAttributes(array('project_number'=>$project->number));
+        $numOfProcurements = sizeof($procurements);
+
+        if ($numOfProcurements >= 1) {
+        	$insertRow = 0;
+        	$offset2 = $offset;
+        	if ($numOfProcurements > 1) {
+        		$insertRow = $numOfProcurements - 1;
+        		$objPHPExcel->getActiveSheet()->insertNewRowBefore((34+$offset), $insertRow);
+        		$offset2 += $insertRow;
+        		$objPHPExcel->getActiveSheet()->insertNewRowBefore((37+$offset2), $insertRow);
+        	}
+        	$i = 0;
+			foreach ($procurements as $procurement) {
+				// upper table
+				$objPHPExcel->setActiveSheetIndex(0)
+					->setCellValue('B'.(33+$offset+$i),$no)
+					->setCellValue('C'.(33+$offset+$i),$procurement->vendor)
+					->setCellValue('D'.(33+$offset+$i),$procurement->contract)
+					->setCellValue('E'.(33+$offset+$i),date('d/m/Y',strtotime($procurement->contract_start_date)).' - '.date('d/m/Y',strtotime($procurement->contract_start_date)))
+					->setCellValue('F'.(33+$offset+$i),$procurement->unit_price);
+
+				// Get price each month
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue($monthIndex[$procurement->period_month].''.(33+$offset+$i),($procurement->total_price * 1.1));
+
+				// lower table
+				$objPHPExcel->setActiveSheetIndex(0)
+					->setCellValue('B'.(36+$offset2+$i),$procurement->item)
+					->setCellValue('C'.(36+$offset2+$i),$procurement->amount)
+					->setCellValue('D'.(36+$offset2+$i),$procurement->location)
+					->setCellValue('E'.(36+$offset2+$i),($procurement->total_price * 1.1));
+
+				$i++;
+				$no++;
+			}
+
+			// numbering format
+        	$objPHPExcel->getActiveSheet()
+        		->getStyle('G'.(33+$offset).':R'.(33+$numOfProcurements+$offset-1))
+        		->getNumberFormat()
+        		->setFormatCode('[>=0]#,##0;[<0](#,##0)');
+        	$objPHPExcel->getActiveSheet()
+        		->getStyle('F'.(33+$offset).':F'.(33+$numOfProcurements+$offset-1))
+        		->getNumberFormat()
+        		->setFormatCode('[>=0]#,##0;[<0](#,##0)');
+        	$objPHPExcel->getActiveSheet()
+        		->getStyle('E'.(36+$offset2).':E'.(36+$numOfProcurements+$offset2-1))
+        		->getNumberFormat()
+        		->setFormatCode('[>=0]#,##0;[<0](#,##0)');
+        	$offset =+ $insertRow;
+        }
         
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $objPHPExcel->setActiveSheetIndex(0);

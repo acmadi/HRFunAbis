@@ -8,7 +8,7 @@
  * @property string $project_number
  * @property string $elbi
  * @property string $elbi_desc
- * @property integer $period_month
+ * @property string $period_month
  * @property string $debit
  * @property string $credit
  * @property string $remarks
@@ -97,7 +97,7 @@ class Finance extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('project_number',$this->project_number,true);
+		$criteria->compare('project_number',Yii::app()->session['project_number'],true);
 		$criteria->compare('elbi',$this->elbi,true);
 		$criteria->compare('elbi_desc',$this->elbi_desc,true);
 		$criteria->compare('period_month',$this->period_month);
