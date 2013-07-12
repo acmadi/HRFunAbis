@@ -16,10 +16,19 @@ $this->menu=array(
 );
 ?>
 
-<h1>View ReimburseJamuan #<?php echo $model->id; ?></h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Reimburse Jamuan #',
+	));		
+?>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+<?php 
+	$this->widget('editable.EditableDetailView', array(
+	'data' => $model,
+	//you can define any default params for child EditableFields
+	'url' => $this->createUrl('reimburseJamuan/ajaxupdate'), //common submit url for all fields
+	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
+	'emptytext' => 'no value',
 	'attributes'=>array(
 		'id',
 		'date',
@@ -31,3 +40,5 @@ $this->menu=array(
 		'created_by',
 	),
 )); ?>
+
+<?php $this->endWidget(); ?>

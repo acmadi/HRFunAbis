@@ -16,10 +16,18 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Personnel #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Personil #',
+	));		
+?>
+<?php 
+	$this->widget('editable.EditableDetailView', array(
+	'data' => $model,
+	//you can define any default params for child EditableFields
+	'url' => $this->createUrl('personnel/ajaxupdate'), //common submit url for all fields
+	'params' => array('YII_CSRF_TOKEN' => Yii::app()->request->csrfToken), //params for all fields
+	'emptytext' => 'no value',
 	'attributes'=>array(
 		'id',
 		'sppd_id',
@@ -27,3 +35,5 @@ $this->menu=array(
 		'name',
 	),
 )); ?>
+
+<?php $this->endWidget(); ?>

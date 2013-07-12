@@ -73,10 +73,10 @@
     <div class="span9">
     
     <?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-            'links'=>$this->breadcrumbs,
-			'homeLink'=>CHtml::link('Dashboard'),
-			'htmlOptions'=>array('class'=>'breadcrumb')
+  	<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+      'links'=>$this->breadcrumbs,
+      'homeLink'=>CHtml::link('Home','index.php'),
+      'htmlOptions'=>array('class'=>'breadcrumb')
         )); ?><!-- breadcrumbs -->
     <?php endif ?>
     

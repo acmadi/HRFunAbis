@@ -16,6 +16,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update MasterDestination <?php echo $model->id; ?></h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Kota Tujuan #',
+	));		
+?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>

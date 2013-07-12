@@ -16,6 +16,15 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update OtherReimburse <?php echo $model->id; ?></h1>
+<?php
+	$this->beginWidget('zii.widgets.CPortlet', array(
+		'title'=>'Update Reimburse Lainnya #',
+	));		
+?>
+
+<p class="note">Fields with <span class="required">*</span> are required.</p>
+
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
