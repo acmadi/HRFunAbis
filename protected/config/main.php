@@ -52,6 +52,9 @@ return array(
 		
 		'application.modules.modproject.*', //modproject
 		'application.modules.modproject.components.*', //modproject
+
+		'application.modules.modsppd.*', //modsppd
+		'application.modules.modsppd.components.*', //modsppd
 		
 		'editable.*',
 		'application.extensions.yii-mail.*',//email
@@ -94,6 +97,7 @@ return array(
 		),
 		
 		'modproject'=>array(),
+		'modsppd'=>array(),
 		
 		'importcsv'=>array(
             'path'=>'upload/', // path to folder for saving csv file and file with import params
