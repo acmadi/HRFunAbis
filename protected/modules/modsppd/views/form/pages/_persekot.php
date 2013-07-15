@@ -1,3 +1,4 @@
+<?php if ($data != null) { ?>
 <div class="span12">
 	<div class="span6">
 		<table class="table">
@@ -49,3 +50,4 @@ KETERANGAN : <?php
 			?>
 
 </div>	
+<?php } ?>

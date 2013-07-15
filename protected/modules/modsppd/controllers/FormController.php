@@ -52,6 +52,11 @@ class FormController extends RController
 	public function actionCreate()
 	{
 		$model=new Form;
+		$model->employee_id = Yii::app()->user->getEmployeeID();
+		$model->name = Employee::model()->getName(Yii::app()->user->getEmployeeID());
+		$model->service_provider = 'PGN SOLUTION';
+		$model->unit = 'PGN SOLUTION';
+
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -59,6 +64,8 @@ class FormController extends RController
 		if(isset($_POST['Form']))
 		{
 			$model->attributes=$_POST['Form'];
+			$model->created_by = 'Dummy';
+			$model->created_date = date('Y-m-d',time());
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -155,6 +162,24 @@ class FormController extends RController
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+
+	public function generateRAB($id)
+	{
+		$model = $this->loadModel($id);
+		$rab = null;
+		if ($model->sppd_type == 'Dinas') {
+			$rab = MasterCost::model()->findAllByAttributes(array('class'=>$model->class));
+		}
+
+		foreach ($rab as $data) {
+			$rabdinas = new RABDinas;
+			$rabdinas->employee_id = $model->employee_id;
+			$rabdinas->name = $model->name;
+			$rabdinas->sppd_id = $model->id;
+			$rabdinas->cost_description = $data->description;
+			$rabdinas->amount = ($data->code == 'btdk' || $data->code == 'atd')?:;
 		}
 	}
 }
