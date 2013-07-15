@@ -264,10 +264,11 @@ class ProjectController extends RController
 		$project = Project::model()->findByAttributes(array('number'=>Yii::app()->session['project_number']));
 		$latestProgress = Progress::model()->getLatestProgress($project->number);
         XPHPExcel::init();
-        $objPHPExcel = PHPExcel_IOFactory::load(Yii::app()->basePath . '/../document/' . 'template.xlsx');
 
+		$src = Yii::app()->baseUrl.'document/template.xls';
+        $objPHPExcel = PHPExcel_IOFactory::load($src);
         // Rename worksheet
-        $objPHPExcel->getActiveSheet()->setTitle($project->name);
+        $objPHPExcel->getActiveSheet()->setTitle($project->number);
 
         // Styling
         $borderStyle = array(
@@ -443,10 +444,10 @@ class ProjectController extends RController
         // Save a xls file
         $filename = 'Report_'.$project->number.'['.date('d-m-Y',time()).']';
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="'.$filename.'.xlsx"');
+        header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
         header('Cache-Control: max-age=0');
         
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 
         $objWriter->save('php://output');
     }
