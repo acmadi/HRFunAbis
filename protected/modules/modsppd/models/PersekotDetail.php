@@ -68,10 +68,10 @@ class PersekotDetail extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'account_code' => 'Account Code',
-			'description' => 'Description',
-			'debit' => 'Debit',
-			'credit' => 'Credit',
+			'account_code' => 'Kode Akun',
+			'description' => 'Uraian',
+			'debit' => 'Debet',
+			'credit' => 'Kredit',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
 		);

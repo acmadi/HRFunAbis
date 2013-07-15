@@ -68,11 +68,11 @@ class RABDinas extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'employee_id' => 'Employee',
-			'name' => 'Name',
-			'sppd_id' => 'Sppd',
-			'cost_description' => 'Cost Description',
-			'amount' => 'Amount',
+			'employee_id' => 'ID Pekerja',
+			'name' => 'Nama Pekerja',
+			'sppd_id' => 'SPPD',
+			'cost_description' => 'Keterangan Biaya',
+			'amount' => 'Jumlah',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
 		);

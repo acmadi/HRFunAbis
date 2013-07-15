@@ -69,11 +69,11 @@ class ReimburseBBM extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'transaction_description' => 'Transaction Description',
-			'amount' => 'Amount',
+			'date' => 'Tangal',
+			'transaction_description' => 'Keterangan',
+			'amount' => 'Jumlah',
 			'cc' => 'Cc',
-			'usage_type' => 'Usage Type',
+			'usage_type' => 'No. Rekening Tujuan',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
 		);

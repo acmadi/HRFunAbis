@@ -64,9 +64,9 @@ class Personnel extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'sppd_id' => 'Sppd',
-			'employee_id' => 'Employee',
-			'name' => 'Name',
+			'sppd_id' => 'SPPD',
+			'employee_id' => 'ID Pekerja',
+			'name' => 'Nama Pekerja',
 		);
 	}
 

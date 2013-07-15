@@ -61,7 +61,7 @@ class MasterDestination extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'city' => 'City',
+			'city' => 'Kota',
 		);
 	}
 

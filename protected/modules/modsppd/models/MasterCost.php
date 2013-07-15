@@ -65,9 +65,9 @@ class MasterCost extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'class' => 'Class',
-			'amount' => 'Amount',
-			'description' => 'Description',
+			'class' => 'Kelas',
+			'amount' => 'Jumlah',
+			'description' => 'Keterangan',
 		);
 	}
 

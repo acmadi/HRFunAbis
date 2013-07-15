@@ -68,10 +68,10 @@ class OtherReimburse extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
+			'date' => 'Tanggal',
 			'cc' => 'Cc',
 			'elbi' => 'Elbi',
-			'amount' => 'Amount',
+			'amount' => 'Jumlah',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
 		);
