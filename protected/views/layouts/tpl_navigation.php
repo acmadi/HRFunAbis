@@ -272,6 +272,29 @@
 				),
 				
 				
+				//mod spps
+				array(
+					'class'=>'bootstrap.widgets.TbMenu',
+					'htmlOptions'=>array('class'=>'pull-right'),
+					'items' => array(
+						//super sppd
+						array('label'=>Yii::t("app","Master Data"), 'url'=>'#', 'items'=>array(
+							array('label'=>'Kota Tujuan', 'url'=>array('/modsppd/MasterDestination/admin')),
+							array('label'=>'Satuan Biaya', 'url'=>array('/modsppd/MasterCost/admin')),
+						 ),
+						 'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))	
+						),
+						
+						array('label'=>Yii::t("app","SPPD"), 'url'=>'#', 'items'=>array(
+							array('label'=>'Data SPPD', 'url'=>array('/modsppd/Form/admin')),
+						 ),
+						 'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))	
+						),						
+					),
+					
+				),
+				
+				
 			)
 		));
 		

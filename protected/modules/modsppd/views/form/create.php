@@ -12,6 +12,10 @@ $this->menu=array(
 	array('label'=>'Manage Form', 'url'=>array('admin')),
 );
 ?>
+Step 1 of 2
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 50%;"></div>
+</div>
 
 <?php
 	$this->beginWidget('zii.widgets.CPortlet', array(

@@ -49,7 +49,8 @@ class CertificationController extends RController
 	{
 		$model = $this->loadModel($id);
 		$src = $model->attached; 
-		if(@file_exists($src)) {
+		if(@file_exists($src)) 
+		{
 				$path_parts = @pathinfo($src);
 				//$mime = $this->__get_mime($path_parts['extension']);
 				header('Content-Description: File Transfer');

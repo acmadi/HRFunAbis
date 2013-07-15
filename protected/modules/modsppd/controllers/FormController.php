@@ -28,8 +28,20 @@ class FormController extends RController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$model = $this->loadModel($id); 
+		
+		Yii::app()->session['sppd_id'] = $model->id;
+		Yii::app()->session['sppd_name'] = $model->purpose;
+		
+		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabdinas = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabnondinas = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		
+		$this->render('dashboard1',array(
+			'model'=>$model, 
+			'persekot'=>$persekot, 
+			'rabdinas'=>$rabdinas, 
+			'rabnondinas'=>$rabnondinas, 
 		));
 	}
 

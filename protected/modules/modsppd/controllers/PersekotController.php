@@ -79,6 +79,12 @@ class PersekotController extends RController
 			'model'=>$model,
 		));
 	}
+	
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('Persekot');
+		$es->update();
+	}
 
 	/**
 	 * Deletes a particular model.
