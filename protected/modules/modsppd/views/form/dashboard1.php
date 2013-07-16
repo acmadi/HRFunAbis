@@ -63,8 +63,8 @@ $this->menu=array(
 	
 	$tabs = array(
 		array('id' => 'tab1', 'label' => 'Persekot', 'content' => $this->renderPartial('pages/_persekot', array('data' => $persekot), true), 'active' => $tab1),
-		array('id' => 'tab4', 'label' => 'RAB DINAS', 'content' => $this->renderPartial('pages/_rab_dinas', array('data' => $rabdinas), true), 'active' => $tab4),
-		array('id' => 'tab5', 'label' => 'RAB NON DINAS', 'content' => $this->renderPartial('pages/_rab_non_dinas', array('data' => $rabnondinas), true), 'active' => $tab5),
+		array('id' => 'tab4', 'label' => 'RAB DINAS', 'content' => $this->renderPartial('pages/_rab_dinas', array('data' => $rabdinas, 'sppd_id'=>$model->id), true), 'active' => $tab4),
+		array('id' => 'tab5', 'label' => 'RAB NON DINAS', 'content' => $this->renderPartial('pages/_rab_non_dinas', array('data' => $rabnondinas, 'sppd_id'=>$model->id), true), 'active' => $tab5),
 		array('id' => 'tab6', 'label' => 'Statement Letter', 'content' => $this->renderPartial('pages/_statement_letter', array('data' => $model), true), 'active' => $tab6),
 		array('id' => 'tab7', 'label' => 'Support Letter', 'content' => $this->renderPartial('pages/_support_letter', array('data' => $model), true), 'active' => $tab7),
 	);

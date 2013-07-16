@@ -37,10 +37,12 @@ class FormController extends RController
 		$rabdinaslist = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
 					'id' => 'id',
+					'pagination'=>false,
 					));
 		$rabnondinaslist = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		$rabnondinas = new CArrayDataProvider($rabnondinaslist,array(
 					'id' => 'id',
+					'pagination'=>false,
 					));
 		
 		$this->render('dashboard1',array(

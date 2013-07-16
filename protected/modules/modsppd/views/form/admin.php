@@ -52,19 +52,18 @@ $('.search-form form').submit(function(){
 		'service_provider',
 		'unit',
 		'class',
-		/*
 		'destination',
 		'purpose',
 		'departure',
 		'arrival',
-		'transport_type',
-		'transport_vehicle',
+		// 'transport_type',
+		// 'transport_vehicle',
 		'sppd_type',
-		'statement_letter',
-		'support_letter',
-		'created_by',
-		'created_date',
-		*/
+		// 'statement_letter',
+		// 'support_letter',
+		// 'created_by',
+		// 'created_date',
+		
 		array(
 			'class'=>'CButtonColumn',
 		),

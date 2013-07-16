@@ -6,19 +6,25 @@
 		'columns'=>array(
 			array(
 	            'header'=>'No',
-	            'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',       //  row is zero based
+	            'value'=>'$row+1',       //  row is zero based
 	            'htmlOptions' => array('style' => 'width:10px')
 	        ),
 			// 'id',
 			// 'employee_id',
 			// 'name',
 			// 'sppd_id',
-			'cost_description',
+			array(
+				'name'=>'cost_description',
+				'footer' => 'Total',
+				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
+				),
 			array(
 				'name'=>'amount',
 				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->amount,\'\'))',
-				'htmlOptions' => array('style' => 'text-align:right')
-			),
+				'footer' => Yii::app()->numberFormatter->formatCurrency(RABDinas::model()->getTotal($sppd_id),''),
+				'htmlOptions' => array('style' => 'text-align:right'),
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold')
+				),
 			/*
 			'created_date',
 			'created_by',
