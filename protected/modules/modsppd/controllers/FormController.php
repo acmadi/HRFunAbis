@@ -72,6 +72,21 @@ class FormController extends RController
 			$model->attributes=$_POST['Form'];
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
+
+			$statement_letter=CUploadedFile::getInstance($model,'statement_letter');
+			if ($statement_letter) {
+				$statement_letter_name = $statement_letter->name;
+				$statement_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $statement_letter_name);
+				$model->statement_letter = $statement_letter_name;
+			}
+
+			$support_letter=CUploadedFile::getInstance($model,'support_letter');
+			if ($support_letter) {
+				$support_letter_name = $support_letter->name;
+				$support_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $support_letter_name);
+				$model->support_letter = $support_letter_name;
+			}
+
 			if($model->save()) {
 				if ($model->sppd_type == 'Dinas') {
 					$this->generateRABDinas($model->id);
@@ -88,6 +103,8 @@ class FormController extends RController
 	public function actionCreateStep2($id)
 	{
 		$model = $this->loadModel($id);
+		$model->status = 'step2';
+		$model->save();
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
 			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
@@ -107,6 +124,9 @@ class FormController extends RController
 	public function actionCreateStep3($id)
 	{
 		$model = $this->loadModel($id);
+		$model->status = 'step3';
+		$model->save();
+
 		$persekot = new Persekot;
 		$persekot->sppd_id = $model->id;
 		$persekot->paid_to = $model->name;
@@ -139,10 +159,14 @@ class FormController extends RController
 					));
 			}
 		}
+	}
 
-		
-		
-		
+	public function actionCreateFinished($id)
+	{
+		$model = $this->loadModel($id);
+		$model->status = 'created';
+		$model->save();
+		$this->redirect(array('view','id'=>$id));
 	}
 
 	/**

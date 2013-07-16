@@ -31,7 +31,7 @@
 		<table class="table">
 			<tr><td>Tanggal Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Nomor Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Nomor Journaltd></td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
+			<tr><td>Nomor Journal</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Kode Bank</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Kode Valuta</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Nomor Cek/Giro</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>

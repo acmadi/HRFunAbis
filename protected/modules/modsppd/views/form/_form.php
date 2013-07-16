@@ -104,7 +104,7 @@
 																'Dinas'=>'Dinas',
 																'Non-Dinas'=>'Non-Dinas',
 																'Luar Negri'=>'Luar Negri'
-															), array('empty'=>'pilih jenis transportasi')); ?>
+															), array('empty'=>'pilih jenis sppd')); ?>
 		<?php echo $form->error($model,'sppd_type'); ?>
 	</div>
 

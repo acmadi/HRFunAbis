@@ -56,8 +56,8 @@ class Form extends CActiveRecord
 			array('service_provider, unit', 'length', 'max'=>20),
 			array('class', 'length', 'max'=>1),
 			array('destination', 'length', 'max'=>100),
-			array('transport_type, sppd_type', 'length', 'max'=>10),
-			array('transport_vehicle', 'length', 'max'=>15),
+			array('sppd_type', 'length', 'max'=>10),
+			array('transport_type, transport_vehicle', 'length', 'max'=>15),
 			array('statement_letter, support_letter', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -130,7 +130,7 @@ class Form extends CActiveRecord
 		$criteria->compare('support_letter',$this->support_letter,true);
 		$criteria->compare('created_by',$this->created_by,true);
 		$criteria->compare('created_date',$this->created_date,true);
-		$criteria->compare('status',$this->status,true);
+		$criteria->compare('status','created',true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
