@@ -122,23 +122,27 @@ class FormController extends RController
 		$persekot->voucher_date = date('Y-m-d',time());
 		$persekot->created_date = date('Y-m-d',time());
 		$persekot->created_by = 'Dummy';
-		$persekot->save();
+		if ($persekot->save()) {
+			$persekotdetail = new PersekotDetail;
+			$persekotdetail->parent_id = $persekot->id;
+			$persekotdetail->account_code = '-';
+			$persekotdetail->description = 'Persekot';
+			$persekotdetail->debit = $persekot->amount;
+			$persekotdetail->credit = 0;
+			$persekotdetail->created_date = date('Y-m-d',time());
+			$persekotdetail->created_by = 'Dummy';
+			if ($persekotdetail->save()) {
+				$this->render('create3',array(
+						'model'=>$model,
+						'persekot'=>$persekot,
+						'persekotdetail'=>$persekotdetail,
+					));
+			}
+		}
 
-		$persekotdetail = new PersekotDetail;
-		$persekotdetail->parent_id = $persekot->id;
-		$persekotdetail->account_code = '-';
-		$persekotdetail->description = 'Persekot';
-		$persekotdetail->debit = $persekot->amount;
-		$persekotdetail->credit = 0;
-		$persekotdetail->created_date = date('Y-m-d',time());
-		$persekotdetail->created_by = 'Dummy';
-		$persekotdetail->save();
 		
-		$this->render('create3',array(
-			'model'=>$model,
-			'persekot'=>$persekot,
-			'persekotdetail'=>$persekotdetail,
-			));
+		
+		
 	}
 
 	/**

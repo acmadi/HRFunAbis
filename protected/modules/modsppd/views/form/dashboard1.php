@@ -51,6 +51,7 @@ $this->menu=array(
 	</div>
   </div>
 </div>
+<br/>
 <div class="row-fluid">
   <div class="span12">
 	<?php 

@@ -7,7 +7,7 @@
  * @property integer $id
  * @property integer $parent_id
  * @property string $account_code
- * @property integer $description
+ * @property string $description
  * @property integer $debit
  * @property integer $credit
  * @property string $created_date
@@ -42,7 +42,7 @@ class PersekotDetail extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('parent_id, account_code, description, debit, credit, created_date, created_by', 'required'),
-			array('parent_id, description, debit, credit', 'numerical', 'integerOnly'=>true),
+			array('parent_id, debit, credit', 'numerical', 'integerOnly'=>true),
 			array('account_code', 'length', 'max'=>6),
 			array('created_by', 'length', 'max'=>50),
 			// The following rule is used by search().

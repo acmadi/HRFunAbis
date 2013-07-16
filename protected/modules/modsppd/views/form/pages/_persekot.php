@@ -1,4 +1,10 @@
-<?php if ($data != null) { ?>
+<?php if ($data != null) { 
+	$persekotdetaillist = PersekotDetail::model()->findAllByAttributes(array('parent_id' => $data->id));
+	$persekotdetail = new CArrayDataProvider($persekotdetaillist,array(
+					'id' => 'id',
+					));
+
+?>
 <div class="span12">
 	<div class="span6">
 		<table class="table">
@@ -15,7 +21,7 @@
 				));
 			?>
 				
-			<?php //echo $data->paid_to;?></td></tr>
+			</td></tr>
 			<tr><td>DITERIMA DARI</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>SEJUMLAH</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>TERBILANG</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
@@ -25,7 +31,7 @@
 		<table class="table">
 			<tr><td>Tanggal Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Nomor Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Nomor Journaltd><td>:</td><td><?php echo $data->paid_to;?></td></tr>
+			<tr><td>Nomor Journaltd></td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Kode Bank</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Kode Valuta</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
 			<tr><td>Nomor Cek/Giro</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
@@ -34,7 +40,40 @@
 	</div>	
 </div>
 <div class="span12">	
-</div>	
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'persekot-detail-grid',
+		'summaryText' => '',
+		'dataProvider'=>$persekotdetail,
+		// 'filter'=>$model,
+		'columns'=>array(
+			array(
+	            'header'=>'No',
+	            'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',       //  row is zero based
+	            'htmlOptions' => array('style' => 'width:10px')
+	        ),
+			// 'id',
+			'account_code',
+			'description',
+			array(
+				'name'=>'debit',
+				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->debit,\'\'))',
+				'htmlOptions' => array('style' => 'text-align:right')
+			),
+			array(
+				'name'=>'credit',
+				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->credit,\'\'))',
+				'htmlOptions' => array('style' => 'text-align:right')
+			),
+			// 'created_date',
+			// 'created_by',
+			array(
+				'class'=>'CButtonColumn',
+			),
+		),
+	)); ?>
+</div>
+
+
 
 <div class="span12">	
 KETERANGAN : <?php
