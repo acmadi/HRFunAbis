@@ -13,6 +13,24 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
+	<!-- <div class="row">
+		<?php echo $form->labelEx($model,'employee_id'); ?>
+		<?php echo $form->textField($model,'employee_id'); ?>
+		<?php echo $form->error($model,'employee_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'name'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'sppd_id'); ?>
+		<?php echo $form->textField($model,'sppd_id'); ?>
+		<?php echo $form->error($model,'sppd_id'); ?>
+	</div> -->
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'explanation'); ?>
 		<?php echo $form->textArea($model,'explanation',array('rows'=>6, 'cols'=>50)); ?>

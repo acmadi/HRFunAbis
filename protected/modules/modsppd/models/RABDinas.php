@@ -42,8 +42,8 @@ class RABDinas extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('employee_id, name, sppd_id, cost_description, amount, created_date, created_by', 'required'),
-			array('employee_id, sppd_id, amount', 'numerical', 'integerOnly'=>true),
-			array('name, created_by', 'length', 'max'=>50),
+			array('sppd_id, amount', 'numerical', 'integerOnly'=>true),
+			array('employee_id, name, created_by', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, employee_id, name, sppd_id, cost_description, amount, created_date, created_by', 'safe', 'on'=>'search'),
@@ -101,5 +101,15 @@ class RABDinas extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function getTotal($sppd_id)
+	{
+		$total = 0;
+		$rab = $this->findAllByAttributes(array('sppd_id' => $sppd_id));
+		foreach ($rab as $data) {
+			$total += $data->amount;
+		}
+		return $total;
 	}
 }

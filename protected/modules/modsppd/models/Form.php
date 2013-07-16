@@ -21,6 +21,7 @@
  * @property string $support_letter
  * @property string $created_by
  * @property string $created_date
+ * @property string $status
  */
 class Form extends CActiveRecord
 {
@@ -91,7 +92,7 @@ class Form extends CActiveRecord
 			'purpose' => 'Tujuan Perjalanan Dinas',
 			'departure' => 'Rencana Berangkat',
 			'arrival' => 'Rencana Kembali',
-			'transport_type' => 'Tranposrtasi',
+			'transport_type' => 'Tranportasi',
 			'transport_vehicle' => 'Sarana Transportasi',
 			'sppd_type' => 'Jenis Biaya Dinas',
 			'statement_letter' => 'Surat Pernyataan',
@@ -129,6 +130,7 @@ class Form extends CActiveRecord
 		$criteria->compare('support_letter',$this->support_letter,true);
 		$criteria->compare('created_by',$this->created_by,true);
 		$criteria->compare('created_date',$this->created_date,true);
+		$criteria->compare('status',$this->status,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -137,7 +139,7 @@ class Form extends CActiveRecord
 
 	public function getNumberOfDays()
 	{
-		return abs((strtotime($this->arrival)-strtotime($this->departure)))/86400;
+		return abs((strtotime($this->arrival)-strtotime($this->departure)))/86400 + 1;
 	}
 
 }

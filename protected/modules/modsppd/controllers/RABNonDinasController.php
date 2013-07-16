@@ -37,9 +37,12 @@ class RABNonDinasController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id, $emp_id)
 	{
 		$model=new RABNonDinas;
+		$model->employee_id = $emp_id;
+		$model->name = Employee::model()->getName($emp_id);
+		$model->sppd_id = $id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -47,8 +50,10 @@ class RABNonDinasController extends RController
 		if(isset($_POST['RABNonDinas']))
 		{
 			$model->attributes=$_POST['RABNonDinas'];
+			$model->created_by = 'Dummy';
+			$model->created_date = date('Y-m-d',time());
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/createStep2','id'=>$id));
 		}
 
 		$this->render('create',array(

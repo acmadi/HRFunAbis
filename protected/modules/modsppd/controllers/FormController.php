@@ -38,7 +38,10 @@ class FormController extends RController
 		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
 					'id' => 'id',
 					));
-		$rabnondinas = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabnondinaslist = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabnondinas = new CArrayDataProvider($rabnondinaslist,array(
+					'id' => 'id',
+					));
 		
 		$this->render('dashboard1',array(
 			'model'=>$model, 
@@ -70,14 +73,63 @@ class FormController extends RController
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
 			if($model->save()) {
-				$this->generateRAB($model->id);
-				$this->redirect(array('view','id'=>$model->id));
+				if ($model->sppd_type == 'Dinas') {
+					$this->generateRABDinas($model->id);
+				}
+				$this->redirect(array('createStep2','id'=>$model->id));
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionCreateStep2($id)
+	{
+		$model = $this->loadModel($id);
+		$rab = null;
+		if ($model->sppd_type == 'Dinas') {
+			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		} else {
+			$rab = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		}
+
+		$rablist = new CArrayDataProvider($rab,array(
+					'id' => 'id',
+					));
+		$this->render('create2',array(
+			'model'=>$model,
+			'rablist' => $rablist,
+			));
+	}
+
+	public function actionCreateStep3($id)
+	{
+		$model = $this->loadModel($id);
+		$persekot = new Persekot;
+		$persekot->sppd_id
+		$persekot->paid_to
+		$persekot->received_from
+		$persekot->amount
+		$persekot->amount_in_words
+		$persekot->check_giro_date
+		$persekot->check_giro_number
+		$persekot->currency_code
+		$persekot->bank_code
+		$persekot->journal_number
+		$persekot->voucher_number
+		$persekot->voucher_date
+		$persekot->created_by
+		$persekot->created_date
+		
+
+		$persekotdetails = new CArrayDataProvider($rab,array(
+					'id' => 'id',
+					));
+		$this->render('create3',array(
+			'model'=>$model,
+			));
 	}
 
 	/**
@@ -170,7 +222,7 @@ class FormController extends RController
 		}
 	}
 
-	public function generateRAB($id)
+	public function generateRABDinas($id)
 	{
 		$model = $this->loadModel($id);
 		$duration = $model->getNumberOfDays();

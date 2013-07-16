@@ -5,6 +5,8 @@
  *
  * The followings are the available columns in table 'sppd_rab_nondinas':
  * @property integer $id
+ * @property integer $employee_id
+ * @property string $name
  * @property string $explanation
  * @property integer $amount
  * @property string $additional_description
@@ -39,9 +41,9 @@ class RABNonDinas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('explanation, amount, additional_description, created_date, created_by', 'required'),
+			array('employee_id, name, explanation, amount, additional_description, created_date, created_by', 'required'),
 			array('amount', 'numerical', 'integerOnly'=>true),
-			array('created_by', 'length', 'max'=>50),
+			array('employee_id, name, created_by', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, explanation, amount, additional_description, created_date, created_by', 'safe', 'on'=>'search'),
@@ -86,6 +88,8 @@ class RABNonDinas extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('employee_id',$this->employee_id,true);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('explanation',$this->explanation,true);
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('additional_description',$this->additional_description,true);
@@ -95,5 +99,15 @@ class RABNonDinas extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function getTotal($sppd_id)
+	{
+		$total = 0;
+		$rab = $this->findAllByAttributes(array('sppd_id' => $sppd_id));
+		foreach ($rab as $data) {
+			$total += $data->amount;
+		}
+		return $total;
 	}
 }

@@ -171,6 +171,6 @@ class Project extends CActiveRecord
 
 	public function getNumberOfDays()
 	{
-		return (strtotime($this->plan_end_date)-strtotime($this->plan_start_date))/86400;
+		return (strtotime($this->plan_end_date)-strtotime($this->plan_start_date))/86400 + 1;
 	}
 }
