@@ -108,27 +108,36 @@ class FormController extends RController
 	{
 		$model = $this->loadModel($id);
 		$persekot = new Persekot;
-		$persekot->sppd_id
-		$persekot->paid_to
-		$persekot->received_from
-		$persekot->amount
-		$persekot->amount_in_words
-		$persekot->check_giro_date
-		$persekot->check_giro_number
-		$persekot->currency_code
-		$persekot->bank_code
-		$persekot->journal_number
-		$persekot->voucher_number
-		$persekot->voucher_date
-		$persekot->created_by
-		$persekot->created_date
-		
+		$persekot->sppd_id = $model->id;
+		$persekot->paid_to = $model->name;
+		$persekot->received_from = '-';
+		$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
+		$persekot->amount_in_words = '-';
+		$persekot->check_giro_date = date('Y-m-d',time());
+		$persekot->check_giro_number = '-';
+		$persekot->currency_code = '-';
+		$persekot->bank_code = '-';
+		$persekot->journal_number = '-';
+		$persekot->voucher_number = '-';
+		$persekot->voucher_date = date('Y-m-d',time());
+		$persekot->created_date = date('Y-m-d',time());
+		$persekot->created_by = 'Dummy';
+		$persekot->save();
 
-		$persekotdetails = new CArrayDataProvider($rab,array(
-					'id' => 'id',
-					));
+		$persekotdetail = new PersekotDetail;
+		$persekotdetail->parent_id = $persekot->id;
+		$persekotdetail->account_code = '-';
+		$persekotdetail->description = 'Persekot';
+		$persekotdetail->debit = $persekot->amount;
+		$persekotdetail->credit = 0;
+		$persekotdetail->created_date = date('Y-m-d',time());
+		$persekotdetail->created_by = 'Dummy';
+		$persekotdetail->save();
+		
 		$this->render('create3',array(
 			'model'=>$model,
+			'persekot'=>$persekot,
+			'persekotdetail'=>$persekotdetail,
 			));
 	}
 

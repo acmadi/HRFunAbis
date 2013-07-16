@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'sppd_persekot_detail':
  * @property integer $id
+ * @property integer $parent_id
  * @property string $account_code
  * @property integer $description
  * @property integer $debit
@@ -40,8 +41,8 @@ class PersekotDetail extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('account_code, description, debit, credit, created_date, created_by', 'required'),
-			array('description, debit, credit', 'numerical', 'integerOnly'=>true),
+			array('parent_id, account_code, description, debit, credit, created_date, created_by', 'required'),
+			array('parent_id, description, debit, credit', 'numerical', 'integerOnly'=>true),
 			array('account_code', 'length', 'max'=>6),
 			array('created_by', 'length', 'max'=>50),
 			// The following rule is used by search().
@@ -89,6 +90,7 @@ class PersekotDetail extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('parent_id',$this->parent_id);
 		$criteria->compare('account_code',$this->account_code,true);
 		$criteria->compare('description',$this->description);
 		$criteria->compare('debit',$this->debit);
