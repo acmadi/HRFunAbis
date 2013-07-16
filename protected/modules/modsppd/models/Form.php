@@ -134,4 +134,10 @@ class Form extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function getNumberOfDays()
+	{
+		return abs((strtotime($this->arrival)-strtotime($this->departure)))/86400;
+	}
+
 }

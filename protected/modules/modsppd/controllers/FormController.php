@@ -34,7 +34,10 @@ class FormController extends RController
 		Yii::app()->session['sppd_name'] = $model->purpose;
 		
 		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		$rabdinas = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabdinaslist = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
+					'id' => 'id',
+					));
 		$rabnondinas = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		
 		$this->render('dashboard1',array(
@@ -66,8 +69,10 @@ class FormController extends RController
 			$model->attributes=$_POST['Form'];
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
-			if($model->save())
+			if($model->save()) {
+				$this->generateRAB($model->id);
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -168,6 +173,7 @@ class FormController extends RController
 	public function generateRAB($id)
 	{
 		$model = $this->loadModel($id);
+		$duration = $model->getNumberOfDays();
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
 			$rab = MasterCost::model()->findAllByAttributes(array('class'=>$model->class));
@@ -179,7 +185,10 @@ class FormController extends RController
 			$rabdinas->name = $model->name;
 			$rabdinas->sppd_id = $model->id;
 			$rabdinas->cost_description = $data->description;
-			$rabdinas->amount = ($data->code == 'btdk' || $data->code == 'atd')?:;
+			$rabdinas->amount = ($data->code == 'btdk' || $data->code == 'atd')?$data->amount * 2:$data->amount * $duration;
+			$rabdinas->created_date = date('Y-m-d',time());
+			$rabdinas->created_by = 'Dummy';
+			$rabdinas->save();
 		}
 	}
 }
