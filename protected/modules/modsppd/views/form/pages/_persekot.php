@@ -22,20 +22,20 @@
 			?>
 				
 			</td></tr>
-			<tr><td>DITERIMA DARI</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>SEJUMLAH</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>TERBILANG</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
+			<tr><td>DITERIMA DARI</td><td>:</td><td><?php echo $data->received_from;?></td></tr>
+			<tr><td>SEJUMLAH</td><td>:</td><td><?php echo Yii::app()->numberFormatter->formatCurrency($data->amount,'');?></td></tr>
+			<tr><td>TERBILANG</td><td>:</td><td><?php echo $data->amount_in_words;?></td></tr>
 		</table>
 	</div>
 	<div class="span6">
 		<table class="table">
-			<tr><td>Tanggal Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Nomor Voucher</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Nomor Journal</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Kode Bank</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Kode Valuta</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Nomor Cek/Giro</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
-			<tr><td>Tanggal Cek/Giro</td><td>:</td><td><?php echo $data->paid_to;?></td></tr>
+			<tr><td>Tanggal Voucher</td><td>:</td><td><?php echo $data->voucher_date;?></td></tr>
+			<tr><td>Nomor Voucher</td><td>:</td><td><?php echo $data->voucher_number;?></td></tr>
+			<tr><td>Nomor Journal</td><td>:</td><td><?php echo $data->journal_number;?></td></tr>
+			<tr><td>Kode Bank</td><td>:</td><td><?php echo $data->bank_code;?></td></tr>
+			<tr><td>Kode Valuta</td><td>:</td><td><?php echo $data->currency_code;?></td></tr>
+			<tr><td>Nomor Cek/Giro</td><td>:</td><td><?php echo $data->check_giro_number;?></td></tr>
+			<tr><td>Tanggal Cek/Giro</td><td>:</td><td><?php echo $data->check_giro_date;?></td></tr>
 		</table>
 	</div>	
 </div>
