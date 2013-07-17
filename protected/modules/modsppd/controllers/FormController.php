@@ -116,6 +116,7 @@ class FormController extends RController
 
 		$rablist = new CArrayDataProvider($rab,array(
 					'id' => 'id',
+					'pagination'=>false,
 					));
 		$model->status = 'step3';
 		$model->save();
@@ -165,7 +166,7 @@ class FormController extends RController
 				}
 			}
 		} else {
-			$this->redirect(Yii::app()->request->urlReferrer);
+			$this->redirect(array('view','id'=>$id));
 		}
 	}
 
@@ -327,7 +328,57 @@ class FormController extends RController
 			$rabdinas->name = $model->name;
 			$rabdinas->sppd_id = $model->id;
 			$rabdinas->cost_description = $data->description;
-			$rabdinas->amount = ($data->code == 'btdk' || $data->code == 'atd')?$data->amount * 2:$data->amount * $duration;
+			if ($model->transport_type == 'Kendaraan Dinas') {
+				switch ($data->code) {
+					case 'btdk': // Transport Dari & Ke
+					case 'btdt': // Transport di tempat tujuan
+					case 'uash': // Uang angkutan setempat harian
+						$rabdinas->amount = 0;
+						break;
+					case 'atd': // airport tax domestik
+					case 'ati': // airport tax internasional
+						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
+						break;
+					case 'btst': // Biaya transport sarana transportasi
+					case 'bph': // Biaya Penginapan Hotel
+					case 'bum': // Biaya uang makan
+					case 'bm': // Biaya Makan
+					case 'ush': // Uang saku harian
+					case 'da': // Daily allowance
+					case 'pbp': // Penggantian biaya penginapan
+					case 'bcp': // biaya cuci pakaian
+					case 'btp': // biaya tunjangan perlengkapan
+					case 'us': // uang saku
+						$rabdinas->amount = $data->amount * $duration;
+						break;		
+				}	
+			} else {
+				switch ($data->code) {
+					case 'btdk': // Transport Dari & Ke
+						$rabdinas->amount = $data->amount * 2;
+						break;
+					case 'atd': // airport tax domestik
+						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount * 2:0;
+					case 'ati': // airport tax internasional
+						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
+						break;
+					case 'btdt': // Transport di tempat tujuan
+					case 'uash': // Uang angkutan setempat harian
+					case 'btst': // Biaya transport sarana transportasi
+					case 'bph': // Biaya Penginapan Hotel
+					case 'bum': // Biaya uang makan
+					case 'bm': // Biaya Makan
+					case 'ush': // Uang saku harian
+					case 'da': // Daily allowance
+					case 'pbp': // Penggantian biaya penginapan
+					case 'bcp': // biaya cuci pakaian
+					case 'btp': // biaya tunjangan perlengkapan
+					case 'us': // uang saku
+						$rabdinas->amount = $data->amount * $duration;
+						break;		
+				}
+			}
+			
 			$rabdinas->created_date = date('Y-m-d',time());
 			$rabdinas->created_by = 'Dummy';
 			$rabdinas->save();

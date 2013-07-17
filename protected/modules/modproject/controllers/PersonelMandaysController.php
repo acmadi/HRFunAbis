@@ -50,7 +50,7 @@ class PersonelMandaysController extends RController
 		{
 			$model->attributes=$_POST['PersonelMandays'];
 			if($model->save())
-				$this->redirect(array('/modproject/personelmandays/detail&employee_id='.$model->employee_id));
+				$this->redirect(array('/modproject/personelMandays/detail&employee_id='.$model->employee_id));
 				// $this->redirect(array('view','id'=>$model->id));
 		}
 

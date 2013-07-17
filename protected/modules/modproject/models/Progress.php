@@ -184,11 +184,15 @@ class Progress extends CActiveRecord
 	public function getLatestProgress($project_number)
 	{
 		$progress = Progress::model()->findAllByAttributes(array('project_number'=>$project_number));
-		$latest = $progress[0];
-		for ($i=1; $i < sizeof($progress); $i++) { 
-			if ($progress[$i]->progress_actual > $latest->progress_actual) {
-				$latest = $progress[$i];
+		if ($progress != null) {
+			$latest = $progress[0];
+			for ($i=1; $i < sizeof($progress); $i++) { 
+				if ($progress[$i]->progress_actual > $latest->progress_actual) {
+					$latest = $progress[$i];
+				}
 			}
+		} else {
+			$latest = new Progress;
 		}
 		return $latest;
 	}

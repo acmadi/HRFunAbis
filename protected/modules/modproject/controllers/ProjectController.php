@@ -366,7 +366,7 @@ class ProjectController extends RController
 					->setCellValue('B'.(29+$offset+$i),$no)
 					->setCellValue('C'.(29+$offset+$i),$person->position)
 					->setCellValue('E'.(29+$offset+$i),$person->name)
-					->setCellValue('F'.(29+$offset+$i),$person->telepon);
+					->getCell('F'.(29+$offset+$i))->setValueExplicit($person->telepon, PHPExcel_Cell_DataType::TYPE_STRING);
 
 				// Get mandays
 				$mandays = PersonelMandays::model()->getAllMandays($person->employee_id);

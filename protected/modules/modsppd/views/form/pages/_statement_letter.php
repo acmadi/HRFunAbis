@@ -1,5 +1,9 @@
 <div class="span12">
-	<embed src="<?php echo 'upload/sppd/'.$data->statement_letter;?>" width="970" height="275">	
+	<?php if ($data->statement_letter != '') { ?>
+		<embed src="<?php echo ($data->statement_letter != '')?'upload/sppd/'.$data->statement_letter:'';?>" width="970" height="275">	
+	<?php } else {
+		echo 'File belum diupload';
+	} ?>
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 		    'label'=>'Upload',

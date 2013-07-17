@@ -39,7 +39,7 @@ $this->menu=array(
 		'employee_id',
 		array(
 			'name'=>'month',
-			'value'=>PersonelMandays::model()->getMonth($model->month),
+			'value'=>$model->month,
 			'editable' => array(
 				'type' => 'select',
 				'source' => PersonelMandays::model()->getPeriodOptions(),

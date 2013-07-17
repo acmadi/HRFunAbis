@@ -23,7 +23,7 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('period_month')); ?>:</b>
 	<?php //echo CHtml::encode($data->period_month); ?>
-	<?php echo CHtml::encode(Finance::model()->getMonth($data->period_month)); ?>
+	<?php echo $data->period_month ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('debit')); ?>:</b>

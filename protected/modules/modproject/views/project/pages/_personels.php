@@ -40,7 +40,7 @@
             	'mandays'=>array(
             		'label'=>'Mandays Detail',
             		'imageUrl'=>Yii::app()->request->baseUrl.'/images/person.png',
-		            'url'=>'Yii::app()->createUrl("modproject/personelmandays/detail", array("employee_id"=>$data->employee_id))',
+		            'url'=>'Yii::app()->createUrl("modproject/personelMandays/detail", array("employee_id"=>$data->employee_id))',
 		            'htmlOptions'=>array('target'=>'blank'),
             		),
             	'update'=>array(

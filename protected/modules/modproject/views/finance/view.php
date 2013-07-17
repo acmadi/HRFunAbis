@@ -38,7 +38,7 @@ $this->menu=array(
 		'elbi_desc',
 		array(
 			'name'=>'period_month',
-			'value'=>Finance::model()->getMonth($model->period_month),
+			'value'=>$model->period_month,
 			'editable' => array(
 				'type' => 'select',
 				'source' => Finance::model()->getPeriodOptions(),
