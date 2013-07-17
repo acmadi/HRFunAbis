@@ -93,6 +93,8 @@ class FormController extends RController
 				if ($model->sppd_type == 'Dinas') {
 					$this->generateRABDinas($model->id);
 				}
+				$model->status = 'step2';
+				$model->save();
 				$this->redirect(array('createStep2','id'=>$model->id));
 			}
 		}
@@ -105,8 +107,6 @@ class FormController extends RController
 	public function actionCreateStep2($id)
 	{
 		$model = $this->loadModel($id);
-		$model->status = 'step2';
-		$model->save();
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
 			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
@@ -117,6 +117,8 @@ class FormController extends RController
 		$rablist = new CArrayDataProvider($rab,array(
 					'id' => 'id',
 					));
+		$model->status = 'step3';
+		$model->save();
 		$this->render('create2',array(
 			'model'=>$model,
 			'rablist' => $rablist,
@@ -126,40 +128,44 @@ class FormController extends RController
 	public function actionCreateStep3($id)
 	{
 		$model = $this->loadModel($id);
-		$model->status = 'step3';
-		$model->save();
-
-		$persekot = new Persekot;
-		$persekot->sppd_id = $model->id;
-		$persekot->paid_to = $model->name;
-		$persekot->received_from = '-';
-		$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
-		$persekot->amount_in_words = '-';
-		$persekot->check_giro_date = date('Y-m-d',time());
-		$persekot->check_giro_number = '-';
-		$persekot->currency_code = '-';
-		$persekot->bank_code = '-';
-		$persekot->journal_number = '-';
-		$persekot->voucher_number = '-';
-		$persekot->voucher_date = date('Y-m-d',time());
-		$persekot->created_date = date('Y-m-d',time());
-		$persekot->created_by = 'Dummy';
-		if ($persekot->save()) {
-			$persekotdetail = new PersekotDetail;
-			$persekotdetail->parent_id = $persekot->id;
-			$persekotdetail->account_code = '-';
-			$persekotdetail->description = 'Persekot';
-			$persekotdetail->debit = $persekot->amount;
-			$persekotdetail->credit = 0;
-			$persekotdetail->created_date = date('Y-m-d',time());
-			$persekotdetail->created_by = 'Dummy';
-			if ($persekotdetail->save()) {
-				$this->render('create3',array(
-						'model'=>$model,
-						'persekot'=>$persekot,
-						'persekotdetail'=>$persekotdetail,
-					));
+		
+		if ($model->status == 'step3') {
+			$persekot = new Persekot;
+			$persekot->sppd_id = $model->id;
+			$persekot->paid_to = $model->name;
+			$persekot->received_from = '-';
+			$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
+			$persekot->amount_in_words = '-';
+			$persekot->check_giro_date = date('Y-m-d',time());
+			$persekot->check_giro_number = '-';
+			$persekot->currency_code = '-';
+			$persekot->bank_code = '-';
+			$persekot->journal_number = '-';
+			$persekot->voucher_number = '-';
+			$persekot->voucher_date = date('Y-m-d',time());
+			$persekot->created_date = date('Y-m-d',time());
+			$persekot->created_by = 'Dummy';
+			if ($persekot->save()) {
+				$persekotdetail = new PersekotDetail;
+				$persekotdetail->parent_id = $persekot->id;
+				$persekotdetail->account_code = '-';
+				$persekotdetail->description = 'Persekot';
+				$persekotdetail->debit = $persekot->amount;
+				$persekotdetail->credit = 0;
+				$persekotdetail->created_date = date('Y-m-d',time());
+				$persekotdetail->created_by = 'Dummy';
+				if ($persekotdetail->save()) {
+					$model->status = 'created';
+					$model->save();
+					$this->render('create3',array(
+							'model'=>$model,
+							'persekot'=>$persekot,
+							'persekotdetail'=>$persekotdetail,
+						));
+				}
 			}
+		} else {
+			$this->redirect(Yii::app()->request->urlReferrer);
 		}
 	}
 
@@ -191,6 +197,51 @@ class FormController extends RController
 		}
 
 		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionUpload($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Form']))
+		{
+			$oldStatement = $model->statement_letter;
+			$oldSupport = $model->support_letter;
+			$model->attributes=$_POST['Form'];
+
+			$statement_letter=CUploadedFile::getInstance($model,'statement_letter');
+			if ($statement_letter) {
+				$statement_letter_name = $statement_letter->name;
+				$statement_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $statement_letter_name);
+				$model->statement_letter = $statement_letter_name;
+				if ($oldStatement != '' && $statement_letter_name != $oldStatement) {
+					unlink(Yii::app()->basePath . '/../upload/sppd/' . $oldStatement);
+				}
+			} else {
+				$model->statement_letter = $oldStatement;
+			}
+
+			$support_letter=CUploadedFile::getInstance($model,'support_letter');
+			if ($support_letter) {
+				$support_letter_name = $support_letter->name;
+				$support_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $support_letter_name);
+				$model->support_letter = $support_letter_name;
+				if ($oldSupport != '' && $support_letter_name != $oldSupport) {
+					unlink(Yii::app()->basePath . '/../upload/sppd/' . $oldSupport);
+				}
+			} else {
+				$model->support_letter = $oldSupport;
+			}
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('upload_form',array(
 			'model'=>$model,
 		));
 	}
