@@ -33,6 +33,53 @@ class FormController extends RController
 		Yii::app()->session['sppd_id'] = $model->id;
 		Yii::app()->session['sppd_name'] = $model->purpose;
 		
+		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'usulan')));
+		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$personnels = new CArrayDataProvider($personnelslist,array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
+		$rabdinaslist = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
+		$rabnondinaslist = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$rabnondinas = new CArrayDataProvider($rabnondinaslist,array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
+		if ($model->status == 'processed' || $model->status == 'closed') {
+			$this->render('dashboard2',array(
+				'model'=>$model, 
+				'persekot'=>$persekot, 
+				'personnels' =>$personnels,
+				'rabdinas'=>$rabdinas, 
+				'rabnondinas'=>$rabnondinas, 
+			));	
+		}
+		$this->render('dashboard1',array(
+			'model'=>$model, 
+			'persekot'=>$persekot, 
+			'personnels' =>$personnels,
+			'rabdinas'=>$rabdinas, 
+			'rabnondinas'=>$rabnondinas, 
+		));
+	}
+
+	public function actionPertanggungjawaban($id)
+	{
+		$model = $this->loadModel($id);
+		if ($model->status == 'created') {
+			$model->status = 'processed' ;
+			$model->save();
+			$persekot = $this->createPersekot($id, 'lpj');
+			$persekotdetail = $this->createPersekotDetail($persekot->id, 'Persekot', 0, $persekot->amount);
+		}
+		
+		Yii::app()->session['sppd_id'] = $model->id;
+		Yii::app()->session['sppd_name'] = $model->purpose;
+		
 		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		$personnels = new CArrayDataProvider($personnelslist,array(
@@ -50,7 +97,7 @@ class FormController extends RController
 					'pagination'=>false,
 					));
 		
-		$this->render('dashboard1',array(
+		$this->render('dashboard2',array(
 			'model'=>$model, 
 			'persekot'=>$persekot, 
 			'personnels' =>$personnels,
@@ -162,40 +209,15 @@ class FormController extends RController
 		$model = $this->loadModel($id);
 		
 		if ($model->status == 'step4') {
-			$persekot = new Persekot;
-			$persekot->sppd_id = $model->id;
-			$persekot->paid_to = $model->name;
-			$persekot->received_from = '-';
-			$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
-			$persekot->amount_in_words = '-';
-			$persekot->check_giro_date = date('Y-m-d',time());
-			$persekot->check_giro_number = '-';
-			$persekot->currency_code = '-';
-			$persekot->bank_code = '-';
-			$persekot->journal_number = '-';
-			$persekot->voucher_number = '-';
-			$persekot->voucher_date = date('Y-m-d',time());
-			$persekot->created_date = date('Y-m-d',time());
-			$persekot->created_by = 'Dummy';
-			if ($persekot->save()) {
-				$persekotdetail = new PersekotDetail;
-				$persekotdetail->parent_id = $persekot->id;
-				$persekotdetail->account_code = '-';
-				$persekotdetail->description = 'Persekot';
-				$persekotdetail->debit = $persekot->amount;
-				$persekotdetail->credit = 0;
-				$persekotdetail->created_date = date('Y-m-d',time());
-				$persekotdetail->created_by = 'Dummy';
-				if ($persekotdetail->save()) {
-					$model->status = 'created';
-					$model->save();
-					$this->render('create4',array(
-							'model'=>$model,
-							'persekot'=>$persekot,
-							'persekotdetail'=>$persekotdetail,
-						));
-				}
-			}
+			$persekot = $this->createPersekot($id, 'usulan');
+			$persekotdetail = $this->createPersekotDetail($persekot->id, 'Persekot',$persekot->amount,0);
+			$model->status = 'created';
+			$model->save();
+			$this->render('create4',array(
+					'model'=>$model,
+					'persekot'=>$persekot,
+					'persekotdetail'=>$persekotdetail,
+				));
 		} else {
 			$this->redirect(array('view','id'=>$id));
 		}
@@ -415,5 +437,42 @@ class FormController extends RController
 				$rabdinas->save();
 			}
 		}
+	}
+
+	public function createPersekot($id, $flag)
+	{
+		$model = $this->loadModel($id);
+		$persekot = new Persekot;
+		$persekot->sppd_id = $model->id;
+		$persekot->paid_to = $model->name;
+		$persekot->received_from = '-';
+		$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
+		$persekot->amount_in_words = '-';
+		$persekot->check_giro_date = date('Y-m-d',time());
+		$persekot->check_giro_number = '-';
+		$persekot->currency_code = '-';
+		$persekot->bank_code = '-';
+		$persekot->journal_number = '-';
+		$persekot->voucher_number = '-';
+		$persekot->flag = $flag;
+		$persekot->voucher_date = date('Y-m-d',time());
+		$persekot->created_date = date('Y-m-d',time());
+		$persekot->created_by = 'Dummy';
+		$persekot->save();
+		return $persekot;
+	}
+
+	public function createPersekotDetail($persekot_id, $description, $debit, $credit)
+	{
+		$persekotdetail = new PersekotDetail;
+		$persekotdetail->parent_id = $persekot_id;
+		$persekotdetail->account_code = '-';
+		$persekotdetail->description = $description;
+		$persekotdetail->debit = $debit;
+		$persekotdetail->credit = $credit;
+		$persekotdetail->created_date = date('Y-m-d',time());
+		$persekotdetail->created_by = 'Dummy';
+		$persekotdetail->save();
+		return $persekotdetail;
 	}
 }

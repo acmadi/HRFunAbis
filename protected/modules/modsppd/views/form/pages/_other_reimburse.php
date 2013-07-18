@@ -4,7 +4,6 @@
 	<?php } else {
 		echo 'File belum diupload';
 	} ?>
-	<?php if ($data->status != 'processed' && $data->status != 'closed'): ?>	
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 		    'label'=>'Upload',
@@ -13,5 +12,4 @@
 		    'url'=>array('upload','id'=>$data->id),
 		)); ?>
 	</div>
-	<?php endif ?>
 </div>
