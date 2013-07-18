@@ -50,6 +50,8 @@ class Task extends CActiveRecord
 			array('project_number, code, name, description, plan_start_date, plan_end_date, plan_progress, remarks', 'required'),
 			array('project_number, code, created_by', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>200),
+			array('plan_start_date, act_start_date', 'validateStartDate'),
+			array('plan_end_date, act_end_date', 'validateEndDate'),
 			array('plan_progress, actual_progress', 'length', 'max'=>11),
 			array('created_date', 'safe'),
 			// The following rule is used by search().
@@ -134,17 +136,27 @@ class Task extends CActiveRecord
 		return self::model()->findByPk($id)->code;
 	}
 
-	// public function behaviors()
-	// {
-	// 	return array(
-	// 		'nestedSetBehavior'=>array(
-	// 		    'class'=>'application.extensions.NestedSetBehavior.NestedSetBehavior',
-	// 		    'leftAttribute'=>'lft',
-	// 		    'rightAttribute'=>'rgt',
-	// 		    'levelAttribute'=>'level',
-	// 		    'hasManyRoots'=>true,
-	// 		    'rootAttribute'=>'root',
-	// 		   	),
-	// 		);
-	//  }
+	/**
+	 * @param string the name of the attribute to be validated
+	 * @param array options specified in the validation rule
+	 */
+	public function validateStartDate($attribute,$params)
+	{
+		if(!(Project::model()->validateDate($this->period_date, $this->project_number)))
+		{
+			 $this->addError($attribute, 'Start date is invalid');
+		}
+	}
+	
+	/**
+	 * @param string the name of the attribute to be validated
+	 * @param array options specified in the validation rule
+	 */
+	public function validateEndDate($attribute,$params)
+	{
+		if(!(Project::model()->validateDate($this->period_date_to, $this->project_number)))
+		{
+			 $this->addError($attribute, 'End date is invalid');
+		}
+	}
 }

@@ -18,7 +18,7 @@ $this->widget('bootstrap.widgets.TbBreadcrumbs', array( 'links'=>array(
 			array(
 				'class' => 'bootstrap.widgets.TbButtonGroup',
 				'buttons'=>array(
-					array('label'=>'Tambah Hari Kerja', 'url'=>array('/modproject/personelmandays/create','employee_id'=>$_GET['employee_id'])),
+					array('label'=>'Tambah Hari Kerja', 'url'=>array('/modproject/personelMandays/create','employee_id'=>$_GET['employee_id'])),
 				),
 			),
 	    ),
