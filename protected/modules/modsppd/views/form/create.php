@@ -12,9 +12,9 @@ $this->menu=array(
 	array('label'=>'Manage Form', 'url'=>array('admin')),
 );
 ?>
-Step 1 of 3
+Step 1 of 4
 <div class="progress progress-striped active">
-  <div class="bar" style="width: 33.33%;"></div>
+  <div class="bar" style="width: 25%;"></div>
 </div>
 
 <?php

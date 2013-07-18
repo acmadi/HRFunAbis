@@ -37,9 +37,10 @@ class PersonnelController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new Personnel;
+		$model->sppd_id = $id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -47,8 +48,9 @@ class PersonnelController extends RController
 		if(isset($_POST['Personnel']))
 		{
 			$model->attributes=$_POST['Personnel'];
+			$model->name = Employee::model()->getName($model->employee_id);
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/createStep2','id'=>$id));
 		}
 
 		$this->render('create',array(

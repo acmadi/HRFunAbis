@@ -20,6 +20,6 @@ $this->menu=array(
 ?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'sppd_id'=>$sppd_id)); ?>
 
 <?php $this->endWidget(); ?>

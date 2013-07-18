@@ -11,13 +11,14 @@
 	        ),
 			// 'id',
 			// 'employee_id',
-			// 'name',
+			'name',
 			// 'sppd_id',
 			array(
 				'name'=>'cost_description',
 				'footer' => 'Total',
 				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
 				),
+			'days',
 			array(
 				'name'=>'amount',
 				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->amount,\'\'))',

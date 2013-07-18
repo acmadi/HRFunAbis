@@ -13,23 +13,23 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'sppd_id'); ?>
 		<?php echo $form->textField($model,'sppd_id'); ?>
 		<?php echo $form->error($model,'sppd_id'); ?>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'employee_id'); ?>
-		<?php echo $form->textField($model,'employee_id',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->dropDownList($model,'employee_id',CHtml::listData(Employee::model()->findAll(),'employee_id','full_name'), array('empty'=>'pilih employee')); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'name'); ?>
-	</div>
+	</div> -->
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>

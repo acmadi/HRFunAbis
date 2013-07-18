@@ -10,11 +10,14 @@
 	            'htmlOptions' => array('style' => 'width:10px')
 	        ),
 			// 'id',
+			// 'employee_id',
+			'name',
 			array(
 				'name'=>'explanation',
 				'footer' => 'Total',
 				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
 				),
+			'days',
 			array(
 				'name'=>'amount',
 				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->amount,\'\'))',

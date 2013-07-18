@@ -34,6 +34,11 @@ class FormController extends RController
 		Yii::app()->session['sppd_name'] = $model->purpose;
 		
 		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$personnels = new CArrayDataProvider($personnelslist,array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
 		$rabdinaslist = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
 					'id' => 'id',
@@ -48,6 +53,7 @@ class FormController extends RController
 		$this->render('dashboard1',array(
 			'model'=>$model, 
 			'persekot'=>$persekot, 
+			'personnels' =>$personnels,
 			'rabdinas'=>$rabdinas, 
 			'rabnondinas'=>$rabnondinas, 
 		));
@@ -90,9 +96,6 @@ class FormController extends RController
 			}
 
 			if($model->save()) {
-				if ($model->sppd_type == 'Dinas') {
-					$this->generateRABDinas($model->id);
-				}
 				$model->status = 'step2';
 				$model->save();
 				$this->redirect(array('createStep2','id'=>$model->id));
@@ -107,8 +110,36 @@ class FormController extends RController
 	public function actionCreateStep2($id)
 	{
 		$model = $this->loadModel($id);
+		if ($model->status != 'step3') {	
+			$personnel = new Personnel;
+			$personnel->sppd_id = $model->id;
+			$personnel->employee_id = $model->employee_id;
+			$personnel->name = $model->name;
+			if ($personnel->save()) {
+				$model->status = 'step3';
+				$model->save();
+			}
+		}
+		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		$personnels = new CArrayDataProvider($personnelslist,array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
+		
+		$this->render('create2',array(
+			'model'=>$model,
+			'personnels' => $personnels,
+			));
+	}
+
+	public function actionCreateStep3($id)
+	{
+		$model = $this->loadModel($id);
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
+			if ($model->status != 'step4') {
+				$this->generateRABDinas($model->id);
+			}
 			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		} else {
 			$rab = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
@@ -118,19 +149,19 @@ class FormController extends RController
 					'id' => 'id',
 					'pagination'=>false,
 					));
-		$model->status = 'step3';
+		$model->status = 'step4';
 		$model->save();
-		$this->render('create2',array(
+		$this->render('create3',array(
 			'model'=>$model,
 			'rablist' => $rablist,
 			));
 	}
 
-	public function actionCreateStep3($id)
+	public function actionCreateStep4($id)
 	{
 		$model = $this->loadModel($id);
 		
-		if ($model->status == 'step3') {
+		if ($model->status == 'step4') {
 			$persekot = new Persekot;
 			$persekot->sppd_id = $model->id;
 			$persekot->paid_to = $model->name;
@@ -158,7 +189,7 @@ class FormController extends RController
 				if ($persekotdetail->save()) {
 					$model->status = 'created';
 					$model->save();
-					$this->render('create3',array(
+					$this->render('create4',array(
 							'model'=>$model,
 							'persekot'=>$persekot,
 							'persekotdetail'=>$persekotdetail,
@@ -317,71 +348,72 @@ class FormController extends RController
 	{
 		$model = $this->loadModel($id);
 		$duration = $model->getNumberOfDays();
-		$rab = null;
-		if ($model->sppd_type == 'Dinas') {
-			$rab = MasterCost::model()->findAllByAttributes(array('class'=>$model->class));
-		}
-
-		foreach ($rab as $data) {
-			$rabdinas = new RABDinas;
-			$rabdinas->employee_id = $model->employee_id;
-			$rabdinas->name = $model->name;
-			$rabdinas->sppd_id = $model->id;
-			$rabdinas->cost_description = $data->description;
-			if ($model->transport_type == 'Kendaraan Dinas') {
-				switch ($data->code) {
-					case 'btdk': // Transport Dari & Ke
-					case 'btdt': // Transport di tempat tujuan
-					case 'uash': // Uang angkutan setempat harian
-						$rabdinas->amount = 0;
-						break;
-					case 'atd': // airport tax domestik
-					case 'ati': // airport tax internasional
-						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
-						break;
-					case 'btst': // Biaya transport sarana transportasi
-					case 'bph': // Biaya Penginapan Hotel
-					case 'bum': // Biaya uang makan
-					case 'bm': // Biaya Makan
-					case 'ush': // Uang saku harian
-					case 'da': // Daily allowance
-					case 'pbp': // Penggantian biaya penginapan
-					case 'bcp': // biaya cuci pakaian
-					case 'btp': // biaya tunjangan perlengkapan
-					case 'us': // uang saku
-						$rabdinas->amount = $data->amount * $duration;
-						break;		
-				}	
-			} else {
-				switch ($data->code) {
-					case 'btdk': // Transport Dari & Ke
-						$rabdinas->amount = $data->amount * 2;
-						break;
-					case 'atd': // airport tax domestik
-						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount * 2:0;
-					case 'ati': // airport tax internasional
-						$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
-						break;
-					case 'btdt': // Transport di tempat tujuan
-					case 'uash': // Uang angkutan setempat harian
-					case 'btst': // Biaya transport sarana transportasi
-					case 'bph': // Biaya Penginapan Hotel
-					case 'bum': // Biaya uang makan
-					case 'bm': // Biaya Makan
-					case 'ush': // Uang saku harian
-					case 'da': // Daily allowance
-					case 'pbp': // Penggantian biaya penginapan
-					case 'bcp': // biaya cuci pakaian
-					case 'btp': // biaya tunjangan perlengkapan
-					case 'us': // uang saku
-						$rabdinas->amount = $data->amount * $duration;
-						break;		
+		$rab = MasterCost::model()->findAllByAttributes(array('class'=>$model->class));
+		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
+		foreach ($personnelslist as $person) {
+			foreach ($rab as $data) {
+				$rabdinas = new RABDinas;
+				$rabdinas->employee_id = $person->employee_id;
+				$rabdinas->name = $person->name;
+				$rabdinas->sppd_id = $model->id;
+				$rabdinas->cost_description = $data->description;
+				$rabdinas->days = $model->getNumberOfDays();
+				if ($model->transport_type == 'Kendaraan Dinas') {
+					switch ($data->code) {
+						case 'btdk': // Transport Dari & Ke
+						case 'btdt': // Transport di tempat tujuan
+						case 'uash': // Uang angkutan setempat harian
+							$rabdinas->amount = 0;
+							break;
+						case 'atd': // airport tax domestik
+						case 'ati': // airport tax internasional
+							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
+							break;
+						case 'btst': // Biaya transport sarana transportasi
+						case 'bph': // Biaya Penginapan Hotel
+						case 'bum': // Biaya uang makan
+						case 'bm': // Biaya Makan
+						case 'ush': // Uang saku harian
+						case 'da': // Daily allowance
+						case 'pbp': // Penggantian biaya penginapan
+						case 'bcp': // biaya cuci pakaian
+						case 'btp': // biaya tunjangan perlengkapan
+						case 'us': // uang saku
+							$rabdinas->amount = $data->amount * $duration;
+							break;		
+					}	
+				} else {
+					switch ($data->code) {
+						case 'btdk': // Transport Dari & Ke
+							$rabdinas->amount = $data->amount * 2;
+							break;
+						case 'atd': // airport tax domestik
+							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount * 2:0;
+							break;
+						case 'ati': // airport tax internasional
+							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
+							break;
+						case 'btdt': // Transport di tempat tujuan
+						case 'uash': // Uang angkutan setempat harian
+						case 'btst': // Biaya transport sarana transportasi
+						case 'bph': // Biaya Penginapan Hotel
+						case 'bum': // Biaya uang makan
+						case 'bm': // Biaya Makan
+						case 'ush': // Uang saku harian
+						case 'da': // Daily allowance
+						case 'pbp': // Penggantian biaya penginapan
+						case 'bcp': // biaya cuci pakaian
+						case 'btp': // biaya tunjangan perlengkapan
+						case 'us': // uang saku
+							$rabdinas->amount = $data->amount * $duration;
+							break;		
+					}
 				}
+				
+				$rabdinas->created_date = date('Y-m-d',time());
+				$rabdinas->created_by = 'Dummy';
+				$rabdinas->save();
 			}
-			
-			$rabdinas->created_date = date('Y-m-d',time());
-			$rabdinas->created_by = 'Dummy';
-			$rabdinas->save();
 		}
 	}
 }

@@ -13,13 +13,13 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<!-- <div class="row">
+	<div class="row">
 		<?php echo $form->labelEx($model,'employee_id'); ?>
-		<?php echo $form->textField($model,'employee_id'); ?>
+		<?php echo $form->dropDownList($model,'employee_id',CHtml::listData(Personnel::model()->findAllByAttributes(array('sppd_id' => $sppd_id)),'employee_id','name'), array('empty'=>'pilih employee')); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'name'); ?>
