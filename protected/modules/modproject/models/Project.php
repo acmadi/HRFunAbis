@@ -54,6 +54,7 @@ class Project extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('number, name, owner, description, version, version_date, plan_start_date, plan_end_date, amount, pic', 'required'),
+			array('number', 'unique'),
 			array('duration, amount', 'numerical', 'integerOnly'=>true),
 			array('number, owner, pic, created_by', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>300),
@@ -172,5 +173,21 @@ class Project extends CActiveRecord
 	public function getNumberOfDays()
 	{
 		return (strtotime($this->plan_end_date)-strtotime($this->plan_start_date))/86400 + 1;
+	}
+	
+	public function validateDate($date, $number)
+	{
+		$model = self::model()->findByAttributes(array('number'=>$number));
+		$date_from = $model->plan_start_date;
+		$date_to = $model->plan_end_date;
+		
+		$new_date1 = strtotime($date_from);
+		$new_date2 = strtotime($date_to);
+		$new_date3 = strtotime($date);
+	 
+		if(($new_date3 >= $new_date1) && ($new_date3 <= $new_date2))
+			return true; 
+		else 
+			return false;
 	}
 }

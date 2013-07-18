@@ -85,6 +85,8 @@ class Progress extends CActiveRecord
 		return array(
 			array('project_number, period_date, period_date_to, period_week, description, progress_actual, progress_plan, pic, progress_this_week, completed_work, work_remaining, reason_of_delay', 'required'),
 			array('period_week', 'numerical', 'integerOnly'=>true),
+			array('period_date', 'validateStartDate'),
+			array('period_date_to', 'validateEndDate'),
 			array('project_number, pic, created_by', 'length', 'max'=>50),
 			array('progress_actual, progress_plan', 'length', 'max'=>11),
 			//array('progress_this_week, completed_work, work_remaining, reason_of_delay', 'length', 'max'=>500),
@@ -195,5 +197,29 @@ class Progress extends CActiveRecord
 			$latest = new Progress;
 		}
 		return $latest;
+	}
+	
+	/**
+	 * @param string the name of the attribute to be validated
+	 * @param array options specified in the validation rule
+	 */
+	public function validateStartDate($attribute,$params)
+	{
+		if(!(Project::model()->validateDate($this->period_date, $this->project_number)))
+		{
+			 $this->addError($attribute, 'Start date is invalid');
+		}
+	}
+	
+	/**
+	 * @param string the name of the attribute to be validated
+	 * @param array options specified in the validation rule
+	 */
+	public function validateEndDate($attribute,$params)
+	{
+		if(!(Project::model()->validateDate($this->period_date_to, $this->project_number)))
+		{
+			 $this->addError($attribute, 'End date is invalid');
+		}
 	}
 }

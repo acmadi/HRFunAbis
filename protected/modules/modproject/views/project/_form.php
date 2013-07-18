@@ -142,7 +142,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'pic'); ?>
-		<?php echo $form->dropDownList($model,'pic',CHtml::listData(User::model()->findAll(),'employee_id','username'), array('empty'=>'pilih user')); ?>
+		<?php echo $form->dropDownList($model,'pic',CHtml::listData(User::model()->findAll(array('order'=>'username')),'employee_id','username'), array('empty'=>'pilih user')); ?>
 		<?php echo $form->error($model,'pic'); ?>
 	</div>
 

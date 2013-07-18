@@ -93,7 +93,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'pic'); ?>
-			<?php echo $form->textField($model,'pic',array('size'=>50,'maxlength'=>50, 'value'=>Yii::app()->user->name)); ?>
+			<?php echo $form->textField($model,'pic',array('size'=>50,'maxlength'=>50, 'value'=>Yii::app()->user->name, 'disabled'=>true)); ?>
 			<?php echo $form->error($model,'pic'); ?>
 		</div>
 

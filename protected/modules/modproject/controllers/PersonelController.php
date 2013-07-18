@@ -41,12 +41,15 @@ class PersonelController extends RController
 	{
 		$model=new Personel;
 		$model->project_number = Yii::app()->session['project_number'];
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Personel']))
 		{
 			$model->attributes=$_POST['Personel'];
+			$model->name = Employee::model()->getName($model->employee_id);
+			
 			if($model->save())
 				$this->redirect(array('/modproject/project/view&id='.Yii::app()->session['project_id'].'&personel=true'));
 				// $this->redirect(array('view','id'=>$model->id));

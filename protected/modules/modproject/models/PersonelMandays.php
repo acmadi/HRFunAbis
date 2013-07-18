@@ -41,6 +41,7 @@ class PersonelMandays extends CActiveRecord
 		return array(
 			array('employee_id, project_number, month, mandays', 'required'),
 			array('year, mandays', 'numerical', 'integerOnly'=>true),
+			array('mandays', 'validateManDays'),
 			array('employee_id, project_number', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -145,5 +146,13 @@ class PersonelMandays extends CActiveRecord
 	{
 		$personMandays = self::model()->findAllByAttributes(array('employee_id'=>$employee_id));
 		return $personMandays;
+	}
+	
+	public function validateManDays($attribute,$params)
+	{
+		if($this->mandays > 30)
+		{
+			 $this->addError($attribute, 'Total Mandays in a mont cant more than 30');
+		}
 	}
 }
