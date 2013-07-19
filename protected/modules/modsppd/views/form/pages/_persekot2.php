@@ -100,6 +100,4 @@ KETERANGAN : <?php
 			?>
 
 </div>	
-<?php } else {
-	echo 'Tidak Mengajukan Persekot';
-}?>
+<?php } ?>

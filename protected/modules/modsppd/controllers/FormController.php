@@ -50,21 +50,44 @@ class FormController extends RController
 					'pagination'=>false,
 					));
 		if ($model->status == 'processed' || $model->status == 'closed') {
+			$rjamuan = new CArrayDataProvider(ReimburseJamuan::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+						'id' => 'id',
+						'pagination'=>false,
+						));
+			$rbbm = new CArrayDataProvider(ReimburseBBM::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+						'id' => 'id',
+						'pagination'=>false,
+						));
+			$rother = new CArrayDataProvider(OtherReimburse::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+						'id' => 'id',
+						'pagination'=>false,
+						));
+			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj')));
+			$persekot3 = new Persekot;
+			$realisasi = null;
 			$this->render('dashboard2',array(
 				'model'=>$model, 
 				'persekot'=>$persekot, 
 				'personnels' =>$personnels,
 				'rabdinas'=>$rabdinas, 
-				'rabnondinas'=>$rabnondinas, 
+				'rabnondinas'=>$rabnondinas,
+				'rjamuan'=>$rjamuan,
+				'rbbm' => $rbbm,
+				'rother' => $rother,
+				'persekot2' => $persekot2,
+				'persekot3' => $persekot3,
+				'realisasi' => $realisasi,
 			));	
+
+		} else {
+			$this->render('dashboard1',array(
+				'model'=>$model, 
+				'persekot'=>$persekot, 
+				'personnels' =>$personnels,
+				'rabdinas'=>$rabdinas, 
+				'rabnondinas'=>$rabnondinas, 
+			));
 		}
-		$this->render('dashboard1',array(
-			'model'=>$model, 
-			'persekot'=>$persekot, 
-			'personnels' =>$personnels,
-			'rabdinas'=>$rabdinas, 
-			'rabnondinas'=>$rabnondinas, 
-		));
 	}
 
 	public function actionPertanggungjawaban($id)
@@ -76,34 +99,7 @@ class FormController extends RController
 			$persekot = $this->createPersekot($id, 'lpj');
 			$persekotdetail = $this->createPersekotDetail($persekot->id, 'Persekot', 0, $persekot->amount);
 		}
-		
-		Yii::app()->session['sppd_id'] = $model->id;
-		Yii::app()->session['sppd_name'] = $model->purpose;
-		
-		$persekot = Persekot::model()->find(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		$personnels = new CArrayDataProvider($personnelslist,array(
-					'id' => 'id',
-					'pagination'=>false,
-					));
-		$rabdinaslist = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		$rabdinas = new CArrayDataProvider($rabdinaslist,array(
-					'id' => 'id',
-					'pagination'=>false,
-					));
-		$rabnondinaslist = RABNonDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		$rabnondinas = new CArrayDataProvider($rabnondinaslist,array(
-					'id' => 'id',
-					'pagination'=>false,
-					));
-		
-		$this->render('dashboard2',array(
-			'model'=>$model, 
-			'persekot'=>$persekot, 
-			'personnels' =>$personnels,
-			'rabdinas'=>$rabdinas, 
-			'rabnondinas'=>$rabnondinas, 
-		));
+		$this->redirect(array('view','id'=>$id));
 	}
 
 	/**
@@ -157,7 +153,7 @@ class FormController extends RController
 	public function actionCreateStep2($id)
 	{
 		$model = $this->loadModel($id);
-		if ($model->status != 'step3') {	
+		if ($model->status == 'step2') {	
 			$personnel = new Personnel;
 			$personnel->sppd_id = $model->id;
 			$personnel->employee_id = $model->employee_id;
@@ -184,7 +180,7 @@ class FormController extends RController
 		$model = $this->loadModel($id);
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
-			if ($model->status != 'step4') {
+			if ($model->status == 'step3') {
 				$this->generateRABDinas($model->id);
 			}
 			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));

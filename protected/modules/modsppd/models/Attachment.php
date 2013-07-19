@@ -1,24 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "sppd_other_reimburse".
+ * This is the model class for table "sppd_attachment".
  *
- * The followings are the available columns in table 'sppd_other_reimburse':
+ * The followings are the available columns in table 'sppd_attachment':
  * @property integer $id
  * @property integer $sppd_id
- * @property string $date
- * @property string $cc
- * @property string $elbi
- * @property integer $amount
+ * @property string $name
+ * @property string $type
+ * @property string $attachment
  * @property string $created_date
  * @property string $created_by
  */
-class OtherReimburse extends CActiveRecord
+class Attachment extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return OtherReimburse the static model class
+	 * @return Attachment the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +29,7 @@ class OtherReimburse extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'sppd_other_reimburse';
+		return 'sppd_attachment';
 	}
 
 	/**
@@ -41,13 +40,14 @@ class OtherReimburse extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sppd_id, date, elbi, amount, created_date, created_by', 'required'),
-			array('amount', 'numerical', 'integerOnly'=>true),
-			array('cc, created_by', 'length', 'max'=>50),
-			array('elbi', 'length', 'max'=>20),
+			array('sppd_id, name, type, attachment, created_date, created_by', 'required'),
+			array('sppd_id', 'numerical', 'integerOnly'=>true),
+			array('name, created_by', 'length', 'max'=>50),
+			array('type', 'length', 'max'=>20),
+			array('attachment', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, date, cc, elbi, amount, created_date, created_by', 'safe', 'on'=>'search'),
+			array('id, sppd_id, name, type, attachment', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,12 +69,10 @@ class OtherReimburse extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Tanggal',
-			'cc' => 'Cc',
-			'elbi' => 'Elbi',
-			'amount' => 'Jumlah',
-			'created_date' => 'Created Date',
-			'created_by' => 'Created By',
+			'sppd_id' => 'Sppd',
+			'name' => 'Name',
+			'type' => 'Type',
+			'attachment' => 'Attachment',
 		);
 	}
 
@@ -90,12 +88,10 @@ class OtherReimburse extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('date',$this->date,true);
-		$criteria->compare('cc',$this->cc,true);
-		$criteria->compare('elbi',$this->elbi,true);
-		$criteria->compare('amount',$this->amount);
-		$criteria->compare('created_date',$this->created_date,true);
-		$criteria->compare('created_by',$this->created_by,true);
+		$criteria->compare('sppd_id',$this->sppd_id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('type',$this->type,true);
+		$criteria->compare('attachment',$this->attachment,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

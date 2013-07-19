@@ -130,7 +130,12 @@ class Form extends CActiveRecord
 		$criteria->compare('support_letter',$this->support_letter,true);
 		$criteria->compare('created_by',$this->created_by,true);
 		$criteria->compare('created_date',$this->created_date,true);
-		$criteria->compare('status','created',true);
+		$criteria->condition = 'status =:stat1 OR status =:stat2 OR status =:stat3';
+		$criteria->params = array(
+						'stat1'=>'created',
+						'stat2'=>'processed',
+						'stat3'=>'closed'
+						);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

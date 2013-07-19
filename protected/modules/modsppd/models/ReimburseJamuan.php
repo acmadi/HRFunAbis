@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'sppd_reimburse_jamuan':
  * @property integer $id
+ * @property integer $sppd_id
  * @property string $date
  * @property string $transaction_description
  * @property integer $amount
@@ -41,7 +42,7 @@ class ReimburseJamuan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date, transaction_description, amount, cc, usage_type, created_date, created_by', 'required'),
+			array('sppd_id, date, transaction_description, amount, usage_type, created_date, created_by', 'required'),
 			array('amount', 'numerical', 'integerOnly'=>true),
 			array('cc, usage_type, created_by', 'length', 'max'=>50),
 			// The following rule is used by search().

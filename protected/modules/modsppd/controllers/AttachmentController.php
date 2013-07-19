@@ -1,6 +1,6 @@
 <?php
 
-class ReimburseJamuanController extends RController
+class AttachmentController extends RController
 {
 	public function init()
 	{
@@ -37,21 +37,25 @@ class ReimburseJamuanController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id)
+	public function actionCreate()
 	{
-		$model=new ReimburseJamuan;
+		$model=new Attachment;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ReimburseJamuan']))
+		if(isset($_POST['Attachment']))
 		{
-			$model->attributes=$_POST['ReimburseJamuan'];
-			$model->sppd_id = $id;
-			$model->created_by = 'Dummy';
-			$model->created_date = date('Y-m-d',time());
+			$model->attributes=$_POST['Attachment'];
+
+			$attachment=CUploadedFile::getInstance($model,'attachment');
+			if ($attachment) {
+				$attachment_name = $attachment->name;
+				$attachment->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $attachment_name);
+				$model->attachment = $attachment_name;
+			}
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -71,12 +75,11 @@ class ReimburseJamuanController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['ReimburseJamuan']))
+		if(isset($_POST['Attachment']))
 		{
-			$model->attributes=$_POST['ReimburseJamuan'];
-			$model->created_date = date('Y-m-d',time());
+			$model->attributes=$_POST['Attachment'];
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -103,7 +106,7 @@ class ReimburseJamuanController extends RController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('ReimburseJamuan');
+		$dataProvider=new CActiveDataProvider('Attachment');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -114,10 +117,10 @@ class ReimburseJamuanController extends RController
 	 */
 	public function actionAdmin()
 	{
-		$model=new ReimburseJamuan('search');
+		$model=new Attachment('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['ReimburseJamuan']))
-			$model->attributes=$_GET['ReimburseJamuan'];
+		if(isset($_GET['Attachment']))
+			$model->attributes=$_GET['Attachment'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -131,7 +134,7 @@ class ReimburseJamuanController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=ReimburseJamuan::model()->findByPk($id);
+		$model=Attachment::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -143,7 +146,7 @@ class ReimburseJamuanController extends RController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='reimburse-jamuan-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='attachment-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

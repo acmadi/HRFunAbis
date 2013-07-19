@@ -75,12 +75,12 @@ $this->menu=array(
 		array('id' => 'tab5', 'label' => 'RAB NON DINAS', 'content' => $this->renderPartial('pages/_rab_non_dinas', array('data' => $rabnondinas, 'sppd_id'=>$model->id), true), 'active' => $tab5),
 		array('id' => 'tab6', 'label' => 'Statement Letter', 'content' => $this->renderPartial('pages/_statement_letter', array('data' => $model), true), 'active' => $tab6),
 		array('id' => 'tab7', 'label' => 'Support Letter', 'content' => $this->renderPartial('pages/_support_letter', array('data' => $model), true), 'active' => $tab7),
-		array('id' => 'tab8', 'label' => 'Reimburse Jamuan', 'content' => $this->renderPartial('pages/_reimburse_jamuan', array('data' => $model), true), 'active' => $tab8),
-		array('id' => 'tab9', 'label' => 'Reimburse BBM', 'content' => $this->renderPartial('pages/_reimburse_bbm', array('data' => $model), true), 'active' => $tab9),
-		array('id' => 'tab10', 'label' => 'Reimburse Lainnya', 'content' => $this->renderPartial('pages/_other_reimburse', array('data' => $model), true), 'active' => $tab10),
-		array('id' => 'tab11', 'label' => 'Persekot2', 'content' => $this->renderPartial('pages/_persekot', array('data' => $persekot), true), 'active' => $tab11),
-		array('id' => 'tab12', 'label' => 'Persekot3', 'content' => $this->renderPartial('pages/_persekot', array('data' => $persekot), true), 'active' => $tab12),
-		array('id' => 'tab13', 'label' => 'Rincian Realisasi', 'content' => $this->renderPartial('pages/_persekot', array('data' => $persekot), true), 'active' => $tab13),
+		array('id' => 'tab8', 'label' => 'Reimburse Jamuan', 'content' => $this->renderPartial('pages/_reimburse_jamuan', array('data' => $rjamuan, 'sppd_id'=>$model->id), true), 'active' => $tab8),
+		array('id' => 'tab9', 'label' => 'Reimburse BBM', 'content' => $this->renderPartial('pages/_reimburse_bbm', array('data' => $rbbm), true), 'active' => $tab9),
+		array('id' => 'tab10', 'label' => 'Reimburse Lainnya', 'content' => $this->renderPartial('pages/_other_reimburse', array('data' => $rother), true), 'active' => $tab10),
+		array('id' => 'tab11', 'label' => 'Persekot2', 'content' => $this->renderPartial('pages/_persekot2', array('data' => $persekot2), true), 'active' => $tab11),
+		array('id' => 'tab12', 'label' => 'Persekot3', 'content' => $this->renderPartial('pages/_persekot3', array('data' => $persekot3), true), 'active' => $tab12),
+		array('id' => 'tab13', 'label' => 'Rincian Realisasi', 'content' => $this->renderPartial('pages/_rincian_realisasi', array('data' => $realisasi), true), 'active' => $tab13),
 	);
 
 	$this->widget('bootstrap.widgets.TbWizard', array(

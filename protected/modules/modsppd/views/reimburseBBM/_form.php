@@ -15,7 +15,12 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'date'); ?>
-		<?php echo $form->textField($model,'date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'date'),
+					'value'=>$model->date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
 		<?php echo $form->error($model,'date'); ?>
 	</div>
 

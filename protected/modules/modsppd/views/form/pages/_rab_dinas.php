@@ -32,6 +32,17 @@
 			*/
 			array(
 				'class'=>'CButtonColumn',
+				'buttons' => array(
+					'view'=>array(
+	            		'url'=>'Yii::app()->createUrl("modsppd/rABDinas/view", array("id"=>$data->id))',
+	            		),
+	            	'update'=>array(
+	            		'url'=>'Yii::app()->createUrl("modsppd/rABDinas/update", array("id"=>$data->id))',
+	            		),
+	            	'delete'=>array(
+	            		'url'=>'Yii::app()->createUrl("modsppd/rABDinas/delete", array("id"=>$data->id))',
+	            		),
+					),
 			),
 		),
 	)); ?>
