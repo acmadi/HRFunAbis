@@ -37,9 +37,10 @@ class AttachmentController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id, $type = null)
 	{
 		$model=new Attachment;
+		$model->type = $type;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -47,15 +48,18 @@ class AttachmentController extends RController
 		if(isset($_POST['Attachment']))
 		{
 			$model->attributes=$_POST['Attachment'];
+			$model->sppd_id = $id;
 
 			$attachment=CUploadedFile::getInstance($model,'attachment');
 			if ($attachment) {
 				$attachment_name = $attachment->name;
 				$attachment->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $attachment_name);
 				$model->attachment = $attachment_name;
+				$model->created_by = 'Dummy';
+				$model->created_date = date('Y-m-d',time());
 			}
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -152,4 +156,29 @@ class AttachmentController extends RController
 			Yii::app()->end();
 		}
 	}
+
+	public function actionDownload($id)
+	{
+		$model = $this->loadModel($id);
+		$src = 'upload/sppd/'.$model->attachment; 
+		if(@file_exists($src)) {
+				$path_parts = @pathinfo($src);
+				//$mime = $this->__get_mime($path_parts['extension']);
+				header('Content-Description: File Transfer');
+				header('Content-Type: application/octet-stream');
+				//header('Content-Type: '.$mime);
+				header('Content-Disposition: attachment; filename='.basename($src));
+				header('Content-Transfer-Encoding: binary');
+				header('Expires: 0');
+				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+				header('Pragma: public');
+				header('Content-Length: ' . filesize($src));
+				ob_clean();
+				flush();
+				readfile($src);
+		} else {
+				header("HTTP/1.0 404 Not Found");
+				exit();
+		}
+    }
 }

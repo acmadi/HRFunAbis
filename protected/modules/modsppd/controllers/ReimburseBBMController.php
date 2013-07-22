@@ -37,9 +37,10 @@ class ReimburseBBMController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new ReimburseBBM;
+		$model->sppd_id = $id;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -47,6 +48,8 @@ class ReimburseBBMController extends RController
 		if(isset($_POST['ReimburseBBM']))
 		{
 			$model->attributes=$_POST['ReimburseBBM'];
+			$model->created_by = 'Dummy';
+			$model->created_date = date('Y-m-d',time());
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

@@ -6,7 +6,7 @@
 				array(
 					'class' => 'bootstrap.widgets.TbButtonGroup',
 					'buttons'=>array(
-						array('label'=>'Tambah Reimburse', 'url'=>array('/modsppd/otherReimburse/create','id'=>$data->id)),
+						array('label'=>'Tambah Reimburse', 'url'=>array('/modsppd/otherReimburse/create','id'=>$sppd_id)),
 					),
 				),
 		    ),
@@ -44,10 +44,10 @@
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
-		    'label'=>'Upload',
+		    'label'=>'Attach File',
 		    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 		    'size'=>'large', // null, 'large', 'small' or 'mini'
-		    'url'=>array('upload','id'=>$data->id),
+		    'url'=>array('attachment/create','id'=>$sppd_id),
 		)); ?>
 	</div>
 

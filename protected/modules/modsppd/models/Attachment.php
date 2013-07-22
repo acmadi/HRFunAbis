@@ -70,9 +70,9 @@ class Attachment extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'sppd_id' => 'Sppd',
-			'name' => 'Name',
-			'type' => 'Type',
-			'attachment' => 'Attachment',
+			'name' => 'Nama',
+			'type' => 'Tipe',
+			'attachment' => 'Lampiran',
 		);
 	}
 
@@ -97,4 +97,26 @@ class Attachment extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	const TYPE_1 = 'BBM';
+	const TYPE_2 = 'TOL';
+	const TYPE_3 = 'TELEPON';
+	const TYPE_4 = 'OBAT';
+	const TYPE_5 = 'MAKAN';
+	const TYPE_6 = 'JAMUAN';
+	const TYPE_7 = 'LAINNYA';
+
+	public function getType()
+	{
+		return array(
+			self::TYPE_1 => 'BBM',
+			self::TYPE_2 => 'TOL',
+			self::TYPE_3 => 'TELEPON',
+			self::TYPE_4 => 'OBAT',
+			self::TYPE_5 => 'MAKAN',
+			self::TYPE_6 => 'JAMUAN',
+			self::TYPE_7 => 'LAINNYA',
+			);
+	}
+
 }

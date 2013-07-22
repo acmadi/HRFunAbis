@@ -65,6 +65,10 @@ class FormController extends RController
 			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj')));
 			$persekot3 = new Persekot;
 			$realisasi = null;
+			$attachments = new CArrayDataProvider(Attachment::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+						'id' => 'id',
+						'pagination'=>false,
+						));
 			$this->render('dashboard2',array(
 				'model'=>$model, 
 				'persekot'=>$persekot, 
@@ -77,6 +81,7 @@ class FormController extends RController
 				'persekot2' => $persekot2,
 				'persekot3' => $persekot3,
 				'realisasi' => $realisasi,
+				'attachments' => $attachments,
 			));	
 
 		} else {

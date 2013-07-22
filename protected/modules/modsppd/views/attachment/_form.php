@@ -12,8 +12,6 @@
 	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<!-- <div class="row">
@@ -30,7 +28,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->dropDownList($model,'type',Attachment::model()->getType(), array('empty'=>'pilih tipe')); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
