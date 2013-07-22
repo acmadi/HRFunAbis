@@ -51,7 +51,7 @@ class ReimburseBBMController extends RController
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -75,7 +75,7 @@ class ReimburseBBMController extends RController
 		{
 			$model->attributes=$_POST['ReimburseBBM'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

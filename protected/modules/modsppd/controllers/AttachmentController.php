@@ -83,7 +83,7 @@ class AttachmentController extends RController
 		{
 			$model->attributes=$_POST['Attachment'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -98,7 +98,9 @@ class AttachmentController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+		unlink('upload/sppd/'.$model->attachment);
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
