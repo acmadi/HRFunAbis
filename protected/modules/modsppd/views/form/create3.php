@@ -98,7 +98,7 @@ Step 3 of 4
 	    'size'=>'large', // null, 'large', 'small' or 'mini'
 	    'htmlOptions' => array(
     					'style' => 'width:50px',
-    					'confirm' => 'Anda yakin tidak membuat persekot?',
+    					'confirm' => 'Anda yakin untuk membuat persekot?',
     					),
 	    'url'=>array('createStep4','id'=>$model->id),
 	)); ?>

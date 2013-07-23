@@ -18,14 +18,20 @@
 				'footer' => 'Total',
 				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
 				),
+			'base_amount',
 			'days',
 			array(
-				'name'=>'amount',
-				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->amount,\'\'))',
+				'class' => 'editable.EditableColumn',
+				'name' => 'amount',
 				'footer' => Yii::app()->numberFormatter->formatCurrency(RABDinas::model()->getTotal($sppd_id),''),
+				'headerHtmlOptions' => array('style' => 'width: 110px'),
 				'htmlOptions' => array('style' => 'text-align:right'),
-				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold')
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
 				),
+			),
 			/*
 			'created_date',
 			'created_by',

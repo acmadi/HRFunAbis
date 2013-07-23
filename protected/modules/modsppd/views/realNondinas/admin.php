@@ -48,6 +48,7 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'id',
 		'sppd_id',
+		'employee_id',
 		'name',
 		'amount',
 		'explanation',

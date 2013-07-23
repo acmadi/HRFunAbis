@@ -6,7 +6,7 @@
 /* @var $model Form */
 
 $this->breadcrumbs=array(
-	'Forms'=>array('index'),
+	'SPPD'=>array('admin'),
 	$model->name,
 );
 

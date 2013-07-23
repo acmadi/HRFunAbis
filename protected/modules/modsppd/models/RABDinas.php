@@ -9,6 +9,8 @@
  * @property string $name
  * @property integer $sppd_id
  * @property string $cost_description
+ * @property integer $base_amount
+ * @property integer $days
  * @property integer $amount
  * @property string $created_date
  * @property string $created_by
@@ -41,8 +43,8 @@ class RABDinas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('employee_id, name, sppd_id, cost_description, amount, created_date, created_by', 'required'),
-			array('sppd_id, amount', 'numerical', 'integerOnly'=>true),
+			array('employee_id, name, sppd_id, cost_description, base_amount, days, amount, created_date, created_by', 'required'),
+			array('sppd_id, base_amount, days, amount', 'numerical', 'integerOnly'=>true),
 			array('employee_id, name, created_by', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -72,6 +74,8 @@ class RABDinas extends CActiveRecord
 			'name' => 'Nama Pekerja',
 			'sppd_id' => 'SPPD',
 			'cost_description' => 'Keterangan Biaya',
+			'base_amount'=>'Biaya Dasar',
+			'days'=>'Jumlah Hari',
 			'amount' => 'Jumlah',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
@@ -94,6 +98,8 @@ class RABDinas extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('sppd_id',$this->sppd_id);
 		$criteria->compare('cost_description',$this->cost_description,true);
+		$criteria->compare('base_amount',$this->base_amount,true);
+		$criteria->compare('days',$this->days,true);
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('created_date',$this->created_date,true);
 		$criteria->compare('created_by',$this->created_by,true);

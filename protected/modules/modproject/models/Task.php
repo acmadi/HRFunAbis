@@ -142,7 +142,7 @@ class Task extends CActiveRecord
 	 */
 	public function validateStartDate($attribute,$params)
 	{
-		if(!(Project::model()->validateDate($this->period_date, $this->project_number)))
+		if(!(Project::model()->validateDate($this->plan_start_date, $this->project_number)))
 		{
 			 $this->addError($attribute, 'Start date is invalid');
 		}
@@ -154,7 +154,7 @@ class Task extends CActiveRecord
 	 */
 	public function validateEndDate($attribute,$params)
 	{
-		if(!(Project::model()->validateDate($this->period_date_to, $this->project_number)))
+		if(!(Project::model()->validateDate($this->plan_end_date, $this->project_number)))
 		{
 			 $this->addError($attribute, 'End date is invalid');
 		}

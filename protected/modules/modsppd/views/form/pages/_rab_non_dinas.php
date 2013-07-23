@@ -11,21 +11,51 @@
 	        ),
 			// 'id',
 			// 'employee_id',
-			'name',
 			array(
-				'name'=>'explanation',
+				'class' => 'editable.EditableColumn',
+				'name' => 'name',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'explanation',
 				'footer' => 'Total',
 				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
 				),
-			'days',
+			),
 			array(
-				'name'=>'amount',
-				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->amount,\'\'))',
+				'class' => 'editable.EditableColumn',
+				'name' => 'days',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'amount',
 				'footer' => Yii::app()->numberFormatter->formatCurrency(RABNonDinas::model()->getTotal($sppd_id),''),
 				'htmlOptions' => array('style' => 'text-align:right'),
-				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold')
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
+				),
 			),
-			'additional_description',
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'additional_description',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
 			// 'created_date',
 			// 'created_by',
 			array(

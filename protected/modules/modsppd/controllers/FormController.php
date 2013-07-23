@@ -64,7 +64,10 @@ class FormController extends RController
 						));
 			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj')));
 			$persekot3 = new Persekot;
-			$realisasi = null;
+			$realisasi = new CArrayDataProvider(RealNondinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+						'id' => 'id',
+						'pagination'=>false,
+						));
 			$attachments = new CArrayDataProvider(Attachment::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
 						'pagination'=>false,
@@ -102,7 +105,10 @@ class FormController extends RController
 			$model->status = 'processed' ;
 			$model->save();
 			$persekot = $this->createPersekot($id, 'lpj');
-			$persekotdetail = $this->createPersekotDetail($persekot->id, 'Persekot', 0, $persekot->amount);
+			$this->createPersekotDetail($persekot->id, 'Persekot', 0, $persekot->amount);
+			if ($model->sppd_type != 'Dinas') {
+				$this->generateRealNonDinas($id);
+			}
 		}
 		$this->redirect(array('view','id'=>$id));
 	}
@@ -386,10 +392,12 @@ class FormController extends RController
 						case 'btdk': // Transport Dari & Ke
 						case 'btdt': // Transport di tempat tujuan
 						case 'uash': // Uang angkutan setempat harian
+							$rabdinas->base_amount = 0;
 							$rabdinas->amount = 0;
 							break;
 						case 'atd': // airport tax domestik
 						case 'ati': // airport tax internasional
+							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount:0;;
 							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
 							break;
 						case 'btst': // Biaya transport sarana transportasi
@@ -402,18 +410,22 @@ class FormController extends RController
 						case 'bcp': // biaya cuci pakaian
 						case 'btp': // biaya tunjangan perlengkapan
 						case 'us': // uang saku
+							$rabdinas->base_amount = $data->amount;
 							$rabdinas->amount = $data->amount * $duration;
 							break;		
 					}	
 				} else {
 					switch ($data->code) {
 						case 'btdk': // Transport Dari & Ke
+							$rabdinas->base_amount = $data->amount;
 							$rabdinas->amount = $data->amount * 2;
 							break;
 						case 'atd': // airport tax domestik
+							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount:0;
 							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount * 2:0;
 							break;
 						case 'ati': // airport tax internasional
+							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount:0;
 							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
 							break;
 						case 'btdt': // Transport di tempat tujuan
@@ -428,6 +440,7 @@ class FormController extends RController
 						case 'bcp': // biaya cuci pakaian
 						case 'btp': // biaya tunjangan perlengkapan
 						case 'us': // uang saku
+							$rabdinas->base_amount = $data->amount;
 							$rabdinas->amount = $data->amount * $duration;
 							break;		
 					}
@@ -475,5 +488,21 @@ class FormController extends RController
 		$persekotdetail->created_by = 'Dummy';
 		$persekotdetail->save();
 		return $persekotdetail;
+	}
+
+	public function generateRealNonDinas($sppd_id)
+	{
+		$rabnondinas = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$sppd_id));
+		foreach ($rabnondinas as $rab) {
+			$realnondinas = new RealNondinas;
+			$realnondinas->sppd_id = $sppd_id;
+			$realnondinas->employee_id = $rab->employee_id;
+			$realnondinas->name = $rab->name;
+			$realnondinas->amount = $rab->amount;
+			$realnondinas->explanation = $rab->explanation;
+			$realnondinas->created_by = 'Dummy';
+			$realnondinas->created_date = date('Y-m-d',time());
+			$realnondinas->save();
+		}
 	}
 }

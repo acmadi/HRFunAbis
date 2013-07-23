@@ -37,6 +37,12 @@
 		<?php echo $form->error($model,'cost_description'); ?>
 	</div>
 
+	<!-- <div class="row">
+		<?php echo $form->labelEx($model,'base_amount'); ?>
+		<?php echo $form->textField($model,'base_amount'); ?>
+		<?php echo $form->error($model,'base_amount'); ?>
+	</div> -->
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'amount'); ?>
 		<?php echo $form->textField($model,'amount'); ?>

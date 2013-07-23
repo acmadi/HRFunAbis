@@ -6,10 +6,11 @@
  * The followings are the available columns in table 'sppd_real_nondinas':
  * @property integer $id
  * @property integer $sppd_id
+ * @property string $employee_id
  * @property string $name
  * @property integer $amount
  * @property string $explanation
- * @property integer $created_by
+ * @property string $created_by
  * @property string $created_date
  */
 class RealNondinas extends CActiveRecord
@@ -40,8 +41,8 @@ class RealNondinas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sppd_id, name, amount, explanation, created_by, created_date', 'required'),
-			array('sppd_id, amount, created_by', 'numerical', 'integerOnly'=>true),
+			array('sppd_id, employee_id, name, amount, explanation, created_by, created_date', 'required'),
+			array('sppd_id, amount', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 			array('explanation', 'length', 'max'=>200),
 			// The following rule is used by search().
@@ -69,6 +70,7 @@ class RealNondinas extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'sppd_id' => 'Sppd',
+			'employee_id' => 'ID Pegawai',
 			'name' => 'Uraian',
 			'amount' => 'Biaya',
 			'explanation' => 'Keterangan',
@@ -90,6 +92,7 @@ class RealNondinas extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('sppd_id',$this->sppd_id);
+		$criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('explanation',$this->explanation,true);
