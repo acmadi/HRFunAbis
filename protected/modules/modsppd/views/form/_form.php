@@ -12,8 +12,6 @@
 	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<?php echo $form->errorSummary($model); ?>
-
 	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'employee_id'); ?>
 		<?php echo $form->textField($model,'employee_id',array('size'=>50,'maxlength'=>50)); ?>
