@@ -70,13 +70,13 @@
 				'class'=>'CButtonColumn',
 				'buttons' => array(
 					'view'=>array(
-	            		'url'=>'Yii::app()->createUrl("modsppd/persekot/view", array("id"=>$data->id))',
+	            		'url'=>'Yii::app()->createUrl("modsppd/persekotDetail/view", array("id"=>$data->id))',
 	            		),
 	            	'update'=>array(
-	            		'url'=>'Yii::app()->createUrl("modsppd/persekot/update", array("id"=>$data->id))',
+	            		'url'=>'Yii::app()->createUrl("modsppd/persekotDetail/update", array("id"=>$data->id))',
 	            		),
 	            	'delete'=>array(
-	            		'url'=>'Yii::app()->createUrl("modsppd/persekot/delete", array("id"=>$data->id))',
+	            		'url'=>'Yii::app()->createUrl("modsppd/persekotDetail/delete", array("id"=>$data->id))',
 	            		),
 					),
 			),

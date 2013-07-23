@@ -13,11 +13,11 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'sppd_id'); ?>
 		<?php echo $form->textField($model,'sppd_id'); ?>
 		<?php echo $form->error($model,'sppd_id'); ?>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'paid_to'); ?>

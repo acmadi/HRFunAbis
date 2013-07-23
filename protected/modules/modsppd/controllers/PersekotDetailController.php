@@ -37,7 +37,7 @@ class PersekotDetailController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new PersekotDetail;
 
@@ -48,7 +48,7 @@ class PersekotDetailController extends RController
 		{
 			$model->attributes=$_POST['PersekotDetail'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$id));
 		}
 
 		$this->render('create',array(
@@ -72,7 +72,7 @@ class PersekotDetailController extends RController
 		{
 			$model->attributes=$_POST['PersekotDetail'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id));
 		}
 
 		$this->render('update',array(
