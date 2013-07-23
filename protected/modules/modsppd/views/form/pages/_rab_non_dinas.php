@@ -15,7 +15,7 @@
 				'class' => 'editable.EditableColumn',
 				'name' => 'name',
 				'editable' => array( //editable section
-					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'url' => $this->createUrl('rABNonDinas/ajaxupdate'),
 					'placement' => 'left',
 				),
 			),
@@ -25,7 +25,7 @@
 				'footer' => 'Total',
 				'footerHtmlOptions' => array('style'=>'font-weight:bold'),
 				'editable' => array( //editable section
-					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'url' => $this->createUrl('rABNonDinas/ajaxupdate'),
 					'placement' => 'left',
 				),
 			),
@@ -33,7 +33,7 @@
 				'class' => 'editable.EditableColumn',
 				'name' => 'days',
 				'editable' => array( //editable section
-					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'url' => $this->createUrl('rABNonDinas/ajaxupdate'),
 					'placement' => 'left',
 				),
 			),
@@ -44,7 +44,7 @@
 				'htmlOptions' => array('style' => 'text-align:right'),
 				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
 				'editable' => array( //editable section
-					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'url' => $this->createUrl('rABNonDinas/ajaxupdate'),
 					'placement' => 'left',
 				),
 			),
@@ -52,7 +52,7 @@
 				'class' => 'editable.EditableColumn',
 				'name' => 'additional_description',
 				'editable' => array( //editable section
-					'url' => $this->createUrl('rABDinas/ajaxupdate'),
+					'url' => $this->createUrl('rABNonDinas/ajaxupdate'),
 					'placement' => 'left',
 				),
 			),

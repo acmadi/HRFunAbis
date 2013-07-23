@@ -19,10 +19,38 @@
 		// 'filter'=>$data,
 		'columns'=>array(
 			'id',
-			'date',
-			'cc',
-			'elbi',
-			'amount',
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'date',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('otherReimburse/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'cc',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('otherReimburse/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'elbi',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('otherReimburse/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'amount',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('otherReimburse/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
 			// 'created_date',
 			// 'created_by',
 			array(

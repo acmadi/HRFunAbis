@@ -80,6 +80,12 @@ class RealNondinasController extends RController
 		));
 	}
 
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('RealNondinas');
+		$es->update();
+	}
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

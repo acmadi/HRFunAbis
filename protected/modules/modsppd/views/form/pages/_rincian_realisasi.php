@@ -23,8 +23,22 @@
 		// 'sppd_id',
 		'employee_id',
 		'name',
-		'amount',
-		'explanation',
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'amount',
+			'editable' => array( //editable section
+				'url' => $this->createUrl('realNondinas/ajaxupdate'),
+				'placement' => 'left',
+			),
+		),
+		array(
+			'class' => 'editable.EditableColumn',
+			'name' => 'explanation',
+			'editable' => array( //editable section
+				'url' => $this->createUrl('realNondinas/ajaxupdate'),
+				'placement' => 'left',
+			),
+		),
 		// 'created_by',
 		// 'created_date',
 		array(

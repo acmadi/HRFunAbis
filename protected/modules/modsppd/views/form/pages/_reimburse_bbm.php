@@ -19,11 +19,46 @@
 		// 'filter'=>$data,
 		'columns'=>array(
 			'id',
-			'date',
-			'transaction_description',
-			'amount',
-			'cc',
-			'usage_type',
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'date',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('reimburseBBM/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'transaction_description',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('reimburseBBM/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'amount',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('reimburseBBM/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'cc',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('reimburseBBM/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'usage_type',
+				'editable' => array( //editable section
+					'url' => $this->createUrl('reimburseBBM/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
 			/*
 			'created_date',
 			'created_by',
