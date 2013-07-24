@@ -183,16 +183,34 @@
 	        ),
 			// 'id',
 			'account_code',
-			'description',
 			array(
-				'name'=>'debit',
-				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->debit,\'\'))',
-				'htmlOptions' => array('style' => 'text-align:right')
+				'name' => 'description',
+				'footer' => 'Total',
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
 			),
 			array(
-				'name'=>'credit',
-				'value'=>'CHtml::encode(Yii::app()->numberFormatter->formatCurrency($data->credit,\'\'))',
-				'htmlOptions' => array('style' => 'text-align:right')
+				'class' => 'editable.EditableColumn',
+				'name' => 'debit',
+				'footer' => Yii::app()->numberFormatter->formatCurrency(PersekotDetail::model()->getTotalDebit($data->id),''),
+				'headerHtmlOptions' => array('style' => 'width: 110px'),
+				'htmlOptions' => array('style' => 'text-align:right'),
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
+				'editable' => array( //editable section
+					'url' => $this->createUrl('persekotDetail/ajaxupdate'),
+					'placement' => 'left',
+				),
+			),
+			array(
+				'class' => 'editable.EditableColumn',
+				'name' => 'credit',
+				'footer' => Yii::app()->numberFormatter->formatCurrency(PersekotDetail::model()->getTotalCredit($data->id),''),
+				'headerHtmlOptions' => array('style' => 'width: 110px'),
+				'htmlOptions' => array('style' => 'text-align:right'),
+				'footerHtmlOptions' => array('style' => 'text-align:right; font-weight:bold'),
+				'editable' => array( //editable section
+					'url' => $this->createUrl('persekotDetail/ajaxupdate'),
+					'placement' => 'left',
+				),
 			),
 			// 'created_date',
 			// 'created_by',

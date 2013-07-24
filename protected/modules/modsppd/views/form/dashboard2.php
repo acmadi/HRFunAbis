@@ -55,19 +55,19 @@ $this->menu=array(
 <div class="row-fluid">
   <div class="span12">
 	<?php 
-	$tab1 = true;
-	$tab2 = false;
-	$tab4 = false;//if($rab_dinas) {$tab4 = true; $tab0 = false;}
-	$tab5 = false;//if($rab_non_dinas) {$tab5 = true; $tab0 = false;}
-	$tab6 = false;
-	$tab7 = false;
-	$tab8 = false;
-	$tab9 = false;
-	$tab10 = false;
-	$tab11 = false;
-	$tab12 = false;
-	$tab13 = false;
-	$tab14 = false;
+	$tab1 = (!isset($_GET['t']))?true:false;
+	$tab2 = (isset($_GET['t']) && $_GET['t'] == 2)?true:false;
+	$tab4 = (isset($_GET['t']) && $_GET['t'] == 3)?true:false;;//if($rab_dinas) {$tab4 = true; $tab0 = false;}
+	$tab5 = (isset($_GET['t']) && $_GET['t'] == 4)?true:false;;//if($rab_non_dinas) {$tab5 = true; $tab0 = false;}
+	$tab6 = (isset($_GET['t']) && $_GET['t'] == 5)?true:false;;
+	$tab7 = (isset($_GET['t']) && $_GET['t'] == 6)?true:false;;
+	$tab8 = (isset($_GET['t']) && $_GET['t'] == 7)?true:false;;
+	$tab9 = (isset($_GET['t']) && $_GET['t'] == 8)?true:false;;
+	$tab10 = (isset($_GET['t']) && $_GET['t'] == 9)?true:false;;
+	$tab11 = (isset($_GET['t']) && $_GET['t'] == 10)?true:false;;
+	$tab12 = (isset($_GET['t']) && $_GET['t'] == 11)?true:false;;
+	$tab13 = (isset($_GET['t']) && $_GET['t'] == 12)?true:false;;
+	$tab14 = (isset($_GET['t']) && $_GET['t'] == 13)?true:false;;
 	
 	$tabs = array(
 		array('id' => 'tab1', 'label' => 'Persekot', 'content' => $this->renderPartial('pages/_persekot', array('data' => $persekot), true), 'active' => $tab1),

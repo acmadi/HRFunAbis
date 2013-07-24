@@ -78,7 +78,7 @@ class RABNonDinasController extends RController
 		{
 			$model->attributes=$_POST['RABNonDinas'];
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->sppd_id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 4));
 		}
 
 		$this->render('update',array(

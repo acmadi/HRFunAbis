@@ -62,8 +62,8 @@ class FormController extends RController
 						'id' => 'id',
 						'pagination'=>false,
 						));
-			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj')));
-			$persekot3 = new Persekot;
+			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj1')));
+			$persekot3 = Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj2')));;
 			$realisasi = new CArrayDataProvider(RealNondinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
 						'pagination'=>false,
@@ -104,10 +104,20 @@ class FormController extends RController
 		if ($model->status == 'created') {
 			$model->status = 'processed' ;
 			$model->save();
-			$persekot = $this->createPersekot($id, 'lpj');
-			$this->createPersekotDetail($persekot->id, 'Persekot', 0, $persekot->amount);
+			$persekot2 = $this->createPersekot($id, 'lpj1');
+			$this->createPersekotDetail($persekot2->id, 'Persekot', 0, $persekot2->amount);
+			$persekot3 = $this->createPersekot($id,'lpj2');
 			if ($model->sppd_type != 'Dinas') {
 				$this->generateRealNonDinas($id);
+				$rab = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
+				foreach ($rab as $item) {
+					$this->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount);
+				}
+			} else {
+				$rab = RABDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
+				foreach ($rab as $item) {
+					$this->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount);
+				}
 			}
 		}
 		$this->redirect(array('view','id'=>$id));

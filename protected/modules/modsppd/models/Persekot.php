@@ -17,6 +17,8 @@
  * @property string $journal_number
  * @property string $voucher_number
  * @property string $voucher_date
+ * @property string $notes
+ * @property string $flag
  * @property string $created_by
  * @property string $created_date
  */
@@ -48,7 +50,7 @@ class Persekot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sppd_id, paid_to, received_from, amount, amount_in_words, check_giro_date, check_giro_number, currency_code, bank_code, journal_number, voucher_number, voucher_date, created_by, created_date', 'required'),
+			array('sppd_id, paid_to, received_from, amount, amount_in_words, check_giro_date, check_giro_number, currency_code, bank_code, journal_number, voucher_number, voucher_date, flag, created_by, created_date', 'required'),
 			array('sppd_id, amount', 'numerical', 'integerOnly'=>true),
 			array('paid_to, received_from, created_by', 'length', 'max'=>50),
 			array('check_giro_number, journal_number, voucher_number', 'length', 'max'=>20),
@@ -118,11 +120,22 @@ class Persekot extends CActiveRecord
 		$criteria->compare('journal_number',$this->journal_number,true);
 		$criteria->compare('voucher_number',$this->voucher_number,true);
 		$criteria->compare('voucher_date',$this->voucher_date,true);
+		$criteria->compare('notes',$this->notes,true);
+		$criteria->compare('flag',$this->flag,true);
 		$criteria->compare('created_by',$this->created_by,true);
 		$criteria->compare('created_date',$this->created_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function updateAmount()
+	{
+		$debit = PersekotDetail::model()->getTotalDebit($this->id);
+		$credit = PersekotDetail::model()->getTotalCredit($this->id);
+		$this->amount = abs($debit-$credit);
+		$this->save();
+
 	}
 }

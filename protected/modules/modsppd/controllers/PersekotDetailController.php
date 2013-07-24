@@ -145,4 +145,13 @@ class PersekotDetailController extends RController
 			Yii::app()->end();
 		}
 	}
+
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('PersekotDetail');
+		$es->update();
+		$persekot_id = $es->model->parent_id;
+		$persekot = Persekot::model()->findByPk($persekot_id);
+		$persekot->updateAmount();
+	}
 }

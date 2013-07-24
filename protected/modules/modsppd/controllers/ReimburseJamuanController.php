@@ -51,7 +51,7 @@ class ReimburseJamuanController extends RController
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$id));
+				$this->redirect(array('form/view','id'=>$id,'t' => 7));
 		}
 
 		$this->render('create',array(
@@ -76,7 +76,7 @@ class ReimburseJamuanController extends RController
 			$model->attributes=$_POST['ReimburseJamuan'];
 			$model->created_date = date('Y-m-d',time());
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->sppd_id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 7));
 		}
 
 		$this->render('update',array(

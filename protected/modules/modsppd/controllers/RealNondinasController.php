@@ -72,7 +72,7 @@ class RealNondinasController extends RController
 		{
 			$model->attributes=$_POST['RealNondinas'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 12));
 		}
 
 		$this->render('update',array(

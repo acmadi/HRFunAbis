@@ -102,4 +102,24 @@ class PersekotDetail extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function getTotalDebit($persekot_id)
+	{
+		$total = 0;
+		$detail = $this->findAllByAttributes(array('parent_id' => $persekot_id));
+		foreach ($detail as $data) {
+			$total += $data->debit;
+		}
+		return $total;
+	}
+
+	public function getTotalCredit($persekot_id)
+	{
+		$total = 0;
+		$detail = $this->findAllByAttributes(array('parent_id' => $persekot_id));
+		foreach ($detail as $data) {
+			$total += $data->credit;
+		}
+		return $total;
+	}
 }

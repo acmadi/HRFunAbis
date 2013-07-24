@@ -51,7 +51,7 @@ class OtherReimburseController extends RController
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$id));
+				$this->redirect(array('form/view','id'=>$id,'t' => 9));
 		}
 
 		$this->render('create',array(
@@ -75,7 +75,7 @@ class OtherReimburseController extends RController
 		{
 			$model->attributes=$_POST['OtherReimburse'];
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->sppd_id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 9));
 		}
 
 		$this->render('update',array(

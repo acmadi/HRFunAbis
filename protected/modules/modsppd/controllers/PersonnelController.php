@@ -74,7 +74,7 @@ class PersonnelController extends RController
 		{
 			$model->attributes=$_POST['Personnel'];
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->sppd_id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 2));
 		}
 
 		$this->render('update',array(

@@ -70,6 +70,8 @@ class RABNonDinas extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'employee_id' => 'ID Pegawai',
+			'name' => 'Nama',
 			'explanation' => 'Uraian Rencana Kegiatan',
 			'amount' => 'Rencana Biaya',
 			'additional_description' => 'Keterangan',

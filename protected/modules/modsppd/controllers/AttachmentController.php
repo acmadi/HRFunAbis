@@ -59,7 +59,7 @@ class AttachmentController extends RController
 				$model->created_date = date('Y-m-d',time());
 			}
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$id,'t' => 13));
 		}
 
 		$this->render('create',array(
@@ -83,7 +83,7 @@ class AttachmentController extends RController
 		{
 			$model->attributes=$_POST['Attachment'];
 			if($model->save())
-				$this->redirect(array('form/view','id'=>$model->id));
+				$this->redirect(array('form/view','id'=>$model->sppd_id,'t' => 13));
 		}
 
 		$this->render('update',array(
