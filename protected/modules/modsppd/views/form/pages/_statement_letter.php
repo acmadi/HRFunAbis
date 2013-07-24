@@ -1,6 +1,6 @@
 <div class="span12">
 	<?php if ($data->statement_letter != '') { ?>
-		<embed src="<?php echo ($data->statement_letter != '')?'upload/sppd/'.$data->statement_letter:'';?>" width="970" height="275">	
+		<embed src="<?php echo ($data->statement_letter != '')?'upload/sppd/'.$data->statement_letter:'';?>" width="970" height="500">	
 	<?php } else {
 		echo 'File belum diupload';
 	} ?>

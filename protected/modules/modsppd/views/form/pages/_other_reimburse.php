@@ -70,14 +70,14 @@
 		),
 	)); ?>
 
-	<div class="form-actions">
-		<?php $this->widget('bootstrap.widgets.TbButton', array(
-		    'label'=>'Attach File',
-		    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-		    'size'=>'large', // null, 'large', 'small' or 'mini'
-		    'url'=>array('attachment/create','id'=>$sppd_id),
-		)); ?>
-	</div>
 
 	<?php $this->endWidget() ?>
+</div>
+<div class="form-actions">
+	<?php $this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>'Attach File',
+	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'large', // null, 'large', 'small' or 'mini'
+	    'url'=>array('attachment/create','id'=>$sppd_id),
+	)); ?>
 </div>
