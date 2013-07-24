@@ -7,7 +7,7 @@
 
 $this->breadcrumbs=array(
 	'SPPD'=>array('admin'),
-	$model->name,
+	$model->purpose,
 );
 
 $this->menu=array(

@@ -3,8 +3,11 @@
 /* @var $model OtherReimburse */
 
 $this->breadcrumbs=array(
-	'Other Reimburses'=>array('index'),
-	$model->id,
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Detail Reimburse Lainnya',
+	$model->date,
+	$model->elbi
 );
 
 $this->menu=array(

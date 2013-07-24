@@ -3,9 +3,10 @@
 /* @var $model Attachment */
 
 $this->breadcrumbs=array(
-	'Attachments'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Update Lampiran',
+	$model->name
 );
 
 $this->menu=array(

@@ -3,8 +3,9 @@
 /* @var $model ReimburseJamuan */
 
 $this->breadcrumbs=array(
-	'Reimburse Jamuans'=>array('index'),
-	'Create',
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Tambah Reimburse Jamuan',
 );
 
 $this->menu=array(

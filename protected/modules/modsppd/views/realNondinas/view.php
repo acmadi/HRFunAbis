@@ -3,8 +3,11 @@
 /* @var $model RealNondinas */
 
 $this->breadcrumbs=array(
-	'Real Nondinases'=>array('index'),
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Detail Realisasi RAB Non-Dinas',
 	$model->name,
+	$model->explanation
 );
 
 $this->menu=array(

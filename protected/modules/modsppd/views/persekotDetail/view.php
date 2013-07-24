@@ -3,8 +3,10 @@
 /* @var $model PersekotDetail */
 
 $this->breadcrumbs=array(
-	'Persekot Details'=>array('index'),
-	$model->id,
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Detail Persekot',
+	$model->description,
 );
 
 $this->menu=array(

@@ -3,8 +3,11 @@
 /* @var $model RABNonDinas */
 
 $this->breadcrumbs=array(
-	'Rabnon Dinases'=>array('index'),
-	$model->id,
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Detail RAB Non-Dinas',
+	$model->name,
+	$model->explanation,
 );
 
 $this->menu=array(

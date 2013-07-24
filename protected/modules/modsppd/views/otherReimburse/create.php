@@ -3,8 +3,9 @@
 /* @var $model OtherReimburse */
 
 $this->breadcrumbs=array(
-	'Other Reimburses'=>array('index'),
-	'Create',
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Tambah Reimburse Lainnya'
 );
 
 $this->menu=array(

@@ -74,7 +74,7 @@ class ReimburseBBM extends CActiveRecord
 			'transaction_description' => 'Keterangan',
 			'amount' => 'Jumlah',
 			'cc' => 'Cc',
-			'usage_type' => 'No. Rekening Tujuan',
+			'usage_type' => 'Tipe Penggunaan',
 			'created_date' => 'Created Date',
 			'created_by' => 'Created By',
 		);

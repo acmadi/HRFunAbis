@@ -3,8 +3,10 @@
 /* @var $model ReimburseBBM */
 
 $this->breadcrumbs=array(
-	'Reimburse Bbms'=>array('index'),
-	$model->id,
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Detail Reimburse BBM',
+	$model->transaction_description,
 );
 
 $this->menu=array(

@@ -6,8 +6,8 @@
 /* @var $model Form */
 
 $this->breadcrumbs=array(
-	'Forms'=>array('index'),
-	$model->name,
+	'SPPD'=>array('admin'),
+	$model->purpose,
 );
 
 $this->menu=array(

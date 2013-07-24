@@ -3,8 +3,9 @@
 /* @var $model Attachment */
 
 $this->breadcrumbs=array(
-	'Attachments'=>array('index'),
-	'Create',
+	'SPPD'=>array('form/admin'),
+	Yii::app()->session['sppd_name']=>array('form/view','id'=>Yii::app()->session['sppd_id']),
+	'Tambah Lampiran',
 );
 
 $this->menu=array(
