@@ -48,15 +48,16 @@ $this->menu=array(
 				'support_letter',
 			),
 		)); ?>
-
-	<div class="form-actions">
-		<?php $this->widget('bootstrap.widgets.TbButton', array(
-		    'label'=>'Pertanggungjawaban',
-		    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-		    'size'=>'large', // null, 'large', 'small' or 'mini'
-		    'url'=>array('pertanggungjawaban','id'=>$model->id),
-		)); ?>
-	</div>
+		<?php if ($model->statement_letter != '' || $model->support_letter != '') { ?>
+		<div class="form-actions">
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Pertanggungjawaban',
+			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url'=>array('pertanggungjawaban','id'=>$model->id),
+			)); ?>
+		</div>
+		<?php } ?>
 	</div>
   </div>
 </div>

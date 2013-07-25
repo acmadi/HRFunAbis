@@ -3,8 +3,9 @@
 /* @var $model Form */
 
 $this->breadcrumbs=array(
-	'Forms'=>array('index'),
-	'Create',
+	'SPPD'=>array('admin'),
+	'Tambah SPPD',
+	'Rancangan Anggaran Biaya'
 );
 
 $this->menu=array(

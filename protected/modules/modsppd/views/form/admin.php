@@ -3,8 +3,7 @@
 /* @var $model Form */
 
 $this->breadcrumbs=array(
-	'Forms'=>array('index'),
-	'Manage',
+	'SPPD'
 );
 
 $this->menu=array(
