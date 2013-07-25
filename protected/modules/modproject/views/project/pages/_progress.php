@@ -1,7 +1,10 @@
 <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 'title' => 'Info Progress',
 'headerIcon' => 'icon-th-list',
-'htmlOptions' => array('class'=>'bootstrap-widget-table')
+'htmlOptions' => array(
+	'class'=>'bootstrap-widget-table',
+	'style'=>'overflow-x:scroll'
+	)
 ));?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(

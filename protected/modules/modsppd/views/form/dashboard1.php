@@ -91,5 +91,40 @@ $this->menu=array(
 	?>
   </div>
 </div>
+<div class="row-fluid">
+	<div class="span12">
+		<?php
+			$this->beginWidget('bootstrap.widgets.TbBox', array(
+			    'title' => 'Status SPPD',
+			));		
+		?>
+
+	  	<?php
+	  		$model = new StatusTracking('search');
+		  	$this->widget('zii.widgets.grid.CGridView', array(
+				'id'=>'status-tracking-grid',
+				'dataProvider'=>$model->search(),
+				'filter'=>$model,
+				'columns'=>array(
+					array(
+						'header'=>'No',
+						'value'=>'$row+1',
+					),
+					// 'id',
+					// 'sppd_id',
+					'status',
+					'status_date',
+					'notes',
+					'notes_by',
+				),
+			));
+	  	?>
+
+	  	<?php $this->endWidget() ?>
+	</div>
+</div>
+
+
+
 
 
