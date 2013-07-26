@@ -48,7 +48,7 @@ $this->menu=array(
 				'support_letter',
 			),
 		)); ?>
-		<?php if ($model->statement_letter != '' || $model->support_letter != '') { ?>
+		<?php if (($model->statement_letter != '' || $model->support_letter != '') && $model->status == 'PAID') { ?>
 		<div class="form-actions">
 			<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Pertanggungjawaban',
