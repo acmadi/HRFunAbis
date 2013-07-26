@@ -1,15 +1,15 @@
 <?php
-/* @var $this StatusTrackingController */
-/* @var $model StatusTracking */
+/* @var $this HierarchyController */
+/* @var $model Hierarchy */
 
 $this->breadcrumbs=array(
-	'Status Trackings'=>array('index'),
+	'Hierarchies'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List StatusTracking', 'url'=>array('index')),
-	array('label'=>'Create StatusTracking', 'url'=>array('create')),
+	array('label'=>'List Hierarchy', 'url'=>array('index')),
+	array('label'=>'Create Hierarchy', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('status-tracking-grid', {
+	$.fn.yiiGridView.update('hierarchy-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -28,7 +28,7 @@ $('.search-form form').submit(function(){
 
 <?php
 	$this->beginWidget('bootstrap.widgets.TbBox', array(
-	    'title' => 'Daftar Status',
+	    'title' => 'Daftar Hierarki',
 	  //   'headerIcon' => 'icon-home',
 	  //   'headerButtons' => array(
 			// array(
@@ -42,16 +42,14 @@ $('.search-form form').submit(function(){
 ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'status-tracking-grid',
+	'id'=>'hierarchy-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'sppd_id',
-		'status',
-		'status_date',
-		'notes',
-		'notes_by',
+		'employee_id',
+		'manager_id',
+		'manager_name',
 		array(
 			'class'=>'CButtonColumn',
 		),

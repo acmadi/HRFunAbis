@@ -1,24 +1,47 @@
 <?php
 
-class StatusTrackingController extends RController
+class HierarchyController extends RController
 {
-	public function init()
-	{
-		//$this->_authorizer = $this->module->getAuthorizer();
-		$this->layout = $this->module->layout;
-		$this->defaultAction = 'admin';
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
 
-		// Register the scripts
-		$this->module->registerScripts();
-	}
-	
 	/**
 	 * @return array action filters
 	 */
 	public function filters()
 	{
 		return array(
-			'rights',	
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
 		);
 	}
 
@@ -37,24 +60,18 @@ class StatusTrackingController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id)
+	public function actionCreate()
 	{
-		$model=new StatusTracking;
-		$model->sppd_id = $id;
+		$model=new Hierarchy;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['StatusTracking']))
+		if(isset($_POST['Hierarchy']))
 		{
-			$model->attributes=$_POST['StatusTracking'];
-			$model->status_date = date('Y-m-d',time());
-			$model->notes_by = 'System';
+			$model->attributes=$_POST['Hierarchy'];
 			if($model->save())
-				$sppd = Form::model()->findByPk($id);
-				$sppd->status = $model->status;
-				$sppd->save();
-				$this->redirect(array('form/view','id'=>$id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -74,9 +91,9 @@ class StatusTrackingController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['StatusTracking']))
+		if(isset($_POST['Hierarchy']))
 		{
-			$model->attributes=$_POST['StatusTracking'];
+			$model->attributes=$_POST['Hierarchy'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -105,7 +122,7 @@ class StatusTrackingController extends RController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('StatusTracking');
+		$dataProvider=new CActiveDataProvider('Hierarchy');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -116,10 +133,10 @@ class StatusTrackingController extends RController
 	 */
 	public function actionAdmin()
 	{
-		$model=new StatusTracking('search');
+		$model=new Hierarchy('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['StatusTracking']))
-			$model->attributes=$_GET['StatusTracking'];
+		if(isset($_GET['Hierarchy']))
+			$model->attributes=$_GET['Hierarchy'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -133,7 +150,7 @@ class StatusTrackingController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=StatusTracking::model()->findByPk($id);
+		$model=Hierarchy::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -145,7 +162,7 @@ class StatusTrackingController extends RController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='status-tracking-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='hierarchy-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

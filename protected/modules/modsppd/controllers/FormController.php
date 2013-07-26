@@ -51,6 +51,9 @@ class FormController extends RController
 					));
 		$status = new CArrayDataProvider(StatusTracking::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 					'id' => 'id',
+					'sort' => array(
+						'defaultOrder' => 'status_date,id desc',
+						),
 					'pagination'=>false,
 					));
 		if ($model->status == 'ON_PROCESS' || $model->status == 'CLOSED') {

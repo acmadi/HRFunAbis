@@ -41,7 +41,7 @@ class StatusTracking extends CActiveRecord
 		return array(
 			array('sppd_id, status, status_date, notes, notes_by', 'required'),
 			array('sppd_id', 'numerical', 'integerOnly'=>true),
-			array('status', 'length', 'max'=>15),
+			array('status', 'length', 'max'=>20),
 			array('notes_by', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -111,15 +111,15 @@ class StatusTracking extends CActiveRecord
 	public function getStatusList()
 	{
 		return array(
-			STATUS_1 => 'Created',
-			STATUS_2 => 'Manager Reviewed',
-			STATUS_3 => 'Manager Rejected',
-			STATUS_4 => 'Manager Approved',
-			STATUS_5 => 'Accounting Rejected',
-			STATUS_6 => 'Accounting Validated',
-			STATUS_7 => 'Paid',
-			STATUS_8 => 'On Process',
-			STATUS_9 => 'Closed',
+			self::STATUS_1 => 'Created',
+			self::STATUS_2 => 'Manager Reviewed',
+			self::STATUS_3 => 'Manager Rejected',
+			self::STATUS_4 => 'Manager Approved',
+			self::STATUS_5 => 'Accounting Rejected',
+			self::STATUS_6 => 'Accounting Validated',
+			self::STATUS_7 => 'Paid',
+			self::STATUS_8 => 'On Process',
+			self::STATUS_9 => 'Closed',
 			);
 	}
 
