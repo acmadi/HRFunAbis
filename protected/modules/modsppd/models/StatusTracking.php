@@ -97,4 +97,40 @@ class StatusTracking extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	const STATUS_1 = 'CREATED';
+	const STATUS_2 = 'MANAGER_REVIEWED';
+	const STATUS_3 = 'MANAGER_REJECTED';
+	const STATUS_4 = 'MANAGER_APPROVED';
+	const STATUS_5 = 'ACCOUNTING_REJECTED';
+	const STATUS_6 = 'ACCOUNTING_VALIDATED';
+	const STATUS_7 = 'PAID';
+	const STATUS_8 = 'ON_PROCESS';
+	const STATUS_9 = 'CLOSED';
+
+	public function getStatusList()
+	{
+		return array(
+			STATUS_1 => 'Created',
+			STATUS_2 => 'Manager Reviewed',
+			STATUS_3 => 'Manager Rejected',
+			STATUS_4 => 'Manager Approved',
+			STATUS_5 => 'Accounting Rejected',
+			STATUS_6 => 'Accounting Validated',
+			STATUS_7 => 'Paid',
+			STATUS_8 => 'On Process',
+			STATUS_9 => 'Closed',
+			);
+	}
+
+	public function createStatus($sppd_id, $status, $notes, $notesBy)
+	{
+		$stat = new StatusTracking;
+		$stat->sppd_id = $sppd_id;
+		$stat->status = $status;
+		$stat->status_date = date('Y-m-d',time());
+		$stat->notes = $notes;
+		$stat->notes_by = $notesBy;
+		$stat->save();
+	}
 }

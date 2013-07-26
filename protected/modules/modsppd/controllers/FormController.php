@@ -49,7 +49,11 @@ class FormController extends RController
 					'id' => 'id',
 					'pagination'=>false,
 					));
-		if ($model->status == 'processed' || $model->status == 'closed') {
+		$status = new CArrayDataProvider(StatusTracking::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
+					'id' => 'id',
+					'pagination'=>false,
+					));
+		if ($model->status == 'ON_PROCESS' || $model->status == 'CLOSED') {
 			$rjamuan = new CArrayDataProvider(ReimburseJamuan::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
 						'pagination'=>false,
@@ -85,6 +89,7 @@ class FormController extends RController
 				'persekot3' => $persekot3,
 				'realisasi' => $realisasi,
 				'attachments' => $attachments,
+				'status' => $status
 			));	
 
 		} else {
@@ -93,7 +98,8 @@ class FormController extends RController
 				'persekot'=>$persekot, 
 				'personnels' =>$personnels,
 				'rabdinas'=>$rabdinas, 
-				'rabnondinas'=>$rabnondinas, 
+				'rabnondinas'=>$rabnondinas,
+				'status' => $status,
 			));
 		}
 	}
@@ -101,22 +107,21 @@ class FormController extends RController
 	public function actionPertanggungjawaban($id)
 	{
 		$model = $this->loadModel($id);
-		if ($model->status == 'created') {
-			$model->status = 'processed' ;
-			$model->save();
-			$persekot2 = $this->createPersekot($id, 'lpj1');
-			$this->createPersekotDetail($persekot2->id, 'Persekot', 0, $persekot2->amount);
-			$persekot3 = $this->createPersekot($id,'lpj2');
+		if ($model->status == 'PAID') {
+			$model->setStatus('ON_PROCESS', '-', 'System');
+			$persekot2 = Persekot::model()->createPersekot($id, 'lpj1');
+			PersekotDetail::model()->createPersekotDetail($persekot2->id, 'Persekot', 0, $persekot2->amount);
+			$persekot3 = Persekot::model()->createPersekot($id,'lpj2');
 			if ($model->sppd_type != 'Dinas') {
-				$this->generateRealNonDinas($id);
+				RealNondinas::model()->generateRealNonDinas($id);
 				$rab = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
 				foreach ($rab as $item) {
-					$this->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount);
+					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount);
 				}
 			} else {
 				$rab = RABDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
 				foreach ($rab as $item) {
-					$this->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount);
+					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount);
 				}
 			}
 		}
@@ -202,7 +207,7 @@ class FormController extends RController
 		$rab = null;
 		if ($model->sppd_type == 'Dinas') {
 			if ($model->status == 'step3') {
-				$this->generateRABDinas($model->id);
+				RABDinas::model()->generateRABDinas($model->id);
 			}
 			$rab = RABDinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
 		} else {
@@ -226,25 +231,21 @@ class FormController extends RController
 		$model = $this->loadModel($id);
 		
 		if ($model->status == 'step4') {
-			$persekot = $this->createPersekot($id, 'usulan');
-			$persekotdetail = $this->createPersekotDetail($persekot->id, 'Persekot',$persekot->amount,0);
-			$model->status = 'created';
-			$model->save();
-			$this->render('create4',array(
+			$persekot = Persekot::model()->createPersekot($id, 'usulan');
+			$persekotdetail = PersekotDetail::model()->createPersekotDetail($persekot->id, 'Persekot',$persekot->amount,0);
+			
+		}
+		$this->render('create4',array(
 					'model'=>$model,
 					'persekot'=>$persekot,
 					'persekotdetail'=>$persekotdetail,
 				));
-		} else {
-			$this->redirect(array('view','id'=>$id));
-		}
 	}
 
 	public function actionCreateFinished($id)
 	{
 		$model = $this->loadModel($id);
-		$model->status = 'created';
-		$model->save();
+		$model->setStatus('CREATED', '-', 'System');
 		$this->redirect(array('view','id'=>$id));
 	}
 
@@ -380,139 +381,6 @@ class FormController extends RController
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
-		}
-	}
-
-	public function generateRABDinas($id)
-	{
-		$model = $this->loadModel($id);
-		$duration = $model->getNumberOfDays();
-		$rab = MasterCost::model()->findAllByAttributes(array('class'=>$model->class));
-		$personnelslist = Personnel::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id)));
-		foreach ($personnelslist as $person) {
-			foreach ($rab as $data) {
-				$rabdinas = new RABDinas;
-				$rabdinas->employee_id = $person->employee_id;
-				$rabdinas->name = $person->name;
-				$rabdinas->sppd_id = $model->id;
-				$rabdinas->cost_description = $data->description;
-				$rabdinas->days = $model->getNumberOfDays();
-				if ($model->transport_type == 'Kendaraan Dinas') {
-					switch ($data->code) {
-						case 'btdk': // Transport Dari & Ke
-						case 'btdt': // Transport di tempat tujuan
-						case 'uash': // Uang angkutan setempat harian
-							$rabdinas->base_amount = 0;
-							$rabdinas->amount = 0;
-							break;
-						case 'atd': // airport tax domestik
-						case 'ati': // airport tax internasional
-							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount:0;;
-							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
-							break;
-						case 'btst': // Biaya transport sarana transportasi
-						case 'bph': // Biaya Penginapan Hotel
-						case 'bum': // Biaya uang makan
-						case 'bm': // Biaya Makan
-						case 'ush': // Uang saku harian
-						case 'da': // Daily allowance
-						case 'pbp': // Penggantian biaya penginapan
-						case 'bcp': // biaya cuci pakaian
-						case 'btp': // biaya tunjangan perlengkapan
-						case 'us': // uang saku
-							$rabdinas->base_amount = $data->amount;
-							$rabdinas->amount = $data->amount * $duration;
-							break;		
-					}	
-				} else {
-					switch ($data->code) {
-						case 'btdk': // Transport Dari & Ke
-							$rabdinas->base_amount = $data->amount;
-							$rabdinas->amount = $data->amount * 2;
-							break;
-						case 'atd': // airport tax domestik
-							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount:0;
-							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type != 'Luar Negri')?$data->amount * 2:0;
-							break;
-						case 'ati': // airport tax internasional
-							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount:0;
-							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
-							break;
-						case 'btdt': // Transport di tempat tujuan
-						case 'uash': // Uang angkutan setempat harian
-						case 'btst': // Biaya transport sarana transportasi
-						case 'bph': // Biaya Penginapan Hotel
-						case 'bum': // Biaya uang makan
-						case 'bm': // Biaya Makan
-						case 'ush': // Uang saku harian
-						case 'da': // Daily allowance
-						case 'pbp': // Penggantian biaya penginapan
-						case 'bcp': // biaya cuci pakaian
-						case 'btp': // biaya tunjangan perlengkapan
-						case 'us': // uang saku
-							$rabdinas->base_amount = $data->amount;
-							$rabdinas->amount = $data->amount * $duration;
-							break;		
-					}
-				}
-				
-				$rabdinas->created_date = date('Y-m-d',time());
-				$rabdinas->created_by = 'Dummy';
-				$rabdinas->save();
-			}
-		}
-	}
-
-	public function createPersekot($id, $flag)
-	{
-		$model = $this->loadModel($id);
-		$persekot = new Persekot;
-		$persekot->sppd_id = $model->id;
-		$persekot->paid_to = $model->name;
-		$persekot->received_from = '-';
-		$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($id):RABNonDinas::model()->getTotal($id);
-		$persekot->amount_in_words = '-';
-		$persekot->check_giro_date = date('Y-m-d',time());
-		$persekot->check_giro_number = '-';
-		$persekot->currency_code = '-';
-		$persekot->bank_code = '-';
-		$persekot->journal_number = '-';
-		$persekot->voucher_number = '-';
-		$persekot->flag = $flag;
-		$persekot->voucher_date = date('Y-m-d',time());
-		$persekot->created_date = date('Y-m-d',time());
-		$persekot->created_by = 'Dummy';
-		$persekot->save();
-		return $persekot;
-	}
-
-	public function createPersekotDetail($persekot_id, $description, $debit, $credit)
-	{
-		$persekotdetail = new PersekotDetail;
-		$persekotdetail->parent_id = $persekot_id;
-		$persekotdetail->account_code = '-';
-		$persekotdetail->description = $description;
-		$persekotdetail->debit = $debit;
-		$persekotdetail->credit = $credit;
-		$persekotdetail->created_date = date('Y-m-d',time());
-		$persekotdetail->created_by = 'Dummy';
-		$persekotdetail->save();
-		return $persekotdetail;
-	}
-
-	public function generateRealNonDinas($sppd_id)
-	{
-		$rabnondinas = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$sppd_id));
-		foreach ($rabnondinas as $rab) {
-			$realnondinas = new RealNondinas;
-			$realnondinas->sppd_id = $sppd_id;
-			$realnondinas->employee_id = $rab->employee_id;
-			$realnondinas->name = $rab->name;
-			$realnondinas->amount = $rab->amount;
-			$realnondinas->explanation = $rab->explanation;
-			$realnondinas->created_by = 'Dummy';
-			$realnondinas->created_date = date('Y-m-d',time());
-			$realnondinas->save();
 		}
 	}
 }

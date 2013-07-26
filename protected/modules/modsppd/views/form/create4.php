@@ -91,7 +91,7 @@ Step 4 of 4
 	    'htmlOptions' => array(
 	    					'style' => 'width:50px'
 	    					),
-	    'url'=>array('view','id'=>$model->id),
+	    'url'=>array('createFinished','id'=>$model->id),
 	)); ?>
 </div>
 

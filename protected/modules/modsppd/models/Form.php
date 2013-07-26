@@ -147,4 +147,11 @@ class Form extends CActiveRecord
 		return abs((strtotime($this->arrival)-strtotime($this->departure)))/86400 + 1;
 	}
 
+	public function setStatus($status, $notes, $notesBy)
+	{
+		$this->status = $status;
+		StatusTracking::model()->createStatus($this->id, $status, $notes, $notesBy);
+		$this->save();
+	}
+
 }

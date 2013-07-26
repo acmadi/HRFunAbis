@@ -107,8 +107,8 @@ $this->menu=array(
 	  		$model = new StatusTracking('search');
 		  	$this->widget('zii.widgets.grid.CGridView', array(
 				'id'=>'status-tracking-grid',
-				'dataProvider'=>$model->search(),
-				'filter'=>$model,
+				'dataProvider'=>$status,
+				// 'filter'=>$model,
 				'columns'=>array(
 					array(
 						'header'=>'No',

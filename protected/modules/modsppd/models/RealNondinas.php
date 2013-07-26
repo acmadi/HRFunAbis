@@ -103,4 +103,20 @@ class RealNondinas extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function generateRealNonDinas($sppd_id)
+	{
+		$rabnondinas = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$sppd_id));
+		foreach ($rabnondinas as $rab) {
+			$realnondinas = new RealNondinas;
+			$realnondinas->sppd_id = $sppd_id;
+			$realnondinas->employee_id = $rab->employee_id;
+			$realnondinas->name = $rab->name;
+			$realnondinas->amount = $rab->amount;
+			$realnondinas->explanation = $rab->explanation;
+			$realnondinas->created_by = 'Dummy';
+			$realnondinas->created_date = date('Y-m-d',time());
+			$realnondinas->save();
+		}
+	}
 }

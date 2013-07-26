@@ -138,4 +138,27 @@ class Persekot extends CActiveRecord
 		$this->save();
 
 	}
+
+	public function createPersekot($sppd_id, $flag)
+	{
+		$model = Form::model()->findByPk($sppd_id);
+		$persekot = new Persekot;
+		$persekot->sppd_id = $model->id;
+		$persekot->paid_to = $model->name;
+		$persekot->received_from = '-';
+		$persekot->amount = ($model->sppd_type == 'Dinas')?RABDinas::model()->getTotal($sppd_id):RABNonDinas::model()->getTotal($sppd_id);
+		$persekot->amount_in_words = '-';
+		$persekot->check_giro_date = date('Y-m-d',time());
+		$persekot->check_giro_number = '-';
+		$persekot->currency_code = '-';
+		$persekot->bank_code = '-';
+		$persekot->journal_number = '-';
+		$persekot->voucher_number = '-';
+		$persekot->flag = $flag;
+		$persekot->voucher_date = date('Y-m-d',time());
+		$persekot->created_date = date('Y-m-d',time());
+		$persekot->created_by = 'Dummy';
+		$persekot->save();
+		return $persekot;
+	}
 }

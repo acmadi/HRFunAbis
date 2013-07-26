@@ -49,6 +49,7 @@ class RABDinasController extends RController
 		{
 			$model->attributes=$_POST['RABDinas'];
 			$model->name = Employee::model()->getName($model->employee_id);
+			$model->base_amount = 0;
 			$model->days = Form::model()->findByPk($id)->getNumberOfDays();
 			$model->created_by = 'Dummy';
 			$model->created_date = date('Y-m-d',time());
