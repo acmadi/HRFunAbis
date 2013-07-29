@@ -15,13 +15,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'employee_id'); ?>
-		<?php echo $form->dropDownList($model,'employee_id',CHtml::listData(Employee::model()->findAll(),'employee_id','name'), array('empty'=>'pilih employee')); ?>
+		<?php echo $form->dropDownList($model,'employee_id',CHtml::listData(Employee::model()->findAll(),'employee_id','full_name'), array('empty'=>'pilih employee')); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'manager_id'); ?>
-		<?php echo $form->dropDownList($model,'manager_id',CHtml::listData(Employee::model()->findAll(),'employee_id','name'), array('empty'=>'pilih manager')); ?>
+		<?php echo $form->dropDownList($model,'manager_id',CHtml::listData(Employee::model()->findAll(),'employee_id','full_name'), array('empty'=>'pilih manager')); ?>
 		<?php echo $form->error($model,'manager_id'); ?>
 	</div>
 

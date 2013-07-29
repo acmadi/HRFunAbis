@@ -351,13 +351,23 @@ class FormController extends RController
 	 */
 	public function actionAdmin()
 	{
-		$model=new Form('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Form']))
-			$model->attributes=$_GET['Form'];
-
+		$criteria = new CDbCriteria;
+		$criteria->compare('employee_id',Yii::app()->user->getEmployeeID());
+		$model=new CActiveDataProvider('Form',array('criteria' => $criteria));
 		$this->render('admin',array(
 			'model'=>$model,
+		));
+	}
+
+	public function actionManagerAdmin()
+	{
+		$hierarchy = Hierarchy::model()->findAllByAttributes(array('manager_id' => Yii::app()->user->getEmployeeID()));
+		$list = CHtml::ListData($hierarchy,'id','employee_id');
+		$criteria = new CDbCriteria;
+		$criteria->addInCondition('employee_id',$list,'OR');
+		$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
+		$this->render('manager_admin',array(
+			'data'=>$sppd,
 		));
 	}
 
