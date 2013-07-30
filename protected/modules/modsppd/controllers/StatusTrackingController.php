@@ -37,10 +37,12 @@ class StatusTrackingController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id)
+	public function actionCreate($id,$status)
 	{
 		$model=new StatusTracking;
 		$model->sppd_id = $id;
+		$model->status = $status;
+		$model->notes_by = Yii::app()->user->getName();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -49,7 +51,6 @@ class StatusTrackingController extends RController
 		{
 			$model->attributes=$_POST['StatusTracking'];
 			$model->status_date = date('Y-m-d',time());
-			$model->notes_by = 'System';
 			if($model->save())
 				$sppd = Form::model()->findByPk($id);
 				$sppd->status = $model->status;

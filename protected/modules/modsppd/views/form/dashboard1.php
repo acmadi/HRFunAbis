@@ -4,6 +4,8 @@
  */
 /* @var $this FormController */
 /* @var $model Form */
+$id = $model->id;
+$sppd_status = $model->status;
 
 $this->breadcrumbs=array(
 	'SPPD'=>array('admin'),
@@ -121,6 +123,86 @@ $this->menu=array(
 	  	?>
 
 	  	<?php $this->endWidget() ?>
+	  	<?php if (Yii::app()->user->isRole('Super->Sppd->Manager') && ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'CREATED')): ?>
+	  	<div class="form-actions">
+		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Approve',
+			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'MANAGER_APPROVED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Approve SPPD ini?',
+			    		),
+			)); ?>
+
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Review',
+			    'type'=>'null', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'MANAGER_REVIEWED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Review SPPD ini?',
+			    		),
+			)); ?>
+
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Reject',
+			    'type'=>'danger', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'MANAGER_REJECTED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Reject SPPD ini?',
+			    		),
+			)); ?>
+		</div>
+	  	<?php endif ?>
+	  	
+	  	<?php if (Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'FINANCE_VALIDATED')): ?>
+	  	<div class="form-actions">
+	  		<?php if ($sppd_status == 'MANAGER_APPROVED'): ?>
+		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Validate',
+			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'FINANCE_VALIDATED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Validate SPPD ini?',
+			    		),
+			)); ?>
+	  		<?php endif ?>
+
+	  		<?php if ($sppd_status == 'FINANCE_VALIDATED'): ?>
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Paid',
+			    'type'=>'success', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'PAID'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'SPPD sudah dibayar?',
+			    		),
+			)); ?>
+	  		<?php endif ?>
+
+	  		<?php if ($sppd_status == 'MANAGER_APPROVED'): ?>
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Reject',
+			    'type'=>'danger', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'FINANCE_REJECTED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Reject SPPD ini?',
+			    		),
+			)); ?>
+	  		<?php endif ?>
+
+		</div>
+	  	<?php endif ?>
 	</div>
 </div>
 

@@ -4,6 +4,8 @@
  */
 /* @var $this FormController */
 /* @var $model Form */
+$id = $model->id;
+$sppd_status = $model->status;
 
 $this->breadcrumbs=array(
 	'SPPD'=>array('admin'),
@@ -125,7 +127,34 @@ $this->menu=array(
 	  	?>
 
 	  	<?php $this->endWidget() ?>
+	  	<?php if (Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'ON_PROCESS' || $sppd_status == 'FINANCE_REVIEWED')): ?>
+	  	<div class="form-actions">
+		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Review',
+			    'type'=>'null', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'FINANCE_REVIEWED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Review SPPD ini?',
+			    		),
+			)); ?>
+
+			<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Close',
+			    'type'=>'success', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'CLOSED'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:80px',
+			    		'confirm' => 'Tutup SPPD ini?',
+			    		),
+			)); ?>
+
+		</div>
+	  	<?php endif ?>
 	</div>
+
 </div>
 
 

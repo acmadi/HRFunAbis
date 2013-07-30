@@ -52,11 +52,11 @@ class FormController extends RController
 		$status = new CArrayDataProvider(StatusTracking::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 					'id' => 'id',
 					'sort' => array(
-						'defaultOrder' => 'status_date,id desc',
+						'defaultOrder' => 'status_date desc, id desc',
 						),
 					'pagination'=>false,
 					));
-		if ($model->status == 'ON_PROCESS' || $model->status == 'CLOSED') {
+		if ($model->status == 'ON_PROCESS' || $model->status == 'FINANCE_REVIEWED' || $model->status == 'CLOSED') {
 			$rjamuan = new CArrayDataProvider(ReimburseJamuan::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
 						'pagination'=>false,
@@ -352,10 +352,17 @@ class FormController extends RController
 	public function actionAdmin()
 	{
 		$criteria = new CDbCriteria;
-		$criteria->compare('employee_id',Yii::app()->user->getEmployeeID());
-		$model=new CActiveDataProvider('Form',array('criteria' => $criteria));
+		$criteria->condition = 'employee_id =:empid AND status !=:stat1 AND status !=:stat2 AND status !=:stat3 AND status !=:stat4';
+		$criteria->params = array(
+						'empid' => Yii::app()->user->getEmployeeID(),
+						'stat1'=>'step1',
+						'stat2'=>'step2',
+						'stat3'=>'step3',
+						'stat4'=>'step4',
+						);
+		$data=new CActiveDataProvider('Form',array('criteria' => $criteria));
 		$this->render('admin',array(
-			'model'=>$model,
+			'data'=>$data,
 		));
 	}
 
@@ -364,9 +371,32 @@ class FormController extends RController
 		$hierarchy = Hierarchy::model()->findAllByAttributes(array('manager_id' => Yii::app()->user->getEmployeeID()));
 		$list = CHtml::ListData($hierarchy,'id','employee_id');
 		$criteria = new CDbCriteria;
-		$criteria->addInCondition('employee_id',$list,'OR');
+		$criteria->condition = 'status !=:stat1 AND status !=:stat2 AND status !=:stat3 AND status !=:stat4';
+		$criteria->params = array(
+						'stat1'=>'step1',
+						'stat2'=>'step2',
+						'stat3'=>'step3',
+						'stat4'=>'step4',
+						);
+		$criteria->addInCondition('employee_id',$list);
 		$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
-		$this->render('manager_admin',array(
+		$this->render('admin',array(
+			'data'=>$sppd,
+		));
+	}
+
+	public function actionFinanceAdmin()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status !=:stat1 AND status !=:stat2 AND status !=:stat3 AND status !=:stat4';
+		$criteria->params = array(
+						'stat1'=>'step1',
+						'stat2'=>'step2',
+						'stat3'=>'step3',
+						'stat4'=>'step4',
+						);
+		$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
+		$this->render('admin',array(
 			'data'=>$sppd,
 		));
 	}

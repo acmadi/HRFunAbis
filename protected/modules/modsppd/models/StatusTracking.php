@@ -102,11 +102,12 @@ class StatusTracking extends CActiveRecord
 	const STATUS_2 = 'MANAGER_REVIEWED';
 	const STATUS_3 = 'MANAGER_REJECTED';
 	const STATUS_4 = 'MANAGER_APPROVED';
-	const STATUS_5 = 'ACCOUNTING_REJECTED';
-	const STATUS_6 = 'ACCOUNTING_VALIDATED';
+	const STATUS_5 = 'FINANCE_REJECTED';
+	const STATUS_6 = 'FINANCE_VALIDATED';
 	const STATUS_7 = 'PAID';
 	const STATUS_8 = 'ON_PROCESS';
-	const STATUS_9 = 'CLOSED';
+	const STATUS_9 = 'FINANCE_REVIEWED';
+	const STATUS_10 = 'CLOSED';
 
 	public function getStatusList()
 	{
@@ -115,11 +116,12 @@ class StatusTracking extends CActiveRecord
 			self::STATUS_2 => 'Manager Reviewed',
 			self::STATUS_3 => 'Manager Rejected',
 			self::STATUS_4 => 'Manager Approved',
-			self::STATUS_5 => 'Accounting Rejected',
-			self::STATUS_6 => 'Accounting Validated',
+			self::STATUS_5 => 'Finance Rejected',
+			self::STATUS_6 => 'Finance Validated',
 			self::STATUS_7 => 'Paid',
 			self::STATUS_8 => 'On Process',
-			self::STATUS_9 => 'Closed',
+			self::STATUS_9 => 'Finance Reviewed',
+			self::STATUS_10 => 'Closed',
 			);
 	}
 

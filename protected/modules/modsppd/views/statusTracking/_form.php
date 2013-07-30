@@ -21,7 +21,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->dropDownList($model,'status',StatusTracking::model()->getStatusList(), array('empty'=>'pilih status')); ?>
+		<?php echo $form->dropDownList($model,'status',StatusTracking::model()->getStatusList(), array('empty'=>'pilih status', 'disabled'=>true)); ?>
+		<!-- <?php echo $form->textField($model,'status',array('disabled'=>true)); ?> -->
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 

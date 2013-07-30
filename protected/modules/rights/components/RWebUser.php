@@ -106,4 +106,20 @@ class RWebUser extends CWebUser
 		else
 			return 0;
 	}
+
+	public function getName()
+	{
+		if(!Yii::app()->user->isGuest)
+		{
+			$userClass = Rights::module()->userClass;
+			$data = CActiveRecord::model($userClass)->findByAttributes(array('id'=>$this->id));
+			if ($data->employee_id) {
+				$name = CActiveRecord::model('Employee')->getName($data->employee_id);
+				return $name;
+			}
+			return $data->username;
+		}
+		else
+			return 0;
+	}
 }
