@@ -287,6 +287,12 @@
 						
 						array('label'=>Yii::t("app","SPPD"), 'url'=>'#', 'items'=>array(
 							array('label'=>'Data SPPD', 'url'=>array('/modsppd/Form/admin')),
+							array('label'=>'[Manager] Data Pengajuan SPPD', 'url'=>array('/modsppd/Form/managerAdmin'),
+								'visible'=>(Yii::app()->user->isRole('Super->Sppd->Manager') && (!Yii::app()->user->isGuest))
+								),
+							array('label'=>'[Finance] Data Pengajuan SPPD', 'url'=>array('/modsppd/Form/financeAdmin'),
+								'visible'=>(Yii::app()->user->isRole('Super->Sppd->Finance') && (!Yii::app()->user->isGuest))
+								),
 						 ),
 						 'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))	
 						),						

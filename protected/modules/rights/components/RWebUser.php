@@ -107,7 +107,7 @@ class RWebUser extends CWebUser
 			return 0;
 	}
 
-	public function getName()
+	public function getEmployeeName()
 	{
 		if(!Yii::app()->user->isGuest)
 		{

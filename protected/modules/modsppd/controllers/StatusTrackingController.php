@@ -42,7 +42,7 @@ class StatusTrackingController extends RController
 		$model=new StatusTracking;
 		$model->sppd_id = $id;
 		$model->status = $status;
-		$model->notes_by = Yii::app()->user->getName();
+		$model->notes_by = Yii::app()->user->getEmployeeName();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
