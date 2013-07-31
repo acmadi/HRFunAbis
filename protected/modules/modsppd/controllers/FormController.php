@@ -54,9 +54,11 @@ class FormController extends RController
 					'sort' => array(
 						'defaultOrder' => 'status_date desc, id desc',
 						),
-					'pagination'=>false,
+					'pagination'=> array(
+						'pageSize' => 5,
+						),
 					));
-		if ($model->status == 'ON_PROCESS' || $model->status == 'FINANCE_REVIEWED' || $model->status == 'CLOSED') {
+		if ($model->status == 'ON_PROCESS' || $model->status == 'CLOSED' || $model->status == 'REQUEST_FOR_ACCOUNTABILITY_APPROVAL' || $model->status == 'ACCOUNTABILITY_REVIEWED') {
 			$rjamuan = new CArrayDataProvider(ReimburseJamuan::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
 						'pagination'=>false,
@@ -360,6 +362,7 @@ class FormController extends RController
 						'stat3'=>'step3',
 						'stat4'=>'step4',
 						);
+		$criteria->order = 'id desc';
 		$data=new CActiveDataProvider('Form',array('criteria' => $criteria));
 		$this->render('admin',array(
 			'data'=>$data,
@@ -379,9 +382,45 @@ class FormController extends RController
 						'stat4'=>'step4',
 						);
 		$criteria->addInCondition('employee_id',$list);
-		$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
-		$this->render('admin',array(
-			'data'=>$sppd,
+		$criteria->order = 'id desc';
+		$all = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'REQUEST_FOR_MANAGER_APPROVAL',
+						);
+		$criteria->addInCondition('employee_id',$list);
+		$criteria->order = 'id desc';
+		$request = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'CLOSED',
+						);
+		$criteria->addInCondition('employee_id',$list);
+		$criteria->order = 'id desc';
+		$closed = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'REJECTED',
+						);
+		$criteria->addInCondition('employee_id',$list);
+		$criteria->order = 'id desc';
+		$rejected = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$tabs = array(
+			array('id' => 'tab1', 'label' => 'Menunggu Persetujuan Manager', 'content' => $this->renderPartial('_status', array('data' => $request), true)),
+			array('id' => 'tab2', 'label' => 'Selesai', 'content' => $this->renderPartial('_status', array('data' => $closed), true)),
+			array('id' => 'tab3', 'label' => 'Ditolak', 'content' => $this->renderPartial('_status', array('data' => $rejected), true)),
+			array('id' => 'tab4', 'label' => 'Semua', 'content' => $this->renderPartial('_status', array('data' => $all), true)),
+		);
+
+		$this->render('manage_admin',array(
+			'tabs'=>$tabs,
 		));
 	}
 
@@ -395,9 +434,60 @@ class FormController extends RController
 						'stat3'=>'step3',
 						'stat4'=>'step4',
 						);
-		$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
-		$this->render('admin',array(
-			'data'=>$sppd,
+		$criteria->order = 'id desc';
+		$all = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'REQUEST_FOR_FINANCE_APPROVAL',
+						);
+		$criteria->order = 'id desc';
+		$request = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'PAID',
+						);
+		$criteria->order = 'id desc';
+		$paid = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'REQUEST_FOR_ACCOUNTABILITY_APPROVAL',
+						);
+		$criteria->order = 'id desc';
+		$acc_req = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'CLOSED',
+						);
+		$criteria->order = 'id desc';
+		$closed = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
+						'stat'=>'REJECTED',
+						);
+		$criteria->order = 'id desc';
+		$rejected = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$tabs = array(
+			array('id' => 'tab1', 'label' => 'Menunggu Persetujuan Finance', 'content' => $this->renderPartial('_status', array('data' => $request), true)),
+			array('id' => 'tab2', 'label' => 'Sudah Dibayar', 'content' => $this->renderPartial('_status', array('data' => $paid), true)),
+			array('id' => 'tab3', 'label' => 'Pengajuan Pertanggungjawaban', 'content' => $this->renderPartial('_status', array('data' => $acc_req), true)),
+			array('id' => 'tab4', 'label' => 'Selesai', 'content' => $this->renderPartial('_status', array('data' => $closed), true)),
+			array('id' => 'tab5', 'label' => 'Ditolak', 'content' => $this->renderPartial('_status', array('data' => $rejected), true)),
+			array('id' => 'tab6', 'label' => 'Semua', 'content' => $this->renderPartial('_status', array('data' => $all), true)),
+		);
+
+		$this->render('manage_admin',array(
+			'tabs'=>$tabs,
 		));
 	}
 

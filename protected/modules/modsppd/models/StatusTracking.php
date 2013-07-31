@@ -41,8 +41,7 @@ class StatusTracking extends CActiveRecord
 		return array(
 			array('sppd_id, status, status_date, notes, notes_by', 'required'),
 			array('sppd_id', 'numerical', 'integerOnly'=>true),
-			array('status', 'length', 'max'=>20),
-			array('notes_by', 'length', 'max'=>50),
+			array('notes_by, status', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, sppd_id, status, status_date, notes, notes_by', 'safe', 'on'=>'search'),
@@ -99,29 +98,35 @@ class StatusTracking extends CActiveRecord
 	}
 
 	const STATUS_1 = 'CREATED';
-	const STATUS_2 = 'MANAGER_REVIEWED';
-	const STATUS_3 = 'MANAGER_REJECTED';
-	const STATUS_4 = 'MANAGER_APPROVED';
-	const STATUS_5 = 'FINANCE_REJECTED';
-	const STATUS_6 = 'FINANCE_VALIDATED';
-	const STATUS_7 = 'PAID';
-	const STATUS_8 = 'ON_PROCESS';
-	const STATUS_9 = 'FINANCE_REVIEWED';
-	const STATUS_10 = 'CLOSED';
+	const STATUS_2 = 'REQUEST_FOR_MANAGER_APPROVAL';
+	const STATUS_3 = 'MANAGER_REVIEWED';
+	const STATUS_4 = 'REJECTED';
+	const STATUS_5 = 'MANAGER_APPROVED';
+	const STATUS_6 = 'REQUEST_FOR_FINANCE_APPROVAL';
+	const STATUS_7 = 'FINANCE_REVIEWED';
+	const STATUS_9 = 'FINANCE_VALIDATED';
+	const STATUS_10 = 'PAID';
+	const STATUS_11 = 'ON_PROCESS';
+	const STATUS_12 = 'REQUEST_FOR_ACCOUNTABILITY_APPROVAL';
+	const STATUS_13 = 'ACCOUNTABILITY_REVIEWED';
+	const STATUS_14 = 'CLOSED';
 
 	public function getStatusList()
 	{
 		return array(
 			self::STATUS_1 => 'Created',
-			self::STATUS_2 => 'Manager Reviewed',
-			self::STATUS_3 => 'Manager Rejected',
-			self::STATUS_4 => 'Manager Approved',
-			self::STATUS_5 => 'Finance Rejected',
-			self::STATUS_6 => 'Finance Validated',
-			self::STATUS_7 => 'Paid',
-			self::STATUS_8 => 'On Process',
-			self::STATUS_9 => 'Finance Reviewed',
-			self::STATUS_10 => 'Closed',
+			self::STATUS_2 => 'Request for Manager Approval',
+			self::STATUS_3 => 'Manager Reviewed',
+			self::STATUS_4 => 'Rejected',
+			self::STATUS_5 => 'Manager Approved',
+			self::STATUS_6 => 'Request for Finance Approval',
+			self::STATUS_7 => 'Finance Reviewed',
+			self::STATUS_9 => 'Finance Validated',
+			self::STATUS_10 => 'Paid',
+			self::STATUS_11 => 'On Process',
+			self::STATUS_12 => 'Request for Accountability Approval',
+			self::STATUS_13 => 'Accountability Reviewed',
+			self::STATUS_14 => 'Closed',
 			);
 	}
 

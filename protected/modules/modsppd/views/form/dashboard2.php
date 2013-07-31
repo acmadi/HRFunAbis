@@ -127,16 +127,36 @@ $this->menu=array(
 	  	?>
 
 	  	<?php $this->endWidget() ?>
-	  	<?php if (Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'ON_PROCESS' || $sppd_status == 'FINANCE_REVIEWED')): ?>
+
+	  	<!-- Normal User -->
+	  	<?php if (!Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'ON_PROCESS' || $sppd_status == 'ACCOUNTABILITY_REVIEWED')): ?>
+	  	<div class="form-actions">
+	  		<?php if ($sppd_status == 'ON_PROCESS' || $sppd_status == 'ACCOUNTABILITY_REVIEWED'): ?>
+		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			    'label'=>'Request for Accountability Approval',
+			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			    'size'=>'large', // null, 'large', 'small' or 'mini'
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'REQUEST_FOR_ACCOUNTABILITY_APPROVAL'),
+			    'htmlOptions' => array(
+			    		'style' => 'width:200px',
+			    		'confirm' => 'Mengirim Permohonan?',
+			    		),
+			)); ?>
+	  		<?php endif ?>
+		</div>
+	  	<?php endif ?>
+
+	  	<!-- Finance -->
+	  	<?php if (Yii::app()->user->isRole('Super->Sppd->Finance') && $sppd_status == 'REQUEST_FOR_ACCOUNTABILITY_APPROVAL'): ?>
 	  	<div class="form-actions">
 		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Review',
 			    'type'=>'null', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 			    'size'=>'large', // null, 'large', 'small' or 'mini'
-			    'url' => array('statusTracking/create','id'=>$id,'status'=>'FINANCE_REVIEWED'),
+			    'url' => array('statusTracking/create','id'=>$id,'status'=>'ACCOUNTABILITY_REVIEWED'),
 			    'htmlOptions' => array(
 			    		'style' => 'width:80px',
-			    		'confirm' => 'Review SPPD ini?',
+			    		'confirm' => 'Review Pertanggungjawaban ini?',
 			    		),
 			)); ?>
 
