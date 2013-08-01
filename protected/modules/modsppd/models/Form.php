@@ -155,4 +155,21 @@ class Form extends CActiveRecord
 		$this->save();
 	}
 
+	public function getTotal()
+	{
+		$persekot = Persekot::model()->findByAttributes(array('sppd_id'=>$this->id,'flag'=>'usulan'));
+		return $persekot->amount;
+	}
+
+	public function getRemains()
+	{
+		$value1 = Persekot::model()->findByAttributes(array('sppd_id'=>$this->id,'flag'=>'lpj1'));
+		$value2 = Persekot::model()->findByAttributes(array('sppd_id'=>$this->id,'flag'=>'lpj2'));
+
+		if ($value1 && $value2) {
+			return $value1->amount - $value2->amount;
+		} else
+			return 0;
+	}
+
 }

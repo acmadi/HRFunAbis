@@ -126,9 +126,9 @@ $this->menu=array(
 	  	<?php $this->endWidget() ?>
 
 	  	<!-- Normal User -->
-	  	<?php if ((!Yii::app()->user->isRole('Super->Sppd->Manager') || !Yii::app()->user->isRole('Super->Sppd->Finance')) && ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'CREATED' || $sppd_status == 'FINANCE_REVIEWED')): ?>
+	  	<?php if ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'CREATED' || $sppd_status == 'FINANCE_REVIEWED'): ?>
 	  	<div class="form-actions">
-	  		<?php if (!Yii::app()->user->isRole('Super->Sppd->Manager') && ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'CREATED')): ?>
+	  		<?php if ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'CREATED'): ?>
 		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Request for Manager Approval',
 			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
@@ -141,7 +141,7 @@ $this->menu=array(
 			)); ?>
 	  		<?php endif ?>
 
-			<?php if (!Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'FINANCE_REVIEWED')): ?>
+			<?php if ($sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'FINANCE_REVIEWED'): ?>
 			<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Request for Finance Approval',
 			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'

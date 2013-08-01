@@ -272,7 +272,7 @@
 				),
 				
 				
-				//mod spps
+				//mod sppd
 				array(
 					'class'=>'bootstrap.widgets.TbMenu',
 					'htmlOptions'=>array('class'=>'pull-right'),
@@ -292,6 +292,9 @@
 								),
 							array('label'=>'[Finance] Data Pengajuan SPPD', 'url'=>array('/modsppd/Form/financeAdmin'),
 								'visible'=>(Yii::app()->user->isRole('Super->Sppd->Finance') && (!Yii::app()->user->isGuest))
+								),
+							array('label'=>'Report', 'url'=>array('/modsppd/Form/report'),
+								'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))
 								),
 						 ),
 						 'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))	

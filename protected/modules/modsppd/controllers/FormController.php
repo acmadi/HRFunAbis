@@ -516,4 +516,73 @@ class FormController extends RController
 			Yii::app()->end();
 		}
 	}
+
+	public function actionReport($filter = 'BY_EMPLOYEE')
+	{
+		$totalAmount = 0;
+		$totalRemains = 0;
+		if ($filter == 'BY_EMPLOYEE' && isset($_GET['employee_id'])) {
+			// BY_EMPLOYEE
+			$criteria = new CDbCriteria;
+			$criteria->condition = 'employee_id =:empid';
+			$criteria->params = array(
+								':empid'=>$_GET['employee_id'],
+								);
+			$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
+			foreach ($sppd->getData() as $item) {
+				$totalAmount += $item->getTotal();
+				$totalRemains += $item->getRemains();
+			}
+			$this->render('report',array(
+				'data'=>$sppd,
+				'totalAmount' => $totalAmount,
+				'totalRemains' => $totalRemains,
+				'tab'=>1,
+			));
+		} elseif ($filter == 'BY_DEPARTMENT' && isset($_GET['department'])) {
+			// BY_DEPARTEMENT
+			$employees = CHtml::ListData(Employee::model()->findAllByAttributes(array('department' => $_GET['department'])),'employee_id','employee_id');
+			$criteria = new CDbCriteria;
+			$criteria->addInCondition('employee_id',$employees);
+			$criteria->order = 'name asc';
+			$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
+			foreach ($sppd->getData() as $item) {
+				$totalAmount += $item->getTotal();
+				$totalRemains += $item->getRemains();
+			}
+			$this->render('report',array(
+				'data'=>$sppd,
+				'totalAmount' => $totalAmount,
+				'totalRemains' => $totalRemains,
+				'tab'=>2,
+			));	
+		} elseif ($filter == 'BY_PERIOD' && isset($_GET['from_date']) && isset($_GET['to_date'])) {
+			// BY PERIOD
+			$criteria = new CDbCriteria;
+			$criteria->condition = 'departure between :from AND :to';
+			$criteria->params = array(
+								':from'=>$_GET['from_date'],
+								':to'=>$_GET['to_date'],
+								);
+			$criteria->order = 'name asc';
+			$sppd = new CActiveDataProvider('Form',array('criteria' => $criteria));
+			foreach ($sppd->getData() as $item) {
+				$totalAmount += $item->getTotal();
+				$totalRemains += $item->getRemains();
+			}
+			$this->render('report',array(
+				'data'=>$sppd,
+				'totalAmount' => $totalAmount,
+				'totalRemains' => $totalRemains,
+				'tab'=>3,
+			));
+		} else {
+			$this->render('report',array(
+				'tab'=>1,
+			));
+		}
+
+
+		
+	}
 }
