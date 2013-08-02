@@ -65,7 +65,7 @@ $('.search-form form').submit(function(){
 			// 'unit',
 			// 'class',
 			'destination',
-			// 'purpose',
+			'purpose',
 			'departure',
 			'arrival',
 			// 'transport_type',

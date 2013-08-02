@@ -34,9 +34,13 @@
 	));
 	?>
 
-	<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Submit', 'htmlOptions'=> array(
+	<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Search', 'htmlOptions'=> array(
 																												'name'=>'filter',
 																												'value'=>'BY_PERIOD',
-																												),)); ?>																									
+																												),)); ?>
+	<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Download Report', 'htmlOptions'=> array(
+																												'name'=>'download',
+																												'value'=>'BY_PERIOD',
+																												),)); ?>																								
 
 <?php $this->endWidget();?>
