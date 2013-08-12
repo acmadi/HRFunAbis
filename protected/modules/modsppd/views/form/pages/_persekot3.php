@@ -183,6 +183,7 @@
 	            'htmlOptions' => array('style' => 'width:10px')
 	        ),
 			// 'id',
+			'name',
 			'account_code',
 			array(
 				'name' => 'description',

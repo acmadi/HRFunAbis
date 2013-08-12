@@ -121,12 +121,12 @@ class FormController extends RController
 				RealNondinas::model()->generateRealNonDinas($id);
 				$rab = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
 				foreach ($rab as $item) {
-					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount);
+					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount, $item->name);
 				}
 			} else {
 				$rab = RABDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
 				foreach ($rab as $item) {
-					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount);
+					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount, $item->name);
 				}
 			}
 		}

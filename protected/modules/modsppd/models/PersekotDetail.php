@@ -123,10 +123,11 @@ class PersekotDetail extends CActiveRecord
 		return $total;
 	}
 
-	public function createPersekotDetail($persekot_id, $description, $debit, $credit)
+	public function createPersekotDetail($persekot_id, $description, $debit, $credit, $name = null)
 	{
 		$persekotdetail = new PersekotDetail;
 		$persekotdetail->parent_id = $persekot_id;
+		$persekotdetail->name = $name;
 		$persekotdetail->account_code = '-';
 		$persekotdetail->description = $description;
 		$persekotdetail->debit = $debit;

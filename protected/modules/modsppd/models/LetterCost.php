@@ -5,6 +5,8 @@
  *
  * The followings are the available columns in table 'sppd_letter_cost':
  * @property integer $id
+ * @property integer $sppd_id
+ * @property string $employee_id
  * @property integer $airport_tax_cost
  * @property integer $airport_tax_quantity
  * @property integer $laundry_cost
@@ -50,8 +52,8 @@ class LetterCost extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('airport_tax_cost, airport_tax_quantity, laundry_cost, laundry_quantity, airline_cost, airline_quantity, hotel_cost, hotel_quantity, transportation_cost, transportation_quantity, from_to_cost, from_to_quantity, lumpsum_cost, lumpsum_quantity, created_date, created_by', 'required'),
-			array('airport_tax_cost, airport_tax_quantity, laundry_cost, laundry_quantity, airline_cost, airline_quantity, hotel_cost, hotel_quantity, transportation_cost, transportation_quantity, from_to_cost, from_to_quantity, lumpsum_cost, lumpsum_quantity', 'numerical', 'integerOnly'=>true),
+			array('sppd_id, employee_id, airport_tax_cost, airport_tax_quantity, laundry_cost, laundry_quantity, airline_cost, airline_quantity, hotel_cost, hotel_quantity, transportation_cost, transportation_quantity, from_to_cost, from_to_quantity, lumpsum_cost, lumpsum_quantity, created_date, created_by', 'required'),
+			array('sppd_id, airport_tax_cost, airport_tax_quantity, laundry_cost, laundry_quantity, airline_cost, airline_quantity, hotel_cost, hotel_quantity, transportation_cost, transportation_quantity, from_to_cost, from_to_quantity, lumpsum_cost, lumpsum_quantity', 'numerical', 'integerOnly'=>true),
 			array('created_by', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -108,6 +110,8 @@ class LetterCost extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('sppd_id',$this->sppd_id);
+		$criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('airport_tax_cost',$this->airport_tax_cost);
 		$criteria->compare('airport_tax_quantity',$this->airport_tax_quantity);
 		$criteria->compare('laundry_cost',$this->laundry_cost);
@@ -128,5 +132,51 @@ class LetterCost extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function getTotalFromTo()
+	{
+		return $this->from_to_quantity * $this->from_to_cost;
+	}
+
+	public function getTotalTransportation()
+	{
+		return $this->transportation_quantity * $this->transportation_cost;
+	}
+
+	public function getTotalHotel()
+	{
+		return $this->hotel_quantity * $this->hotel_cost;
+	}
+
+	public function getTotalAirline()
+	{
+		return $this->airline_quantity * $this->airline_cost;
+	}
+
+	public function getTotalLumpsum()
+	{
+		return $this->lumpsum_quantity * $this->lumpsum_cost;
+	}
+
+	public function getTotalLaundry()
+	{
+		return $this->laundry_quantity * $this->laundry_cost;
+	}
+
+	public function getTotalAirportTax()
+	{
+		return $this->airport_tax_quantity * $this->airport_tax_cost;
+	}
+
+	public function getTotal()
+	{
+		return $this->getTotalFromTo()
+			+ $this->getTotalTransportation()
+			+ $this->getTotalHotel()
+			+ $this->getTotalAirline()
+			+ $this->getTotalLumpsum()
+			+ $this->getTotalLaundry()
+			+ $this->getTotalAirportTax();
 	}
 }

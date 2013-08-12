@@ -30,10 +30,10 @@ class LetterCostController extends RController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($employee_id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>LetterCost::model()->findByAttributes(array('employee_id'=>$employee_id)),
 		));
 	}
 
@@ -82,6 +82,12 @@ class LetterCostController extends RController
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionAjaxupdate()
+	{
+		$es = new EditableSaver('LetterCost');
+		$es->update();
 	}
 
 	/**
