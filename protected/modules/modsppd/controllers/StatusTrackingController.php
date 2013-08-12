@@ -50,12 +50,14 @@ class StatusTrackingController extends RController
 		if(isset($_POST['StatusTracking']))
 		{
 			$model->attributes=$_POST['StatusTracking'];
+			$model->notes = ($model->notes == '')?'-':$model->notes;
 			$model->status_date = date('Y-m-d',time());
-			if($model->save())
+			if($model->save()) {
 				$sppd = Form::model()->findByPk($id);
 				$sppd->status = $model->status;
 				$sppd->save();
 				$this->redirect(array('form/view','id'=>$id));
+			}
 		}
 
 		$this->render('create',array(

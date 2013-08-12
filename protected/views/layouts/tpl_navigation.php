@@ -281,6 +281,7 @@
 						array('label'=>Yii::t("app","Master Data"), 'url'=>'#', 'items'=>array(
 							array('label'=>'Kota Tujuan', 'url'=>array('/modsppd/MasterDestination/admin')),
 							array('label'=>'Satuan Biaya', 'url'=>array('/modsppd/MasterCost/admin')),
+							array('label'=>'Hierarchy', 'url'=>array('/modsppd/Hierarchy/admin')),
 						 ),
 						 'visible'=>(Yii::app()->user->isRole('Super->Super->Sppd') && (!Yii::app()->user->isGuest))	
 						),
