@@ -6,6 +6,7 @@
 /* @var $model Form */
 $id = $model->id;
 $sppd_status = $model->status;
+$emp_id = $model->employee_id;
 
 $this->breadcrumbs=array(
 	'SPPD'=>array('admin'),
@@ -129,7 +130,7 @@ $this->menu=array(
 	  	<?php $this->endWidget() ?>
 
 	  	<!-- Normal User -->
-	  	<?php if (!Yii::app()->user->isRole('Super->Sppd->Finance') && ($sppd_status == 'ON_PROCESS' || $sppd_status == 'ACCOUNTABILITY_REVIEWED')): ?>
+	  	<?php if (($sppd_status == 'ON_PROCESS' || $sppd_status == 'ACCOUNTABILITY_REVIEWED') && $emp_id == Yii::app()->user->getEmployeeID()): ?>
 	  	<div class="form-actions">
 	  		<?php if ($sppd_status == 'ON_PROCESS' || $sppd_status == 'ACCOUNTABILITY_REVIEWED'): ?>
 		  	<?php $this->widget('bootstrap.widgets.TbButton', array(

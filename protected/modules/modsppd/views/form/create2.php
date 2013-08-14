@@ -86,6 +86,16 @@ Step 2 of 4
 <div class="form-actions">
 
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>'Sebelumnya',
+	    'type'=>'null', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'large', // null, 'large', 'small' or 'mini'
+	    'htmlOptions' => array(
+    					// 'style' => 'width:50px',
+    					),
+	    'url'=>array('create','id'=>$model->id),
+	)); ?>
+
+	<?php $this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>'Selanjutnya',
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	    'size'=>'large', // null, 'large', 'small' or 'mini'

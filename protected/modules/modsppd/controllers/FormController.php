@@ -71,7 +71,7 @@ class FormController extends RController
 						'id' => 'id',
 						'pagination'=>false,
 						));
-			$persekot2 =  Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj1')));
+			$persekot2 = Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj1')));
 			$persekot3 = Persekot::model()->find(array('condition'=>'sppd_id=:x AND flag=:y', 'params'=>array(':x'=>$id, ':y'=>'lpj2')));;
 			$realisasi = new CArrayDataProvider(RealNondinas::model()->findAll(array('condition'=>'sppd_id=:x', 'params'=>array(':x'=>$id))),array(
 						'id' => 'id',
@@ -112,21 +112,29 @@ class FormController extends RController
 	public function actionPertanggungjawaban($id)
 	{
 		$model = $this->loadModel($id);
+		$persekot = Persekot::model()->findByAttributes(array('sppd_id'=>$model->id));
 		if ($model->status == 'PAID') {
 			$model->setStatus('ON_PROCESS', '-', 'System');
-			$persekot2 = Persekot::model()->createPersekot($id, 'lpj1');
-			PersekotDetail::model()->createPersekotDetail($persekot2->id, 'Persekot', 0, $persekot2->amount);
-			$persekot3 = Persekot::model()->createPersekot($id,'lpj2');
+			if ($persekot) {
+				$persekot2 = Persekot::model()->createPersekot($id, 'lpj1');
+				PersekotDetail::model()->createPersekotDetail($persekot2->id, 'Persekot', 0, $persekot2->amount);
+				$persekot3 = Persekot::model()->createPersekot($id,'lpj2');
+			}
 			if ($model->sppd_type != 'Dinas') {
 				RealNondinas::model()->generateRealNonDinas($id);
-				$rab = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
-				foreach ($rab as $item) {
-					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount, $item->name);
+				if ($persekot) {
+					$rab = RABNonDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
+					foreach ($rab as $item) {
+						PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->explanation,0,$item->amount, $item->name);
+					}
 				}
 			} else {
-				$rab = RABDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
-				foreach ($rab as $item) {
-					PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount, $item->name);
+				LetterCost::model()->generateLetterCost($id);
+				if ($persekot) {
+					$rab = RABDinas::model()->findAllByAttributes(array('sppd_id'=>$id));
+					foreach ($rab as $item) {
+						PersekotDetail::model()->createPersekotDetail($persekot3->id, $item->cost_description,0,$item->amount, $item->name);
+					}
 				}
 			}
 		}
@@ -137,42 +145,53 @@ class FormController extends RController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id = null)
 	{
-		$model=new Form;
-		$model->employee_id = Yii::app()->user->getEmployeeID();
-		$model->name = Employee::model()->getName(Yii::app()->user->getEmployeeID());
-		$model->service_provider = 'PGN SOLUTION';
-		$model->unit = 'PGN SOLUTION';
-
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Form']))
-		{
-			$model->attributes=$_POST['Form'];
-			$model->created_by = 'Dummy';
-			$model->created_date = date('Y-m-d',time());
-
-			$statement_letter=CUploadedFile::getInstance($model,'statement_letter');
-			if ($statement_letter) {
-				$statement_letter_name = $statement_letter->name;
-				$statement_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $statement_letter_name);
-				$model->statement_letter = $statement_letter_name;
+		$model=($id == null)? new Form: $this->loadModel($id);
+		if ($model->status == 'step2' || $model->status == 'step3' || $model->status == 'step4') {
+			if(isset($_POST['Form']))
+			{
+				$model->attributes=$_POST['Form'];
+				$model->created_by = Employee::model()->getName(Yii::app()->user->getEmployeeID());
+				$model->created_date = date('Y-m-d',time());
+				if($model->save())
+					$this->redirect(array('createStep2','id'=>$model->id));
 			}
+		} else {
+			$model->employee_id = Yii::app()->user->getEmployeeID();
+			$model->name = Employee::model()->getName(Yii::app()->user->getEmployeeID());
+			$model->service_provider = 'PGN SOLUTION';
+			$model->unit = 'PGN SOLUTION';
 
-			$support_letter=CUploadedFile::getInstance($model,'support_letter');
-			if ($support_letter) {
-				$support_letter_name = $support_letter->name;
-				$support_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $support_letter_name);
-				$model->support_letter = $support_letter_name;
-			}
 
-			if($model->save()) {
-				$model->status = 'step2';
-				$model->save();
-				$this->redirect(array('createStep2','id'=>$model->id));
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+
+			if(isset($_POST['Form']))
+			{
+				$model->attributes=$_POST['Form'];
+				$model->created_by = Employee::model()->getName(Yii::app()->user->getEmployeeID());
+				$model->created_date = date('Y-m-d',time());
+
+				$statement_letter=CUploadedFile::getInstance($model,'statement_letter');
+				if ($statement_letter) {
+					$statement_letter_name = $statement_letter->name;
+					$statement_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $statement_letter_name);
+					$model->statement_letter = $statement_letter_name;
+				}
+
+				$support_letter=CUploadedFile::getInstance($model,'support_letter');
+				if ($support_letter) {
+					$support_letter_name = $support_letter->name;
+					$support_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $support_letter_name);
+					$model->support_letter = $support_letter_name;
+				}
+
+				if($model->save()) {
+					$model->status = 'step2';
+					$model->save();
+					$this->redirect(array('createStep2','id'=>$model->id));
+				}
 			}
 		}
 
@@ -448,6 +467,14 @@ class FormController extends RController
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'status =:stat';
 		$criteria->params = array(
+						'stat'=>'FINANCE_VALIDATED',
+						);
+		$criteria->order = 'id desc';
+		$unpaid = new CActiveDataProvider('Form',array('criteria' => $criteria));
+
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status =:stat';
+		$criteria->params = array(
 						'stat'=>'PAID',
 						);
 		$criteria->order = 'id desc';
@@ -479,11 +506,12 @@ class FormController extends RController
 
 		$tabs = array(
 			array('id' => 'tab1', 'label' => 'Menunggu Persetujuan Finance', 'content' => $this->renderPartial('_status', array('data' => $request), true)),
-			array('id' => 'tab2', 'label' => 'Sudah Dibayar', 'content' => $this->renderPartial('_status', array('data' => $paid), true)),
-			array('id' => 'tab3', 'label' => 'Pengajuan Pertanggungjawaban', 'content' => $this->renderPartial('_status', array('data' => $acc_req), true)),
-			array('id' => 'tab4', 'label' => 'Selesai', 'content' => $this->renderPartial('_status', array('data' => $closed), true)),
-			array('id' => 'tab5', 'label' => 'Ditolak', 'content' => $this->renderPartial('_status', array('data' => $rejected), true)),
-			array('id' => 'tab6', 'label' => 'Semua', 'content' => $this->renderPartial('_status', array('data' => $all), true)),
+			array('id' => 'tab2', 'label' => 'Belum Dibayar', 'content' => $this->renderPartial('_status', array('data' => $unpaid), true)),
+			array('id' => 'tab3', 'label' => 'Sudah Dibayar', 'content' => $this->renderPartial('_status', array('data' => $paid), true)),
+			array('id' => 'tab4', 'label' => 'Pengajuan Pertanggungjawaban', 'content' => $this->renderPartial('_status', array('data' => $acc_req), true)),
+			array('id' => 'tab5', 'label' => 'Selesai', 'content' => $this->renderPartial('_status', array('data' => $closed), true)),
+			array('id' => 'tab6', 'label' => 'Ditolak', 'content' => $this->renderPartial('_status', array('data' => $rejected), true)),
+			array('id' => 'tab7', 'label' => 'Semua', 'content' => $this->renderPartial('_status', array('data' => $all), true)),
 		);
 
 		$this->render('manage_admin',array(

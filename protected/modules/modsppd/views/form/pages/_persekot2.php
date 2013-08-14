@@ -248,4 +248,6 @@ KETERANGAN : <?php
 			?>
 
 </div>	
-<?php } ?>
+<?php } else {
+	echo 'Tidak Mengajukan Persekot';
+}?>

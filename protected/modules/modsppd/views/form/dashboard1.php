@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Dashboar khusus untuk sppd yang baru diajukan / belum dipertanggung jawabkan
@@ -6,6 +7,7 @@
 /* @var $model Form */
 $id = $model->id;
 $sppd_status = $model->status;
+$emp_id = $model->employee_id;
 
 $this->breadcrumbs=array(
 	'SPPD'=>array('admin'),
@@ -128,7 +130,7 @@ $this->menu=array(
 	  	<!-- Normal User -->
 	  	<?php if ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'CREATED' || $sppd_status == 'FINANCE_REVIEWED'): ?>
 	  	<div class="form-actions">
-	  		<?php if ($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'CREATED'): ?>
+	  		<?php if (($sppd_status == 'MANAGER_REVIEWED' || $sppd_status == 'CREATED') && $emp_id == Yii::app()->user->getEmployeeID()) : ?>
 		  	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Request for Manager Approval',
 			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
@@ -141,7 +143,7 @@ $this->menu=array(
 			)); ?>
 	  		<?php endif ?>
 
-			<?php if ($sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'FINANCE_REVIEWED'): ?>
+			<?php if (($sppd_status == 'MANAGER_APPROVED' || $sppd_status == 'FINANCE_REVIEWED') && $emp_id == Yii::app()->user->getEmployeeID()): ?>
 			<?php $this->widget('bootstrap.widgets.TbButton', array(
 			    'label'=>'Request for Finance Approval',
 			    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'

@@ -47,7 +47,7 @@ $this->menu=array(
 					'text' => $model->from_to_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Dari dan Ke',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -61,7 +61,7 @@ $this->menu=array(
 					'text' => $model->from_to_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Dari dan Ke',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -79,7 +79,7 @@ $this->menu=array(
 					'text' => $model->transportation_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Transportasi Lokal',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -93,7 +93,7 @@ $this->menu=array(
 					'text' => $model->transportation_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Transportasi Lokal',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -111,7 +111,7 @@ $this->menu=array(
 					'text' => $model->hotel_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Penginapan',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -125,7 +125,7 @@ $this->menu=array(
 					'text' => $model->hotel_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Penginapan',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -143,7 +143,7 @@ $this->menu=array(
 					'text' => $model->airline_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Tiket Pesawat',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -157,7 +157,7 @@ $this->menu=array(
 					'text' => $model->airline_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Tiket Pesawat',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -178,7 +178,7 @@ $this->menu=array(
 					'text' => $model->lumpsum_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Lumpsum',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -192,7 +192,7 @@ $this->menu=array(
 					'text' => $model->lumpsum_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Lumpsum',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -210,7 +210,7 @@ $this->menu=array(
 					'text' => $model->laundry_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Laundry',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -224,7 +224,7 @@ $this->menu=array(
 					'text' => $model->laundry_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Laundry',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -242,7 +242,7 @@ $this->menu=array(
 					'text' => $model->airport_tax_quantity,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Airport Tax',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>
@@ -256,7 +256,7 @@ $this->menu=array(
 					'text' => $model->airport_tax_cost,
 					'url' => $this->createUrl('letterCost/ajaxupdate'),
 					'title' => 'Airport Tax',
-					'placement' => 'right'
+					'placement' => 'left'
 					));
 				?>
 			</td>

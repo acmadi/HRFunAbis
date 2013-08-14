@@ -30,10 +30,10 @@ class LetterCostController extends RController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($employee_id)
+	public function actionView($id, $employee_id)
 	{
 		$this->render('view',array(
-			'model'=>LetterCost::model()->findByAttributes(array('employee_id'=>$employee_id)),
+			'model'=>LetterCost::model()->findByAttributes(array('sppd_id' => $id, 'employee_id'=>$employee_id)),
 		));
 	}
 

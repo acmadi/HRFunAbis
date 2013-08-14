@@ -179,4 +179,33 @@ class LetterCost extends CActiveRecord
 			+ $this->getTotalLaundry()
 			+ $this->getTotalAirportTax();
 	}
+
+	public function generateLetterCost($id)
+	{
+		$sppd = Form::model()->findByPk($id);
+		$days = $sppd->getNumberOfDays();
+		$personnels = Personnel::model()->findAllByAttributes(array('sppd_id' => $id));
+		foreach ($personnels as $person) {
+			$lCost = new LetterCost;
+			$lCost->sppd_id = $id;
+			$lCost->employee_id = $person->employee_id;
+			$lCost->airport_tax_quantity = 2;
+			$lCost->airport_tax_cost = 0;
+			$lCost->laundry_quantity = $days;
+			$lCost->laundry_cost = 0;
+			$lCost->airline_quantity = 2;
+			$lCost->airline_cost = 0;
+			$lCost->hotel_quantity = $days;
+			$lCost->hotel_cost = 0;
+			$lCost->transportation_quantity = $days;
+			$lCost->transportation_cost = 0;
+			$lCost->from_to_quantity = 2;
+			$lCost->from_to_cost = 0;
+			$lCost->lumpsum_quantity = $days;
+			$lCost->lumpsum_cost = 0;
+			$lCost->created_date = date('Y-m-d',time());
+			$lCost->created_by = 'System';
+			$lCost->save();
+		}
+	}
 }
