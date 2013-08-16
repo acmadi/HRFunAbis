@@ -38,6 +38,8 @@ Step 2 of 4
 				'class',
 				'destination',
 				'purpose',
+				'event_start_date',
+				'event_end_date',
 			),
 		)); ?>
 	</div>

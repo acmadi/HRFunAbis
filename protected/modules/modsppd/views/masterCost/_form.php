@@ -27,9 +27,15 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
+		<?php echo $form->dropDownList($model,'code',RABDinas::model()->getTypeList(), array('empty'=>'pilih tipe')); ?>
+		<?php echo $form->error($model,'code'); ?>
+	</div>
+
+	<!-- <div class="row">
+		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'description'); ?>
-	</div>
+	</div> -->
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>

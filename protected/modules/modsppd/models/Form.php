@@ -11,6 +11,8 @@
  * @property string $unit
  * @property string $class
  * @property string $destination
+ * @property string $event_start_date
+ * @property string $event_end_date
  * @property string $purpose
  * @property string $departure
  * @property string $arrival
@@ -51,10 +53,10 @@ class Form extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('employee_id, name, service_provider, unit, class, destination, purpose, departure, arrival, transport_type, transport_vehicle, sppd_type, created_by, created_date', 'required'),
+			array('employee_id, name, service_provider, unit, class, destination, purpose, event_start_date, event_end_date, departure, arrival, transport_type, transport_vehicle, sppd_type, created_by, created_date', 'required'),
 			array('employee_id, name, created_by', 'length', 'max'=>50),
 			array('service_provider, unit', 'length', 'max'=>20),
-			array('class', 'length', 'max'=>1),
+			array('class', 'length', 'max'=>15),
 			array('destination', 'length', 'max'=>100),
 			array('sppd_type', 'length', 'max'=>10),
 			array('transport_type, transport_vehicle', 'length', 'max'=>15),
@@ -90,6 +92,8 @@ class Form extends CActiveRecord
 			'class' => 'Golongan Dinas',
 			'destination' => 'Tempat/Kota Tujuan Penugasan',
 			'purpose' => 'Tujuan Perjalanan Dinas',
+			'event_start_date' => 'Tanggal Mulai Kegiatan',
+			'event_end_date' => 'Tanggal Selesai Kegiatan',
 			'departure' => 'Rencana Berangkat',
 			'arrival' => 'Rencana Kembali',
 			'transport_type' => 'Tranportasi',
@@ -121,6 +125,8 @@ class Form extends CActiveRecord
 		$criteria->compare('class',$this->class,true);
 		$criteria->compare('destination',$this->destination,true);
 		$criteria->compare('purpose',$this->purpose,true);
+		$criteria->compare('event_start_date',$this->event_start_date,true);
+		$criteria->compare('event_end_date',$this->event_end_date,true);
 		$criteria->compare('departure',$this->departure,true);
 		$criteria->compare('arrival',$this->arrival,true);
 		$criteria->compare('transport_type',$this->transport_type,true);
@@ -145,7 +151,7 @@ class Form extends CActiveRecord
 
 	public function getNumberOfDays()
 	{
-		return abs((strtotime($this->arrival)-strtotime($this->departure)))/86400 + 1;
+		return abs((strtotime($this->event_end_date)-strtotime($this->event_start_date)))/86400 + 1;
 	}
 
 	public function setStatus($status, $notes, $notesBy)

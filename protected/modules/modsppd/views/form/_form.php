@@ -55,6 +55,28 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'event_start_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'event_start_date'),
+					'value'=>$model->event_start_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
+		<?php echo $form->error($model,'event_start_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event_end_date'); ?>
+		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
+					'name'=>CHtml::activeName($model,'event_end_date'),
+					'value'=>$model->event_end_date,
+					'options'=>array('dateFmt'=>'yyyy-MM-dd'),
+				));
+				?>
+		<?php echo $form->error($model,'event_end_date'); ?>
+	</div>	
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'departure'); ?>
 		<?php $this->widget('ext.my97DatePicker.JMy97DatePicker',array(
 					'name'=>CHtml::activeName($model,'departure'),

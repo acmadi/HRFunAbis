@@ -146,14 +146,17 @@ class RABDinas extends CActiveRecord
 							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount:0;;
 							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara')?$data->amount * 2:0;
 							break;
-						case 'btst': // Biaya transport sarana transportasi
 						case 'bph': // Biaya Penginapan Hotel
+						case 'pbp': // Penggantian biaya penginapan
+						case 'bcp': // biaya cuci pakaian
+							$rabdinas->base_amount = ($duration > 1)?$data->amount:0;
+							$rabdinas->amount = ($duration > 1)?$data->amount * $duration:0;
+							break;
+						case 'btst': // Biaya transport sarana transportasi
 						case 'bum': // Biaya uang makan
 						case 'bm': // Biaya Makan
 						case 'ush': // Uang saku harian
 						case 'da': // Daily allowance
-						case 'pbp': // Penggantian biaya penginapan
-						case 'bcp': // biaya cuci pakaian
 						case 'btp': // biaya tunjangan perlengkapan
 						case 'us': // uang saku
 							$rabdinas->base_amount = $data->amount;
@@ -174,16 +177,19 @@ class RABDinas extends CActiveRecord
 							$rabdinas->base_amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount:0;
 							$rabdinas->amount = ($model->transport_vehicle == 'Pesawat Udara' && $model->sppd_type == 'Luar Negri')?$data->amount * 2:0;
 							break;
+						case 'bph': // Biaya Penginapan Hotel
+						case 'bcp': // biaya cuci pakaian
+						case 'pbp': // Penggantian biaya penginapan
+							$rabdinas->base_amount = ($duration > 1)?$data->amount:0;
+							$rabdinas->amount = ($duration > 1)?$data->amount * $duration:0;
+							break;
 						case 'btdt': // Transport di tempat tujuan
 						case 'uash': // Uang angkutan setempat harian
 						case 'btst': // Biaya transport sarana transportasi
-						case 'bph': // Biaya Penginapan Hotel
 						case 'bum': // Biaya uang makan
 						case 'bm': // Biaya Makan
 						case 'ush': // Uang saku harian
 						case 'da': // Daily allowance
-						case 'pbp': // Penggantian biaya penginapan
-						case 'bcp': // biaya cuci pakaian
 						case 'btp': // biaya tunjangan perlengkapan
 						case 'us': // uang saku
 							$rabdinas->base_amount = $data->amount;
@@ -197,5 +203,48 @@ class RABDinas extends CActiveRecord
 				$rabdinas->save();
 			}
 		}
+	}
+
+	const CODE_1 = 'btdk'; // Transport Dari & Ke
+	const CODE_2 = 'btdt'; // Transport di tempat tujuan
+	const CODE_3 = 'uash'; // Uang angkutan setempat harian
+	const CODE_4 = 'atd'; // airport tax domestik
+	const CODE_5 = 'ati'; // airport tax internasional
+	const CODE_6 = 'btst'; // Biaya transport sarana transportasi
+	const CODE_7 = 'bph'; // Biaya Penginapan Hotel
+	const CODE_8 = 'bum'; // Biaya uang makan
+	const CODE_9 = 'bm'; // Biaya Makan
+	const CODE_10 = 'ush'; // Uang saku harian
+	const CODE_11 = 'da'; // Daily allowance
+	const CODE_12 = 'pbp'; // Penggantian biaya penginapan
+	const CODE_13 = 'bcp'; // biaya cuci pakaian
+	const CODE_14 = 'btp'; // biaya tunjangan perlengkapan
+	const CODE_15 = 'us'; // uang saku
+
+	public function getTypeList()
+	{
+		return array(
+			self::CODE_1 => 'Transport Dari & Ke',
+			self::CODE_2 => 'Transport di Tempat Tujuan',
+			self::CODE_3 => 'Uang Angkutan Setempat Harian',
+			self::CODE_4 => 'Airport Tax Domestik',
+			self::CODE_5 => 'Airport Tax Internasional',
+			self::CODE_6 => 'Biaya Transport Sarana Transportasi',
+			self::CODE_7 => 'Biaya Penginapan Hotel',
+			self::CODE_8 => 'Biaya Uang Makan',
+			self::CODE_9 => 'Biaya Makan', 
+			self::CODE_10 => 'Uang saku Harian',
+			self::CODE_11 => 'Daily Allowance',
+			self::CODE_12 => 'Penggantian Biaya Penginapan',
+			self::CODE_13 => 'Biaya Cuci Pakaian',
+			self::CODE_14 => 'Biaya Tunjangan Perlengkapan',
+			self::CODE_15 => 'Uang Saku',
+			);
+	}
+
+	public function getTypeDescription($code)
+	{
+		$array = $this->getTypeList();
+		return $array[$code];
 	}
 }

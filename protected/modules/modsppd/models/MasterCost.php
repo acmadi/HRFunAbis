@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'sppd_master_cost':
  * @property integer $id
  * @property string $class
+ * @property string $code
  * @property integer $amount
  * @property string $description
  */
@@ -37,9 +38,9 @@ class MasterCost extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('class, amount, description', 'required'),
+			array('class, code, amount, description', 'required'),
 			array('amount', 'numerical', 'integerOnly'=>true),
-			array('class', 'length', 'max'=>1),
+			array('class', 'length', 'max'=>15),
 			array('description', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -66,6 +67,7 @@ class MasterCost extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'class' => 'Kelas',
+			'code' => 'Kode',
 			'amount' => 'Jumlah',
 			'description' => 'Keterangan',
 		);
@@ -84,6 +86,7 @@ class MasterCost extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('class',$this->class,true);
+		$criteria->compare('code',$this->code,true);
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('description',$this->description,true);
 

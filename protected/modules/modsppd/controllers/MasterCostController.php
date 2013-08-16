@@ -47,6 +47,7 @@ class MasterCostController extends RController
 		if(isset($_POST['MasterCost']))
 		{
 			$model->attributes=$_POST['MasterCost'];
+			$model->description = RABDinas::model()->getTypeDescription($model->code);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

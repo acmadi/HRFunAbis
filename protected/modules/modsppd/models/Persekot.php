@@ -50,7 +50,7 @@ class Persekot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sppd_id, paid_to, received_from, amount, amount_in_words, check_giro_date, check_giro_number, currency_code, bank_code, journal_number, voucher_number, voucher_date, flag, created_by, created_date', 'required'),
+			array('sppd_id, paid_to, received_from, amount, amount_in_words, check_giro_date, check_giro_number, currency_code, bank_code, journal_number, voucher_number, voucher_date, notes, flag, created_by, created_date', 'required'),
 			array('sppd_id, amount', 'numerical', 'integerOnly'=>true),
 			array('paid_to, received_from, created_by', 'length', 'max'=>50),
 			array('check_giro_number, journal_number, voucher_number', 'length', 'max'=>20),

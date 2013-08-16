@@ -151,9 +151,36 @@ class FormController extends RController
 		if ($model->status == 'step2' || $model->status == 'step3' || $model->status == 'step4') {
 			if(isset($_POST['Form']))
 			{
+				$oldStatement = $model->statement_letter;
+				$oldSupport = $model->support_letter;
 				$model->attributes=$_POST['Form'];
 				$model->created_by = Employee::model()->getName(Yii::app()->user->getEmployeeID());
 				$model->created_date = date('Y-m-d',time());
+
+				$statement_letter=CUploadedFile::getInstance($model,'statement_letter');
+				if ($statement_letter) {
+					$statement_letter_name = $statement_letter->name;
+					$statement_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $statement_letter_name);
+					$model->statement_letter = $statement_letter_name;
+					if ($oldStatement != '' && $statement_letter_name != $oldStatement) {
+						unlink(Yii::app()->basePath . '/../upload/sppd/' . $oldStatement);
+					}
+				} else {
+					$model->statement_letter = $oldStatement;
+				}
+
+				$support_letter=CUploadedFile::getInstance($model,'support_letter');
+				if ($support_letter) {
+					$support_letter_name = $support_letter->name;
+					$support_letter->SaveAs(Yii::app()->basePath . '/../upload/sppd/' . $support_letter_name);
+					$model->support_letter = $support_letter_name;
+					if ($oldSupport != '' && $support_letter_name != $oldSupport) {
+						unlink(Yii::app()->basePath . '/../upload/sppd/' . $oldSupport);
+					}
+				} else {
+					$model->support_letter = $oldSupport;
+				}
+
 				if($model->save())
 					$this->redirect(array('createStep2','id'=>$model->id));
 			}
