@@ -284,8 +284,8 @@ class FormController extends RController
 		if ($model->status == 'step4') {
 			$persekot = Persekot::model()->createPersekot($id, 'usulan');
 			$persekotdetail = PersekotDetail::model()->createPersekotDetail($persekot->id, 'Persekot',$persekot->amount,0);
-			
 		}
+		
 		$this->render('create4',array(
 					'model'=>$model,
 					'persekot'=>$persekot,

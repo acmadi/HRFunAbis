@@ -154,6 +154,7 @@ class Persekot extends CActiveRecord
 		$persekot->bank_code = '-';
 		$persekot->journal_number = '-';
 		$persekot->voucher_number = '-';
+		$persekot->notes = '-';
 		$persekot->flag = $flag;
 		$persekot->voucher_date = date('Y-m-d',time());
 		$persekot->created_date = date('Y-m-d',time());
