@@ -1,7 +1,7 @@
 <div class="span12">
 	<?php
 		$this->beginWidget('bootstrap.widgets.TbBox', array(
-		    'title' => 'Reimburse Jamuan',
+		    'title' => 'Reimburse Lainnya',
 		    'headerButtons' => array(
 				array(
 					'class' => 'bootstrap.widgets.TbButtonGroup',
